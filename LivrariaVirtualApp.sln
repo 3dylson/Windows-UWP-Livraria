@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrariaVirtualApp.Infrastructure", "LivrariaVirtualApp.Infrastructure\LivrariaVirtualApp.Infrastructure.csproj", "{DF3F6061-A600-4B60-88D6-C8B880B56858}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrariaVirtualApp.Domain", "..\LivrariaVirtualApp.Domain\LivrariaVirtualApp.Domain.csproj", "{A2C2EE45-B132-4D01-B165-FDF37DCE91A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrariaVirtualAppConsole", "..\LivrariaVirtualAppConsole\LivrariaVirtualAppConsole.csproj", "{13525A5C-A15B-4787-8702-46FB2ECDC6FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{DF3F6061-A600-4B60-88D6-C8B880B56858}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF3F6061-A600-4B60-88D6-C8B880B56858}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF3F6061-A600-4B60-88D6-C8B880B56858}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2C2EE45-B132-4D01-B165-FDF37DCE91A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2C2EE45-B132-4D01-B165-FDF37DCE91A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2C2EE45-B132-4D01-B165-FDF37DCE91A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2C2EE45-B132-4D01-B165-FDF37DCE91A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13525A5C-A15B-4787-8702-46FB2ECDC6FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13525A5C-A15B-4787-8702-46FB2ECDC6FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13525A5C-A15B-4787-8702-46FB2ECDC6FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13525A5C-A15B-4787-8702-46FB2ECDC6FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
