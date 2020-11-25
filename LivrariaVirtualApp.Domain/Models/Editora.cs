@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LivrariaVirtualApp.Domain.Models
 {
-    class Editora : Entity{
+    public class Editora : Entity{
         //coleção de livros
         public List<Livro> Livros
         {

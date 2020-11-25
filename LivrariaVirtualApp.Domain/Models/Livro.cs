@@ -5,12 +5,12 @@ using System.Text;
 
 namespace LivrariaVirtualApp.Domain.Models
 {
-    class Livro : Entity{
-        public Livro(string name, string isbn, string genero, string fe, string dimensoes,
+    public class Livro : Entity{
+        public Livro(string nome, string isbn, string genero, string fe, string dimensoes,
             int numPag, string idioma, int anoEdicao, string quantidade, float preco,
             byte[] imagem, int quant, int idEditora /*,int IdLivraria*/)
         {
-            this.Nome = name;
+            this.Nome = nome;
             this.Isbn = isbn;
             this.Genero = genero;
             this.FaixaEtaria = fe;
