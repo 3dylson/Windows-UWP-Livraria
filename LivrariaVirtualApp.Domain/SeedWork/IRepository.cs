@@ -26,6 +26,7 @@ namespace LivrariaVirtualApp.Domain.SeedWork
         Task<IEnumerable<T>> GetWhere(Expression<Func<T, bool>> predicate);
         Task<int> CountAll();
 
+
     }
 }
 
