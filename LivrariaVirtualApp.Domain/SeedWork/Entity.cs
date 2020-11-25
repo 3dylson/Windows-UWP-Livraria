@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LivrariaVirtualApp.Domain.SeedWork
 {
-    class Entity{
+    public abstract class Entity{
         public int Id{
             get;
             set;
