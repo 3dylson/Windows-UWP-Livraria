@@ -23,13 +23,26 @@ namespace LivrariaVirtualApp.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Autor>().HasIndex(i => i.Nome).IsUnique();
-            modelBuilder.Entity<Autor>().Property(i => i.Nome)
-                .IsRequired().HasMaxLength(256);
+            modelBuilder.Entity<Autor>()
+                .HasIndex(a => a.ID)
+                .IsUnique();
+            
+                
+            modelBuilder.Entity<Editora>()
+                .HasIndex(e => e.ID)
+                .IsUnique();
 
-            modelBuilder.Entity<Editora>().HasIndex(i => i.Nome).IsUnique();
-            modelBuilder.Entity<Editora>().Property(i => i.Nome)
-                .IsRequired().HasMaxLength(256);
+
+            modelBuilder.Entity<Livraria>()
+                .HasIndex(l => l.ID)
+                .IsUnique();
+
+            modelBuilder.Entity<Livro>()
+                .HasIndex(l => l.ID)
+                .IsUnique();
+            
+
+
         }
 
     }
