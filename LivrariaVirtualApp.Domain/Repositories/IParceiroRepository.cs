@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LivrariaVirtualApp.Domain.Repositories
 {
-    public interface ILivrariaRepository : IRepository<Livraria>
+    public interface IParceiroRepository : IRepository<Parceiro>
     {
         
     }

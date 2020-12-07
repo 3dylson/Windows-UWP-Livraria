@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LivrariaVirtualApp.Domain.Models
 {
-    public class Parceiros : Entity
+    public class Parceiro : Entity
     {
         public string Nome { get; set; }
         public string NIF { get; set; }
@@ -14,8 +14,8 @@ namespace LivrariaVirtualApp.Domain.Models
         public long Telefone { get; set; }
         
 
-        public Parceiros() { }
-        public Parceiros(string nome, string nif, string atividade, string email, long telefone)
+        public Parceiro() { }
+        public Parceiro(string nome, string nif, string atividade, string email, long telefone)
         {
             this.Nome = nome;
             this.NIF = nif;
