@@ -1,6 +1,7 @@
 ﻿using LivrariaVirtualApp.Domain.SeedWork;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace LivrariaVirtualApp.Domain.Models
@@ -11,6 +12,7 @@ namespace LivrariaVirtualApp.Domain.Models
         public decimal Subtotal { get; set; }
                 
         public int User_id { get; set; }
+        
 
         public User User { get; set; }
         

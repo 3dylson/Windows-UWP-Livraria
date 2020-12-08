@@ -10,7 +10,7 @@ namespace LivrariaVirtualApp.Domain.Models
     {
         public decimal Total { get; set; }
         public DateTimeKind Date_created { get; set; }
-        public Enum Status { get; set; }
+        public string Status { get; set; }
         public string Shipping_address { get; set; }
                 
         public int User_id { get; set; }
@@ -24,7 +24,7 @@ namespace LivrariaVirtualApp.Domain.Models
         public Cart Cart { get; set; }
         public Book Book { get; set; }
         public Order() { }
-        public Order(decimal total, DateTimeKind date_created, Enum status, string shipping_adress,
+        public Order(decimal total, DateTimeKind date_created, string status, string shipping_adress,
                      int User_id, int Cart_id, int Book_id)
         {
             this.Total = total;

@@ -10,7 +10,7 @@ namespace LivrariaVirtualAppConsole
 {
     class Program
     {
-        public static string SqlConnectionString = @"Server=localhost; User Id=userLivraria; Password=Livraria; Initial Catalog=LivrariaVirtualApp; Connect Timeout = 30";
+        public static string SqlConnectionString = @"Server=tcp:localhost,1433;Initial Catalog=dbLivraria; User ID=userLivraria; Password=Livraria; Connection Timeout = 30;";
 
 
         public static IUnitOfWork UOW { get; private set; }

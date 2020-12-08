@@ -91,7 +91,8 @@ namespace LivrariaVirtualApp.Infrastructure
                 .IsRequired();
             modelBuilder.Entity<Cart>()
                 .HasOne(c => c.User)
-                .WithOne(u => u.Cart);
+                .WithOne(c => c.Cart)
+                .HasForeignKey<User>(u => u.Id );
             //Order Entity
             modelBuilder.Entity<Order>()
                 .HasKey(c => c.Id);
@@ -144,17 +145,6 @@ namespace LivrariaVirtualApp.Infrastructure
                 .Property(u => u.Admin)
                 .IsRequired()
                 .HasDefaultValue(0);
-
-
-
-
-
-
-
-
-
-
-
 
 
 
