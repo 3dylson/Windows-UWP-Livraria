@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +22,6 @@ namespace LivrariaVirtualApp.Domain.SeedWork
         Task<T> FindByIdAsync(int id);
         Task<List<T>> FindAllAsync();
         Task<IEnumerable<T>> GetAll();
-        Task<IEnumerable<T>> GetWhere(Expression<Func<T, bool>> predicate);
         Task<int> CountAll();
 
 
