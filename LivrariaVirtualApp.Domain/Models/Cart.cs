@@ -13,6 +13,8 @@ namespace LivrariaVirtualApp.Domain.Models
         public int User_id { get; set; }
 
         public User User { get; set; }
+        
+        public List<Book> Books { get; set; }
         public Cart() { }
         public Cart(int quantity, decimal subtotal, int User_id, int cart_id )
         {

@@ -1,6 +1,7 @@
 ﻿using LivrariaVirtualApp.Domain.SeedWork;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace LivrariaVirtualApp.Domain.Models
@@ -13,8 +14,11 @@ namespace LivrariaVirtualApp.Domain.Models
         public string Shipping_address { get; set; }
                 
         public int User_id { get; set; }
+        [ForeignKey("User_id")]
         public int Cart_id { get; set; }
+        [ForeignKey("Cart_id")]
         public int Book_id { get; set; }
+        [ForeignKey("Book_id")]
 
         public User User { get; set; }
         public Cart Cart { get; set; }
