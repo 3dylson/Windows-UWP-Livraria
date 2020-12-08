@@ -15,6 +15,11 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         {
         }
 
+        public override Task<int> CountAll()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<List<Category>> FindAllByNameStartWithAsync(string name)
         {
             return _dbContext.Categories.Where(c => c.Name.StartsWith(name))
@@ -36,6 +41,11 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
                 await _dbContext.SaveChangesAsync();
             }
             return c;
+        }
+
+        public override Task<IEnumerable<Category>> GetAll()
+        {
+            throw new NotImplementedException();
         }
 
         public override async Task<Category> UpsertAsync(Category e)
