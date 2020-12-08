@@ -9,8 +9,8 @@ namespace LivrariaVirtualApp.Domain.Models
     public class Order : Entity
     {
         public decimal Total { get; set; }
-        public DateTimeKind Date_created { get; set; }
-        public string Status { get; set; }
+        public DateTime Date_created { get; set; } = DateTime.Now;
+        public OrderStatus Status { get; set; } = OrderStatus.Processing;
         public string Shipping_address { get; set; }
                 
         public int User_id { get; set; }
@@ -24,7 +24,7 @@ namespace LivrariaVirtualApp.Domain.Models
         public Cart Cart { get; set; }
         public Book Book { get; set; }
         public Order() { }
-        public Order(decimal total, DateTimeKind date_created, string status, string shipping_adress,
+        public Order(decimal total, DateTime date_created, OrderStatus status, string shipping_adress,
                      int User_id, int Cart_id, int Book_id)
         {
             this.Total = total;
@@ -42,7 +42,15 @@ namespace LivrariaVirtualApp.Domain.Models
             return $"Total:{Total}, Ordered at:{Date_created}, Status:{Status}, Your Shipping Address is:{Shipping_address}";
         }
 
-
+        /// <summary>
+        /// Represents the status of an order.
+        /// </summary>
+        public enum OrderStatus
+        {
+            Processing,
+            Concluded
+            
+        }
 
 
     }
