@@ -11,7 +11,7 @@ namespace LivrariaVirtualApp.Infrastructure
         public DbSet<Livraria> Livrarias { get; set; }
         public DbSet<Livro> Livros { get; set; }
         public DbSet<Parceiro> Parceiros { get; set; }
-        public DbSet<Utilizador> Utilizadores { get; set; }
+        public DbSet<User> Utilizadores { get; set; }
 
         public LivrariaVirtualDbContext()
         {

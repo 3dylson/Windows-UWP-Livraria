@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace LivrariaVirtualApp.Domain.Repositories
 {
-    public interface ILivrariaRepository : IRepository<Livraria>
+    public interface IOrderRepository : IRepository<Order>
     {
-        
+        Task<List<Order>> FindAllByUserIdAsync(int user_id);
+        Task<List<Order>> FindAllByStatusStartWithAsync(string status);
     }
 }
