@@ -7,7 +7,6 @@ namespace LivrariaVirtualApp.Domain.Models
 {
     public class Utilizador : Entity
     {
-        public int ID { get; set; }
         public string Nome { get; set; }
         public string NIF { get; set; }
         public string Email { get; set; }
@@ -21,10 +20,9 @@ namespace LivrariaVirtualApp.Domain.Models
         public Livraria Livraria { get; set; }
 
         public Utilizador() { }
-        public Utilizador(int id, string nome, string nif, string email, string datanascimento, 
+        public Utilizador(string nome, string nif, string email, string datanascimento, 
                           string morada, long telefone, int admin, int idlivraria)
         {
-            this.ID = id;
             this.Nome = nome;
             this.NIF = nif;
             this.Email = email;
@@ -38,7 +36,7 @@ namespace LivrariaVirtualApp.Domain.Models
 
         public override string ToString()
         {
-            return $"ID:{Id}, Nome:{Nome}, NIF:{NIF}, Email:{Email}, Data de Nascimento:{DataNascimento}, " +
+            return $"Nome:{Nome}, NIF:{NIF}, Email:{Email}, Data de Nascimento:{DataNascimento}, " +
                    $"Morada:{Morada}, Telefone:{Telefone}";
         }
 
