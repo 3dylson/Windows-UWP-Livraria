@@ -63,5 +63,10 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
+
+        Task<IEnumerable<Book>> IBookRepository.GetAsync(string search)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

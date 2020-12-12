@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text;
 
 namespace LivrariaVirtualApp.Domain.Models
@@ -12,7 +13,7 @@ namespace LivrariaVirtualApp.Domain.Models
     /// </summary>
     public class Order : Entity
     {
-        public decimal Total => Cart.Count * .005m;  /* ublic decimal Total { get; set; } */
+        public decimal Total { get; set; } /*=> Cart.Subtotal + 10;*/
         public DateTime Date_created { get; set; } = DateTime.Now;
         public OrderStatus Status { get; set; } = OrderStatus.Processing;
         public string Shipping_address { get; set; }

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
-using System.Linq;
+
 
 namespace LivrariaVirtualApp.Domain.Models
 {
@@ -16,13 +16,13 @@ namespace LivrariaVirtualApp.Domain.Models
         /// Gets or sets the quantity of books. 
         /// </summary>
         public int Quantity { get; set; } = 1;
-               
+
         public decimal Subtotal { get; set; } /* public decimal Subtotal => Cart.Sum(cart => Book.Price * Quantity); */
 
         public int User_id { get; set; }
-
+        [ForeignKey("User_id")]
         public int Book_id { get; set; }
-
+        [ForeignKey("Book_id")]
 
         public User User { get; set; }
         public Order Order { get; set; } = new Order();

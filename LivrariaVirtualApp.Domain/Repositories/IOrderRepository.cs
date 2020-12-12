@@ -14,7 +14,7 @@ namespace LivrariaVirtualApp.Domain.Repositories
         Task<List<Order>> FindAllByStatusStartWithAsync(string status);
 
         /// <summary>
-        /// Returns all the given customer's orders. 
+        /// Returns all the given User's orders. 
         /// </summary>
         Task<IEnumerable<Order>> GetForUserAsync(int order_id);
 

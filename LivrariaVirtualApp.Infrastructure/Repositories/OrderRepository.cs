@@ -44,5 +44,30 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
+
+        Task IOrderRepository.DeleteAsync(int order_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<Order>> IOrderRepository.FindAllByStatusStartWithAsync(string status)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<Order>> IOrderRepository.FindAllByUserIdAsync(int user_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<IEnumerable<Order>> IOrderRepository.GetForUserAsync(int order_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Order> IOrderRepository.UpsertAsync(Order order)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
