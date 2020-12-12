@@ -16,5 +16,10 @@ namespace LivrariaVirtualApp.Domain.Repositories
         Task<int> CountAll(string name_wishlist);
         Task<List<Book>> FindAllByCartStartWithAsync(int cart_id, string quantity);
         Task<List<Book>> FindAllByWishlistStartWithAsync(int wishlist_id, string name_wishlist);
+       
+        /// <summary>
+        /// Returns all products with a data field matching the start of the given string. 
+        /// </summary>
+        Task<IEnumerable<Book>> GetAsync(string search);
     }
 }
