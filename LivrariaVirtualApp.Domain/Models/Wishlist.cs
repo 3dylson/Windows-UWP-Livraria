@@ -11,6 +11,7 @@ namespace LivrariaVirtualApp.Domain.Models
         public string Name { get; set; }
                 
         public int User_id { get; set; }
+        [ForeignKey("User_id")]
         public int Book_id { get; set; }
         [ForeignKey("Book_id")]
 

@@ -5,6 +5,9 @@ using System.Text;
 
 namespace LivrariaVirtualApp.Domain.Models
 {
+    /// <summary>
+    /// Represents a User.
+    /// </summary>
     public class User : Entity
     {
         public string Name { get; set; }
@@ -16,6 +19,7 @@ namespace LivrariaVirtualApp.Domain.Models
 
         public List<Wishlist> Wishlists { get; set; }
         public Cart Cart { get; set; }
+        public List<Order> Order { get; set; }    
         public User() { }
         public User(string name, string email, string password, string birth_date, 
                           string phone, int admin, int user_id)
@@ -28,16 +32,15 @@ namespace LivrariaVirtualApp.Domain.Models
             this.Admin = admin;
             this.Id = user_id;
             
+            
+            
         }
 
-        public override string ToString()
-        {
-            return $"Name:{Name}, Email:{Email}, Birthday:{Birth_date}, " +
+        /// <summary>
+        /// Returns the User's infos.
+        /// </summary>
+        public override string ToString() =>  $"Name:{Name}, Email:{Email}, Birthday:{Birth_date}, " +
                    $"Phone number:{Phone}";
-        }
-
-
-
 
     }
 
