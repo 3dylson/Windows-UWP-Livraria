@@ -21,6 +21,9 @@ namespace LivrariaVirtualApp.Domain.SeedWork
         Task<T> DeleteAsync(T e);
         Task<T> FindByIdAsync(int id);
         Task<List<T>> FindAllAsync();
+        Task<IEnumerable<T>> GetAll();
+        Task<int> CountAll();
+
 
     }
 }

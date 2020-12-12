@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace LivrariaVirtualApp.Domain.Repositories
 {
-    public interface ILivroRepository : IRepository<Livro>
+    public interface IWishlistRepository : IRepository<Wishlist>
     {
-        Task<Livro> FindByNameAsync(string nome);
-        Task<List<Livro>> FindAllByNameStartWithAsync(string genero);
-
-
+        Task<Wishlist> FindByNameAsync(string name_wishlist);
+        Task<List<Wishlist>> FindAllByNameStartWithAsync(string name_wishlist);
     }
 }
+

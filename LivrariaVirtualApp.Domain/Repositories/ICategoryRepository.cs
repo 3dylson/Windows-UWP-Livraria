@@ -5,12 +5,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace LivrariaVirtualApp.Domain.Repositories
 {
-    public interface IAutorRepository : IRepository<Autor>
+    public interface ICategoryRepository : IRepository<Category>
     {
-        Task<Autor> FindByNameAsync(string nome);
-        Task<List<Autor>> FindAllByNameStartWithAsync(string nacionalidade);
+        Task<Category> FindByNameAsync(string name);
+        Task<List<Category>> FindAllByNameStartWithAsync(string name);
     }
 }
