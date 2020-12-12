@@ -25,7 +25,8 @@ namespace LivrariaVirtualApp.Domain.Models
 
 
         public User User { get; set; }
-       
+        public Order Order { get; set; } = new Order();
+               
         public List<Book> Books { get; set; }
         public Cart() { }
         public Cart(int quantity, decimal subtotal, int user_id, int cart_id )
