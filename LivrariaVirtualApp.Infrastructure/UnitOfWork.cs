@@ -12,7 +12,13 @@ namespace LivrariaVirtualApp.Infrastructure
     {
         private DbContextOptions<LivrariaVirtualDbContext> Options { get; }
 
-        
+        public ICategoryRepository CategoryRepository => new CategoryRepository(new LivrariaVirtualDbContext(Options));
+        public IBookRepository BookRepository => new BookRepository(new LivrariaVirtualDbContext(Options));
+        public IOrderRepository OrderRepository => new OrderRepository(new LivrariaVirtualDbContext(Options));
+        public IWishlistRepository WishlistRepository => new WishlistRepository(new LivrariaVirtualDbContext(Options));
+        public IUserRepository UserRepository => new UserRepository(new LivrariaVirtualDbContext(Options));
+
+
 
         public UnitOfWork(DbContextOptions<LivrariaVirtualDbContext> options)
         {

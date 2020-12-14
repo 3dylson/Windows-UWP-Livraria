@@ -7,12 +7,11 @@ namespace LivrariaVirtualApp.Domain
 {
     public interface IUnitOfWork
     {
-        ILivroRepository LivroRepository { get; }
-        IAutorRepository AutorRepository { get; }
-        IEditoraRepository EditoraRepository { get; }
-        ILivrariaRepository LivrariaRepository { get; }
-        IParceiroRepository ParceiroRepository { get; }
-        IUtilizadorRepository UtilizadorRepository { get; }
+        IBookRepository BookRepository { get; }
+        IUserRepository UserRepository { get; }
+        ICategoryRepository CategoryRepository { get; }
+        IOrderRepository OrderRepository { get; }
+        IWishlistRepository WishlistRepository { get; }
 
     }
 }
