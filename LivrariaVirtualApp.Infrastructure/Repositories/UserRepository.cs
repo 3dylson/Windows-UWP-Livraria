@@ -16,24 +16,53 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         {
         }
 
-        public override Task<int> CountAll()
+        public override async Task<User> FindOrCreate(User e)
         {
-            throw new NotImplementedException();
+            var c = await _dbContext.Users.SingleOrDefaultAsync(i => i.Email == e.Email);
+            if (c == null)
+            {
+                c = await CreateAsync(e);
+                await _dbContext.SaveChangesAsync();
+            }
+            return c;
         }
 
-        public override Task<User> FindOrCreate(User e)
+  
+        public override async Task<User> UpsertAsync(User e)
         {
-            throw new NotImplementedException();
+            User f = null;
+            User existing = await FindByEmail(e.Email);
+
+            if (existing == null)
+            {
+                if (e.Id == 0)
+                {
+                    f = await CreateAsync(e);
+                }
+                else
+                {
+                    f = await UpdateAsync(e);
+                }
+            }
+            else if (existing.Id == e.Id)
+            {
+                _dbContext.Entry(existing).State = EntityState.Detached;
+                f = await UpdateAsync(e);
+            }
+            await _dbContext.SaveChangesAsync();
+
+            return f;
         }
 
-        public override Task<IEnumerable<User>> GetAll()
+        public async Task<User> FindByEmailAndPassword(string email, string password)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Users.SingleOrDefaultAsync(e => e.Email == email
+                    && e.Password == password);
         }
-
-        public override Task<User> UpsertAsync(User e)
+        
+        public async Task<User> FindByEmail(string email)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Users.SingleOrDefaultAsync(e => e.Email == email);
         }
 
         Task IUserRepository.DeleteAsync(int user_id)
@@ -52,6 +81,16 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         }
 
         Task<User> IUserRepository.GetAsync(int admin)
+        {
+            throw new NotImplementedException();
+        }
+        
+        public override Task<int> CountAll()
+        {
+            throw new NotImplementedException();
+        }
+        
+        public override Task<IEnumerable<User>> GetAll()
         {
             throw new NotImplementedException();
         }
