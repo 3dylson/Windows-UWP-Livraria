@@ -1,6 +1,7 @@
 ﻿using LivrariaVirtualApp.Domain.SeedWork;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace LivrariaVirtualApp.Domain.Models
@@ -12,7 +13,21 @@ namespace LivrariaVirtualApp.Domain.Models
     {
         public string Name { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
+        public string Password
+        {
+            get
+            {
+                return password;
+            }
+            set
+            {
+                var data = Encoding.UTF8.GetBytes(value);
+                var hashData = new SHA1Managed().ComputeHash(data);
+                password = BitConverter.ToString(hashData).Replace("-", "").ToUpper();
+            }
+
+        }
+        private string password;
         public string Birth_date { get; set; }
         public string Phone { get; set; }
         public int Admin { get; set; }

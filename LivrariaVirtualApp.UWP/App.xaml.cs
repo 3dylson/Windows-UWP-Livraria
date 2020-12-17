@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace LivrariaVirtualApp.UWP
 {
@@ -22,6 +24,12 @@ namespace LivrariaVirtualApp.UWP
     /// </summary>
     sealed partial class App : Application
     {
+
+        public static IUnitOfWork UnitOfWork { get; set; }
+
+        public static string SqlConnectionString = @"Server=tcp:localhost,1433;Initial Catalog=dbLivraria; User ID=userLivraria; Password=Livraria; Connection Timeout = 30;";
+
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -39,6 +47,14 @@ namespace LivrariaVirtualApp.UWP
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            var optionsBuilder = new DbContextOptionsBuilder<LivrariaVirtualDbContext>();
+            optionsBuilder.UseSqlServer(App.SqlConnectionString);
+
+            // Optional Development Setting
+            optionsBuilder.EnableSensitiveDataLogging();
+
+            UnitOfWork = new UnitOfWork(optionsBuilder.Options);
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,

@@ -145,7 +145,9 @@ namespace LivrariaVirtualApp.Infrastructure
                 .Property(u => u.Admin)
                 .IsRequired()
                 .HasDefaultValue(0);
-
+            //Admin User created on DB building
+            modelBuilder.Entity<User>().HasData(new User
+            { Id = 1, Name = "admin", Email = "admin@admin.com", Password = "admin", Admin = 1 });
 
 
         }

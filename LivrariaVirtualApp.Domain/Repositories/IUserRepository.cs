@@ -11,7 +11,7 @@ namespace LivrariaVirtualApp.Domain.Repositories
     public interface IUserRepository : IRepository<User>
     {
         /// <summary>
-        /// Returns all customers with a data field matching the start of the given string. 
+        /// Returns all Users with a data field matching the start of the given string. 
         /// </summary>
         Task<IEnumerable<User>> GetAsync(string search);
 
@@ -32,8 +32,12 @@ namespace LivrariaVirtualApp.Domain.Repositories
         Task<User> UpsertAsync(User user);
 
         /// <summary>
-        /// Deletes a customer.
+        /// Deletes a User.
         /// </summary>
         Task DeleteAsync(int user_id);
+
+        Task<User> FindByEmail(string email);
+
+        Task<User> FindByEmailAndPassword(string email, string password);
     }
 }
