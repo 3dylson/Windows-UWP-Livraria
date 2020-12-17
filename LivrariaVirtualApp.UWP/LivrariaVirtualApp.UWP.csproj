@@ -161,6 +161,16 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LivrariaVirtualApp.Domain\LivrariaVirtualApp.Domain.csproj">
+      <Project>{EBF07140-8B7B-4F68-BC85-D0B6AD7F07A8}</Project>
+      <Name>LivrariaVirtualApp.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LivrariaVirtualApp.Infrastructure\LivrariaVirtualApp.Infrastructure.csproj">
+      <Project>{DF3F6061-A600-4B60-88D6-C8B880B56858}</Project>
+      <Name>LivrariaVirtualApp.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

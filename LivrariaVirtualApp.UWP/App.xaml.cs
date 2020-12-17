@@ -15,7 +15,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.EntityFrameworkCore;
-
+using LivrariaVirtualApp.Infrastructure;
+using LivrariaVirtualApp.Domain;
 
 namespace LivrariaVirtualApp.UWP
 {
