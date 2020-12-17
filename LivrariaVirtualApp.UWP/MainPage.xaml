@@ -9,6 +9,22 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <NavigationView IsSettingsVisible="False" ItemInvoked="NavigationView_ItemInvoked">
+            <NavigationView.PaneFooter>
+                <StackPanel>
+                    <NavigationViewItem Content="Login" Icon="Permissions" />
+                    <NavigationViewItem Content="Register" Icon="ContactInfo" />
+                </StackPanel>
+            </NavigationView.PaneFooter>
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Wish List" Icon="Shop"/>
+                <NavigationViewItem Content="Books" Icon="List"/>
+                <NavigationViewItem Content="Categories" Icon="Library"/>
+                <NavigationViewItem Content="Users" Icon="Contact"/>
+                <NavigationViewItem Content="Cart"/>
+            </NavigationView.MenuItems>
 
+            <Frame x:Name="frame" Padding="10" />
+        </NavigationView>
     </Grid>
 </Page>
