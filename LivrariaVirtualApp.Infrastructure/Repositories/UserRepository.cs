@@ -78,27 +78,44 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             }
         }
 
-        Task<IEnumerable<User>> IUserRepository.GetAsync(string search)
+        public async Task<IEnumerable<User>> GetAsync(string search)
         {
-            throw new NotImplementedException();
+            string[] parameters = search.Split(' ');
+            return await _dbContext.Users
+                .Where(user =>
+                    parameters.Any(parameter =>
+                        user.Name.StartsWith(parameter) ||
+                        user.Email.StartsWith(parameter) ||
+                        user.Birth_date.StartsWith(parameter) ||
+                        user.Phone.StartsWith(parameter)))
+                .OrderByDescending(user =>
+                    parameters.Count(parameter =>
+                        user.Name.StartsWith(parameter) ||
+                        user.Email.StartsWith(parameter) ||
+                        user.Birth_date.StartsWith(parameter) ||
+                        user.Phone.StartsWith(parameter)))
+                .AsNoTracking()
+                .ToListAsync();
         }
 
-        Task<IEnumerable<User>> IUserRepository.GetAsync()
+        public async Task<IEnumerable<User>> GetAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Users.AsNoTracking().ToListAsync();
         }
 
-        Task<User> IUserRepository.GetAsync(int admin)
+        public async Task<User> GetAsync(int admin)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(user => user.Admin == admin);
         }
-        
-        public override Task<int> CountAll()
-        {
-            throw new NotImplementedException();
-        }
-        
+
         public override Task<IEnumerable<User>> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<int> CountAll()
         {
             throw new NotImplementedException();
         }
