@@ -65,9 +65,17 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             return await _dbContext.Users.SingleOrDefaultAsync(e => e.Email == email);
         }
 
-        Task IUserRepository.DeleteAsync(int user_id)
+        public async Task DeleteAsync(int user_id)
         {
-            throw new NotImplementedException();
+            var user = await _dbContext.Users.FirstOrDefaultAsync(_user => _user.Id == user_id);
+            
+            if(null != user) 
+            {
+                var orders = await _dbContext.Orders.Where(order => order.User_id == user_id).ToListAsync();
+                _dbContext.Orders.RemoveRange(orders);
+                _dbContext.Users.Remove(user);
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         Task<IEnumerable<User>> IUserRepository.GetAsync(string search)
