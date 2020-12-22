@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LivrariaVirtualApp.UWP.ViewModels
 {
-    class UserViewModel : INotifyPropertyChanged
+   public class UserViewModel : INotifyPropertyChanged
     {
 
         public UserViewModel()

@@ -9,7 +9,13 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <NavigationView IsSettingsVisible="False" ItemInvoked="NavigationView_ItemInvoked">
+        <StackPanel Background="AntiqueWhite" Height="59" VerticalAlignment="Top" Canvas.ZIndex="1" Grid.ColumnSpan="2">
+            <Image Source="Assets/logoliv.png" Width="215" Height="60" Canvas.ZIndex="2" HorizontalAlignment="Left" Margin="100,0,0,0" />
+        </StackPanel>
+        <NavigationView Margin="1,60,1,0" IsPaneToggleButtonVisible="True" IsSettingsVisible="False" IsBackButtonVisible="Collapsed" ItemInvoked="NavigationView_ItemInvoked">
+            <NavigationView.AutoSuggestBox>
+                <AutoSuggestBox QueryIcon="Find" AutomationProperties.Name="Search" />
+            </NavigationView.AutoSuggestBox>
             <NavigationView.PaneFooter>
                 <StackPanel>
                     <NavigationViewItem Content="Login" Icon="Permissions" 
@@ -20,21 +26,29 @@
                                         Visibility="{x:Bind UserViewModel.IsLogged, Mode=OneWay}"
                                         x:Name="btnLogout"
                                         Tapped="btnLogout_Tapped" />
-                    <NavigationViewItem Content="Register" Icon="ContactInfo" 
+                    <NavigationViewItem Content="Registo" Icon="ContactInfo" 
                                         Visibility="{x:Bind UserViewModel.IsNotLogged, Mode=OneWay}"
                                         x:Name="btnRegister"
-                                        Tapped="btnRegister_Tapped" />
+                                        Tapped="btnRegister_Tapped"/>
                 </StackPanel>
             </NavigationView.PaneFooter>
+
             <NavigationView.MenuItems>
-                <NavigationViewItem Content="Wish List" Icon="Shop"/>
-                <NavigationViewItem Content="Books" Icon="List"/>
-                <NavigationViewItem Content="Categories" Icon="Library"/>
-                <NavigationViewItem Content="Users" Icon="Contact"/>
-                <NavigationViewItem Content="Cart"/>
+                <NavigationViewItem Content="Livros" Icon="Library"/>
+                <NavigationViewItem Content="Contactos" Icon="Mail"/>
             </NavigationView.MenuItems>
 
-            <Frame x:Name="frame" Padding="10" />
+            
         </NavigationView>
+        <CommandBar Grid.Column="1" x:Name="mainCommandBar"
+                        Background="Transparent" OverflowButtonVisibility="Collapsed"
+                        DefaultLabelPosition="Right" Height="49" Margin="0,10,0,0" RenderTransformOrigin="0.5,0.5" Canvas.ZIndex="2">
+
+            <AppBarButton x:Name="AddButton" Icon="Shop" Label="Carrinho"
+                              ToolTipService.ToolTip="Carrinho" BorderThickness="1,0,1,0" FontFamily="Gill Sans Nova" FontWeight="Normal" />
+            <AppBarButton x:Name="AddButton2" Icon="SolidStar" Label="WhishList"
+                              ToolTipService.ToolTip="Lista de Desejos" BorderThickness="1,0,1,0" FontFamily="Gill Sans Nova Light" FontWeight="Normal" FontStyle="Normal" />
+        </CommandBar>
+        <Frame x:Name="frame" Padding="10" />
     </Grid>
 </Page>
