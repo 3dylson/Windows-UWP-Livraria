@@ -65,32 +65,57 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             return await _dbContext.Users.SingleOrDefaultAsync(e => e.Email == email);
         }
 
-        Task IUserRepository.DeleteAsync(int user_id)
+        public async Task DeleteAsync(int user_id)
         {
-            throw new NotImplementedException();
+            var user = await _dbContext.Users.FirstOrDefaultAsync(_user => _user.Id == user_id);
+            
+            if(null != user) 
+            {
+                var orders = await _dbContext.Orders.Where(order => order.User_id == user_id).ToListAsync();
+                _dbContext.Orders.RemoveRange(orders);
+                _dbContext.Users.Remove(user);
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
-        Task<IEnumerable<User>> IUserRepository.GetAsync(string search)
+        public async Task<IEnumerable<User>> GetAsync(string search)
         {
-            throw new NotImplementedException();
+            string[] parameters = search.Split(' ');
+            return await _dbContext.Users
+                .Where(user =>
+                    parameters.Any(parameter =>
+                        user.Name.StartsWith(parameter) ||
+                        user.Email.StartsWith(parameter) ||
+                        user.Birth_date.StartsWith(parameter) ||
+                        user.Phone.StartsWith(parameter)))
+                .OrderByDescending(user =>
+                    parameters.Count(parameter =>
+                        user.Name.StartsWith(parameter) ||
+                        user.Email.StartsWith(parameter) ||
+                        user.Birth_date.StartsWith(parameter) ||
+                        user.Phone.StartsWith(parameter)))
+                .AsNoTracking()
+                .ToListAsync();
         }
 
-        Task<IEnumerable<User>> IUserRepository.GetAsync()
+        public async Task<IEnumerable<User>> GetAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Users.AsNoTracking().ToListAsync();
         }
 
-        Task<User> IUserRepository.GetAsync(int admin)
+        public async Task<User> GetAsync(int admin)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(user => user.Admin == admin);
         }
-        
-        public override Task<int> CountAll()
-        {
-            throw new NotImplementedException();
-        }
-        
+
         public override Task<IEnumerable<User>> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<int> CountAll()
         {
             throw new NotImplementedException();
         }
