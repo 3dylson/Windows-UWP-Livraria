@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Navigation;
 using Microsoft.EntityFrameworkCore;
 using LivrariaVirtualApp.Infrastructure;
 using LivrariaVirtualApp.Domain;
+using LivrariaVirtualApp.UWP.ViewModels;
 
 namespace LivrariaVirtualApp.UWP
 {
@@ -25,7 +26,7 @@ namespace LivrariaVirtualApp.UWP
     /// </summary>
     sealed partial class App : Application
     {
-
+        public static UserViewModel UserViewModel { get; set; }
         public static IUnitOfWork UnitOfWork { get; set; }
 
         public static string SqlConnectionString = @"Server=tcp:localhost,1433;Initial Catalog=dbLivraria; User ID=userLivraria; Password=Livraria; Connection Timeout = 30;";
@@ -39,6 +40,8 @@ namespace LivrariaVirtualApp.UWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            UserViewModel = new UserViewModel();
         }
 
         /// <summary>
