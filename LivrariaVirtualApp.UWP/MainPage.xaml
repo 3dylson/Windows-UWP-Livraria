@@ -12,8 +12,18 @@
         <NavigationView IsSettingsVisible="False" ItemInvoked="NavigationView_ItemInvoked">
             <NavigationView.PaneFooter>
                 <StackPanel>
-                    <NavigationViewItem Content="Login" Icon="Permissions" />
-                    <NavigationViewItem Content="Register" Icon="ContactInfo" />
+                    <NavigationViewItem Content="Login" Icon="Permissions" 
+                                        Visibility="{x:Bind UserViewModel.IsNotLogged, Mode=OneWay}"
+                                        x:Name="btnLogin"
+                                        Tapped="btnLogin_Tapped" />
+                    <NavigationViewItem Content="Logout" Icon="NewWindow"
+                                        Visibility="{x:Bind UserViewModel.IsLogged, Mode=OneWay}"
+                                        x:Name="btnLogout"
+                                        Tapped="btnLogout_Tapped" />
+                    <NavigationViewItem Content="Register" Icon="ContactInfo" 
+                                        Visibility="{x:Bind UserViewModel.IsNotLogged, Mode=OneWay}"
+                                        x:Name="btnRegister"
+                                        Tapped="btnRegister_Tapped" />
                 </StackPanel>
             </NavigationView.PaneFooter>
             <NavigationView.MenuItems>
