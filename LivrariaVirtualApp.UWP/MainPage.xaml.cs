@@ -1,8 +1,7 @@
 ﻿using LivrariaVirtualApp.Domain.Models;
 using LivrariaVirtualApp.UWP.ViewModels;
 using LivrariaVirtualApp.UWP.Views.Categories;
-using LivrariaVirtualApp
-    .UWP.Views.Users;
+using LivrariaVirtualApp.UWP.Views.Users;
 using System;
 using System.Collections.Generic;
 using System.IO;

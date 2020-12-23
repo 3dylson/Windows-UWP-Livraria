@@ -177,7 +177,10 @@
       <Version>6.2.10</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Categories\" />
+    <Folder Include="Views\WishLists\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LivrariaVirtualApp.Domain\LivrariaVirtualApp.Domain.csproj">
       <Project>{EBF07140-8B7B-4F68-BC85-D0B6AD7F07A8}</Project>
