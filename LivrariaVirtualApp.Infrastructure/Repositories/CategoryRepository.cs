@@ -15,10 +15,6 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         {
         }
 
-        public override Task<int> CountAll()
-        {
-            throw new NotImplementedException();
-        }
 
         public Task<List<Category>> FindAllByNameStartWithAsync(string name)
         {
@@ -43,10 +39,6 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             return c;
         }
 
-        public override Task<IEnumerable<Category>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
 
         public override async Task<Category> UpsertAsync(Category e)
         {

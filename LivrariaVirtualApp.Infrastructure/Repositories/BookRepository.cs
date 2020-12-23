@@ -14,11 +14,6 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         {
         }
 
-        public override Task<int> CountAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<int> CountAll(string name_wishlist)
         {
             throw new NotImplementedException();
@@ -54,10 +49,6 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public override Task<IEnumerable<Book>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
 
         public override Task<Book> UpsertAsync(Book e)
         {

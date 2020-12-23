@@ -38,7 +38,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(IsLogged));
                 OnPropertyChanged(nameof(IsNotLogged));
-                OnPropertyChanged(nameof(IsAdmin));
+                OnPropertyChanged(nameof(Admin));
             }
         }
 
@@ -52,7 +52,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             get => !IsLogged;
         }
 
-        public int IsAdmin => LoggedUser != null && LoggedUser.Admin;
+        public int Admin => LoggedUser != null && LoggedUser.Admin;
 
         internal async Task<bool> DoLoginAsync()
         {
@@ -70,7 +70,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
 
         internal async Task<bool> RegisterAsync()
         {
-            bool err = true;
+            bool err = true;    
 
             var user = await App.UnitOfWork.UserRepository.FindByEmail(User.Email);
             if (user == null)

@@ -52,8 +52,7 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             public abstract Task<T> FindOrCreate(T e);
 
             public abstract Task<T> UpsertAsync(T e);
-            public abstract Task<IEnumerable<T>> GetAll();
-            public abstract Task<int> CountAll();
+            
         
     }
 }
