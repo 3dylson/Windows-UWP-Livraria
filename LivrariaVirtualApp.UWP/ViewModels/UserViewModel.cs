@@ -38,7 +38,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(IsLogged));
                 OnPropertyChanged(nameof(IsNotLogged));
-                OnPropertyChanged(nameof(Admin));
+                OnPropertyChanged(nameof(IsAdmin));
             }
         }
 
@@ -52,7 +52,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             get => !IsLogged;
         }
 
-        public int Admin => LoggedUser != null && LoggedUser.Admin;
+        public bool IsAdmin => LoggedUser != null && LoggedUser.Admin == 1; 
 
         internal async Task<bool> DoLoginAsync()
         {
