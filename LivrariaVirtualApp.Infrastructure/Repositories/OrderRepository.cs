@@ -15,10 +15,6 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         {
         }
 
-        public override Task<int> CountAll()
-        {
-            throw new NotImplementedException();
-        }
 
         public Task<List<Order>> FindAllByStatusStartWithAsync(string status)
         {
@@ -35,10 +31,6 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public override Task<IEnumerable<Order>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
 
         public override Task<Order> UpsertAsync(Order e)
         {

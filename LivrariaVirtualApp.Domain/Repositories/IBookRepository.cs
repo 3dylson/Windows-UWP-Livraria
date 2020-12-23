@@ -13,7 +13,6 @@ namespace LivrariaVirtualApp.Domain.Repositories
         Task<List<Book>> FindAllByUserIdAsync(int user_id);
         Task<Book> FindByNameAsync(string name);
         Task<List<Book>> FindAllByCategoryStartWithAsync(int category_id, string name);
-        Task<int> CountAll(string name_wishlist);
         Task<List<Book>> FindAllByCartStartWithAsync(int cart_id, string quantity);
         Task<List<Book>> FindAllByWishlistStartWithAsync(int wishlist_id, string name_wishlist);
        
