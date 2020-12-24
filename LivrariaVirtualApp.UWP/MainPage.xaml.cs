@@ -1,8 +1,8 @@
 ﻿using LivrariaVirtualApp.Domain.Models;
 using LivrariaVirtualApp.UWP.ViewModels;
+using LivrariaVirtualApp.UWP.Views.Books;
 using LivrariaVirtualApp.UWP.Views.Categories;
-using LivrariaVirtualApp
-    .UWP.Views.Users;
+using LivrariaVirtualApp.UWP.Views.Users;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,11 +25,16 @@ namespace LivrariaVirtualApp.UWP
     public sealed partial class MainPage : Page
     {
         public UserViewModel UserViewModel { get; set; }
+        public BookViewModel BookViewModel { get; set; }
+        public CategoryViewModel CategoryViewModel { get; set; }
+
         public MainPage()
         {
             this.InitializeComponent();
 
             UserViewModel = App.UserViewModel;
+            CategoryViewModel = App.CategoryViewModel;
+            BookViewModel = App.BookViewModel;
         }
 
         public Frame AppFrame => frame;
@@ -42,8 +47,12 @@ namespace LivrariaVirtualApp.UWP
                 switch (selectedItem.Tag)
                 {
                     case "categories":
-                        AppFrame.Navigate(typeof(ManageCategoriesPage));
+                        AppFrame.Navigate(typeof(CategoriesPage));
                         break;
+                    case "books":
+                        AppFrame.Navigate(typeof(BooksPage));
+                        break;
+                       
                 }
             }
         }
@@ -54,9 +63,9 @@ namespace LivrariaVirtualApp.UWP
             var res = await dlg.ShowAsync();
             if (res == ContentDialogResult.Primary)
             {
-                if (App.UserViewModel.IsLogged)
+                if (App.UserViewModel.IsAdmin)
                 {
-                    AppFrame.Navigate(typeof(ManageCategoriesPage));
+                    AppFrame.Navigate(typeof(AdminPage));
                 }
             }
         }
@@ -74,9 +83,9 @@ namespace LivrariaVirtualApp.UWP
             var res = await dlg.ShowAsync();
             if (res == ContentDialogResult.Primary)
             {
-                if (App.UserViewModel.IsLogged)
+                if (App.UserViewModel.IsAdmin)
                 {
-                    AppFrame.Navigate(typeof(ManageCategoriesPage));
+                    AppFrame.Navigate(typeof(AdminPage));
                 }
             }
         }
