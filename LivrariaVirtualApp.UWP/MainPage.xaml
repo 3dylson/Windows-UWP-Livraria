@@ -35,7 +35,7 @@
 
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Livros" Icon="Library" Tag="books"/>
-                <NavigationViewItem Content="Categorias" Icon="Bookmarks" Tag="categories"/>
+                <NavigationViewItem Content="Categorias" Icon="Bookmarks" Tag="books"/>
                 <NavigationViewItem Content="Contactos" Icon="Mail" Tag="contacts"/>
                 <NavigationViewItem Content="Admin" Icon="Admin"
                                     Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="admin"/>
@@ -52,6 +52,17 @@
             <AppBarButton x:Name="AddButton2" Icon="SolidStar" Label="WhishList"
                               ToolTipService.ToolTip="Lista de Desejos" BorderThickness="1,0,1,0" FontFamily="Gill Sans Nova Light" FontWeight="Normal" FontStyle="Normal" />
         </CommandBar>
+
+        <StackPanel Margin="325,65,0,0" Padding="30">
+            <TextBlock Margin="0,0,0,30" Height="100" TextAlignment="Left" Canvas.ZIndex="1"
+                       Text="Livros" FontSize="85" FontFamily="Yu Gothic"></TextBlock>
+
+            
+            <Image Source="/Assets/negreiros.png" Height="248" Width="245"></Image>
+
+
+        </StackPanel>
+
         <Frame x:Name="frame" Padding="10" />
     </Grid>
 </Page>

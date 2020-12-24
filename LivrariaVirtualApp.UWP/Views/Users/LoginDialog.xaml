@@ -14,8 +14,8 @@
     >
 
     <StackPanel>
-        <TextBox x:Name="username" Header="Username" Text="{x:Bind UserViewModel.User.Name, Mode=TwoWay}" />
-        <PasswordBox x:Name="password" Header="Password" Password="{x:Bind UserViewModel.User.Password, Mode=TwoWay}" />
+        <TextBox x:Name="email" Header="Email" Text="{x:Bind UserViewModel.User.Email, Mode=TwoWay}" />
+        <PasswordBox x:Name="password" Header="Password" BorderBrush="Gray" Password="{x:Bind UserViewModel.User.Password, Mode=TwoWay}" />
 
         <Border Background="Red" BorderBrush="Black" BorderThickness="2" Margin="0,10" Padding="5" 
                 Visibility="{x:Bind UserViewModel.ShowError, Mode=OneWay}">

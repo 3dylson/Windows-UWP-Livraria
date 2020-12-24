@@ -27,6 +27,8 @@ namespace LivrariaVirtualApp.UWP
     sealed partial class App : Application
     {
         public static UserViewModel UserViewModel { get; set; }
+        public static BookViewModel BookViewModel { get; set; }
+        public static CategoryViewModel CategoryViewModel { get; set; }
         public static IUnitOfWork UnitOfWork { get; set; }
 
         public static string SqlConnectionString = @"Server=tcp:localhost,1433;Initial Catalog=dbLivraria; User ID=userLivraria; Password=Livraria; Connection Timeout = 30;";
@@ -42,6 +44,8 @@ namespace LivrariaVirtualApp.UWP
             this.Suspending += OnSuspending;
 
             UserViewModel = new UserViewModel();
+            CategoryViewModel = new CategoryViewModel();
+            BookViewModel = new BookViewModel();
         }
 
         /// <summary>
