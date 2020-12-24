@@ -25,11 +25,16 @@ namespace LivrariaVirtualApp.UWP
     public sealed partial class MainPage : Page
     {
         public UserViewModel UserViewModel { get; set; }
+        public BookViewModel BookViewModel { get; set; }
+        public CategoryViewModel CategoryViewModel { get; set; }
+
         public MainPage()
         {
             this.InitializeComponent();
 
             UserViewModel = App.UserViewModel;
+            CategoryViewModel = App.CategoryViewModel;
+            BookViewModel = App.BookViewModel;
         }
 
         public Frame AppFrame => frame;
