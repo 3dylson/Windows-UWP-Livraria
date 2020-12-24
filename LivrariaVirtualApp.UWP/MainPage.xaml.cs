@@ -1,5 +1,6 @@
 ﻿using LivrariaVirtualApp.Domain.Models;
 using LivrariaVirtualApp.UWP.ViewModels;
+using LivrariaVirtualApp.UWP.Views.Books;
 using LivrariaVirtualApp.UWP.Views.Categories;
 using LivrariaVirtualApp.UWP.Views.Users;
 using System;
@@ -41,8 +42,12 @@ namespace LivrariaVirtualApp.UWP
                 switch (selectedItem.Tag)
                 {
                     case "categories":
-                        AppFrame.Navigate(typeof(ManageCategoriesPage));
+                        AppFrame.Navigate(typeof(CategoriesPage));
                         break;
+                    case "books":
+                        AppFrame.Navigate(typeof(BooksPage));
+                        break;
+                       
                 }
             }
         }
@@ -53,9 +58,9 @@ namespace LivrariaVirtualApp.UWP
             var res = await dlg.ShowAsync();
             if (res == ContentDialogResult.Primary)
             {
-                if (App.UserViewModel.IsLogged)
+                if (App.UserViewModel.IsAdmin)
                 {
-                    AppFrame.Navigate(typeof(ManageCategoriesPage));
+                    AppFrame.Navigate(typeof(AdminPage));
                 }
             }
         }
@@ -73,9 +78,9 @@ namespace LivrariaVirtualApp.UWP
             var res = await dlg.ShowAsync();
             if (res == ContentDialogResult.Primary)
             {
-                if (App.UserViewModel.IsLogged)
+                if (App.UserViewModel.IsAdmin)
                 {
-                    AppFrame.Navigate(typeof(ManageCategoriesPage));
+                    AppFrame.Navigate(typeof(AdminPage));
                 }
             }
         }
