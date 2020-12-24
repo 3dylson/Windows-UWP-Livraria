@@ -43,5 +43,36 @@ namespace LivrariaVirtualApp.UWP.Views.Users
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
         }
+
+        private void DatePicker_CalendarOpened(object sender, RoutedEventArgs e)
+        {
+            birth_date.Text = "Select a date from the calendar";
+        }
+
+        private void DatePicker_CalendarClosed(object sender, RoutedEventArgs e)
+        {
+            birth_date.Text = "Enter a date or click the calendar";
+        }
+
+        // If the text is a valid date show a message.
+        // If the text is not a valid date, thow an exception.
+    //    private void DatePicker_DateValidationError(object sender,
+    //                    DatePickerDateValidationErrorEventArgs e)
+    //    {
+    //        DateTime newDate;
+    //        DatePicker datePickerObj = sender as DatePicker;
+
+    //        if (DateTime.TryParse(e.Text, out newDate))
+    //        {
+                
+    //                MessageBox.Show(String.Format("The date, {0}, cannot be selected.",
+    //                                               e.Text));
+                
+    //        }
+    //        else
+    //        {
+    //            e.ThrowException = true;
+    //        }
+    //    }
     }
 }
