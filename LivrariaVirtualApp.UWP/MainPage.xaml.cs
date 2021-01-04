@@ -30,7 +30,7 @@ namespace LivrariaVirtualApp.UWP
 
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             UserViewModel = App.UserViewModel;
             CategoryViewModel = App.CategoryViewModel;

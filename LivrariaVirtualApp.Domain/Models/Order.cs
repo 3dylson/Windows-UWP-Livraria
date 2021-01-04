@@ -20,7 +20,7 @@ namespace LivrariaVirtualApp.Domain.Models
         public int User_id { get; set; }
         
         public User User { get; set; }
-        public List<Cart> Cart { get; set; }  
+        public List<Cart> Cart { get; set; } = new List<Cart>();
         
 
         /// <summary>

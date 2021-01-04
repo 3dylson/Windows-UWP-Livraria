@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LivrariaVirtualApp.Infrastructure.Migrations
 {
     [DbContext(typeof(LivrariaVirtualDbContext))]
-    [Migration("20201224005026_SecondCreate")]
-    partial class SecondCreate
+    [Migration("20210104183635_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
