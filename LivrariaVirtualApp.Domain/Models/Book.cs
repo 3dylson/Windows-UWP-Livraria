@@ -24,6 +24,8 @@ namespace LivrariaVirtualApp.Domain.Models
         
 
         public Category Category { get; set; }
+        public int Uer_id { get; set}
+        public User User { get; set; }
         
         public Book() { }
         public Book(string name, string isbn, string pg, string language,

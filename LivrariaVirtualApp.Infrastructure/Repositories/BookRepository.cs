@@ -1,7 +1,9 @@
 ﻿using LivrariaVirtualApp.Domain.Models;
 using LivrariaVirtualApp.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,45 +16,54 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         {
         }
 
-        public Task<int> CountAll(string name_wishlist)
+        public async Task<List<Book>> FindAllByCategoryStartWithAsync(int category_id, string name)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Book>> FindAllByCartStartWithAsync(int cart_id, string quantity)
+        public async Task<Book> FindByNameAsync(string name)
         {
-            throw new NotImplementedException();
+            return _dbContext.Books.Where(c => c.Name.StartsWith(name))
+                .OrderBy(c => c.Name)
+                .ToListAsync();
         }
 
-        public Task<List<Book>> FindAllByCategoryStartWithAsync(int category_id, string name)
+        public override async Task<Book> FindOrCreate(Book e)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Book>> FindAllByUserIdAsync(int user_id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Book>> FindAllByWishlistStartWithAsync(int wishlist_id, string name_wishlist)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Book> FindByNameAsync(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<Book> FindOrCreate(Book e)
-        {
-            throw new NotImplementedException();
+            var c = await _dbContext.Books.SingleOrDefaultAsync(i => i.Name == e.Name);
+            if (c == null)
+            {
+                c = await CreateAsync(e);
+                await _dbContext.SaveChangesAsync();
+            }
+            return c;
         }
 
 
-        public override Task<Book> UpsertAsync(Book e)
+        public override async Task<Book> UpsertAsync(Book e)
         {
-            throw new NotImplementedException();
+            Book f = null;
+            Book existing = await FindByNameAsync(e.Name);
+
+            if (existing == null)
+            {
+                if (e.Id == 0)
+                {
+                    f = await CreateAsync(e);
+                }
+                else
+                {
+                    f = await UpdateAsync(e);
+                }
+            }
+            else if (existing.Id == e.Id)
+            {
+                _dbContext.Entry(existing).State = EntityState.Detached;
+                f = await UpdateAsync(e);
+            }
+            await _dbContext.SaveChangesAsync();
+
+            return f;
         }
 
         Task<IEnumerable<Book>> IBookRepository.GetAsync(string search)
