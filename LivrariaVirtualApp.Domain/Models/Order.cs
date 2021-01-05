@@ -11,12 +11,15 @@ namespace LivrariaVirtualApp.Domain.Models
     /// </summary>
     public class Order : Entity
     {
-        public decimal Total
+        public virtual decimal Total
         {
             get
             {
                 return Cart.Sum(bookCart => bookCart.Book.Price * bookCart.Quantity);
             }
+
+            protected set { }
+            
         }
 
         public DateTime Date_created { get; set; } = DateTime.Now;
