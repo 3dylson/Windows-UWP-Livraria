@@ -40,8 +40,8 @@ namespace LivrariaVirtualApp.UWP
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
+            InitializeComponent();
+            Suspending += OnSuspending;
 
             UserViewModel = new UserViewModel();
             CategoryViewModel = new CategoryViewModel();

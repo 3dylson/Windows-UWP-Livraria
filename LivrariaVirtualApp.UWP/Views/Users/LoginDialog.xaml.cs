@@ -27,7 +27,7 @@ namespace LivrariaVirtualApp.UWP.Views.Users
         public UserViewModel UserViewModel { get; set; }
         public LoginDialog()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             UserViewModel = App.UserViewModel;
             UserViewModel.User = new User();
         }

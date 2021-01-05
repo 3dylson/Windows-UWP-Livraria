@@ -24,7 +24,7 @@ namespace LivrariaVirtualApp.UWP.Views.Users
     {
         public AdminPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }

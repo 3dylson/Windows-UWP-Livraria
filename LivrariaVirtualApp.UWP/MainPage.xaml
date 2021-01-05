@@ -35,7 +35,7 @@
 
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Livros" Icon="Library" Tag="books"/>
-                <NavigationViewItem Content="Categorias" Icon="Bookmarks" Tag="books"/>
+                <NavigationViewItem Content="Categorias" Icon="Bookmarks" Tag="categories"/>
                 <NavigationViewItem Content="Contactos" Icon="Mail" Tag="contacts"/>
                 <NavigationViewItem Content="Admin" Icon="Admin"
                                     Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="admin"/>

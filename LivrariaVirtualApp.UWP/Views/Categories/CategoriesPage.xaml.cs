@@ -24,7 +24,7 @@ namespace LivrariaVirtualApp.UWP.Views.Categories
     {
         public CategoriesPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }

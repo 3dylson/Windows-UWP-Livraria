@@ -28,7 +28,7 @@ namespace LivrariaVirtualApp.UWP.Views.Users
 
         public RegisterDialog()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             UserViewModel = App.UserViewModel;
             UserViewModel.User = new User();
         }
@@ -56,23 +56,23 @@ namespace LivrariaVirtualApp.UWP.Views.Users
 
         // If the text is a valid date show a message.
         // If the text is not a valid date, thow an exception.
-        private void DatePicker_DateValidationError(object sender,
-                        DatePickerDateValidationErrorEventArgs e)
-        {
-            DateTime newDate;
-            DatePicker datePickerObj = sender as DatePicker;
+        //private void DatePicker_DateValidationError(object sender,
+        //                DatePickerDateValidationErrorEventArgs e)
+        //{
+        //    DateTime newDate;
+        //    DatePicker datePickerObj = sender as DatePicker;
 
-            if (DateTime.TryParse(e.Text, out newDate))
-            {
+        //    if (DateTime.TryParse(e.Text, out newDate))
+        //    {
                 
-                    MessageBox.Show(String.Format("The date, {0}, cannot be selected.",
-                                                   e.Text));
+        //            MessageBox.Show(String.Format("The date, {0}, cannot be selected.",
+        //                                           e.Text));
                 
-            }
-            else
-            {
-                e.ThrowException = true;
-            }
-        }
+        //    }
+        //    else
+        //    {
+        //        e.ThrowException = true;
+        //    }
+        //}
     }
 }
