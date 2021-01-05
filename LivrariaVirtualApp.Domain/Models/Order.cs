@@ -11,7 +11,14 @@ namespace LivrariaVirtualApp.Domain.Models
     /// </summary>
     public class Order : Entity
     {
-        public decimal Total => Cart.Sum(bookCart => bookCart.Book.Price * bookCart.Quantity);
+        public decimal Total
+        {
+            get
+            {
+                return Cart.Sum(bookCart => bookCart.Book.Price * bookCart.Quantity);
+            }
+        }
+
         public DateTime Date_created { get; set; } = DateTime.Now;
         public OrderStatus Status { get; set; } = OrderStatus.Processing;
         public string UserOrdering { get; set; }
