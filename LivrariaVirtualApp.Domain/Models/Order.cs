@@ -1,9 +1,7 @@
 ﻿using LivrariaVirtualApp.Domain.SeedWork;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
 
 namespace LivrariaVirtualApp.Domain.Models
 {
@@ -13,42 +11,39 @@ namespace LivrariaVirtualApp.Domain.Models
     /// </summary>
     public class Order : Entity
     {
-        public decimal Total { get; set; } /*=> Cart.Subtotal + 10;*/
+        public decimal Total
+        {
+            get
+            {
+                return Cart.Sum(bookCart => bookCart.Book.Price * bookCart.Quantity);
+            }
+        }
+
         public DateTime Date_created { get; set; } = DateTime.Now;
         public OrderStatus Status { get; set; } = OrderStatus.Processing;
+        public string UserOrdering { get; set; }
         public string Shipping_address { get; set; }
                 
         public int User_id { get; set; }
-        [ForeignKey("User_id")]
-        public int Cart_id { get; set; }
-        [ForeignKey("Cart_id")]
         
-
         public User User { get; set; }
-        public List<Cart> Cart { get; set; }  
+        public List<Cart> Cart { get; set; } = new List<Cart>();
         
-        /*public Book Book { get; set; }*/
 
         /// <summary>
         /// Creates a new order.
         /// </summary>
         public Order() { }
-        public Order( DateTime date_created, OrderStatus status, string shipping_adress,
-                     int user_id, int cart_id)
+        public Order(User user ) : this()
         {
-            /*this.Total = total;*/
-            this.Date_created = date_created;
-            this.Status = status;
-            this.Shipping_address = shipping_adress;
-            this.User_id = user_id;
-            this.Cart_id = cart_id;
-            
-                        
-        }
+            User = user;
+            UserOrdering = $"{user.Name}";
+            Shipping_address = user.Address;
+         }
 
         public override string ToString()
         {
-            return $"Total with shipping tax added:{Total}€, Ordered at:{Date_created}, Status:{Status}, Your Shipping Address is:{Shipping_address}";
+            return $"Total:{Total}€, Ordered at:{Date_created}, Status:{Status}, Your Shipping Address is:{Shipping_address} \nThank You {UserOrdering}! ";
         }
 
         /// <summary>

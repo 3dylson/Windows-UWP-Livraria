@@ -11,20 +11,16 @@ namespace LivrariaVirtualApp.Domain.Models
         
         public List<Book> Books { get; set; }
         public Category() { }
-        public Category(string name, int category_id)
+        public Category(string name)
         {
-            this.Name = name;
-            this.Id = category_id;
-                        
+            Name = name;
+                                  
         }
 
         public override string ToString()
         {
             return Name;
         }
-
-
-
 
     }
 

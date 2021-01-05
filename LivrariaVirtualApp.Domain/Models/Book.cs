@@ -30,26 +30,26 @@ namespace LivrariaVirtualApp.Domain.Models
                      decimal price, int available, DateTime release_date, string publisher,
                      string pages, string overview, byte[] image, int category_id)
         {
-            this.Name = name;
-            this.ISBN = isbn;
-            this.Parental_guide = pg;
-            this.Language = language;
-            this.Price = price;
-            this.Available = available;
-            this.Realease_date = release_date;
-            this.Publisher = publisher;
-            this.Pages = pages;
-            this.Overview = overview;
-            this.Image = image;
-            this.Category_id = category_id;
+            Name = name;
+            ISBN = isbn;
+            Parental_guide = pg;
+            Language = language;
+            Price = price;
+            Available = available;
+            Realease_date = release_date;
+            Publisher = publisher;
+            Pages = pages;
+            Overview = overview;
+            Image = image;
+            Category_id = category_id;
 
                         
         }
 
         public override string ToString()
         {
-            return $"{Name}, ISBN:{ISBN}, Parental Guide:{Parental_guide}, Language:{Language}, Price:{Price}, Available:{Available}, Release Date:{Realease_date}," +
-                   $"Publisher:{Publisher}, Pages:{Pages}, Overview:{Overview}, Image:{Image}";
+            return $"{Name}, ISBN:{ISBN}, Parental Guide:{Parental_guide}, Language:{Language}, Available:{Available}, Release Date:{Realease_date}," +
+                   $"Publisher:{Publisher}, Pages:{Pages}, Overview:{Overview}, Image:{Image} \n{Price}";
         }
 
 

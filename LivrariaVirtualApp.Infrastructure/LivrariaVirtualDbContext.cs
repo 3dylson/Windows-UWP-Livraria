@@ -26,17 +26,17 @@ namespace LivrariaVirtualApp.Infrastructure
         {
             //Category Entity
             modelBuilder.Entity<Category>()
-                .HasKey(c => c.Id);
+                .HasIndex(c => c.Name).IsUnique();
             modelBuilder.Entity<Category>()
                 .Property(c => c.Name)
                 .IsRequired()
-                .HasMaxLength(45);
+                .HasMaxLength(60);
             modelBuilder.Entity<Category>()
                 .HasMany(c => c.Books)
                 .WithOne();
             //Book Entity
             modelBuilder.Entity<Book>()
-                .HasKey(b => b.Id);
+                .HasIndex(b => b.Name).IsUnique();
             modelBuilder.Entity<Book>()
                 .Property(b => b.Name)
                 .IsRequired()
@@ -79,26 +79,23 @@ namespace LivrariaVirtualApp.Infrastructure
             modelBuilder.Entity<Book>()
                 .HasOne(b => b.Category)
                 .WithMany(c => c.Books)
-                .HasForeignKey(b => b.Category_id);
+                .HasForeignKey(b => b.Category_id)
+                .OnDelete(DeleteBehavior.Restrict);
             //Cart Entity
             modelBuilder.Entity<Cart>()
-                .HasKey(c => c.Id);
+                .HasIndex(t => new { t.Book_id, t.User_id });
             modelBuilder.Entity<Cart>()
                 .Property(c => c.Quantity)
-                .IsRequired();
+                .IsRequired();       
             modelBuilder.Entity<Cart>()
-                .Property(c => c.Subtotal)
-                .IsRequired();
-            modelBuilder.Entity<Cart>()
-                .HasOne(c => c.User)
-                .WithOne(c => c.Cart)
-                .HasForeignKey<User>(u => u.Id );
+                .HasOne(c => c.Order)
+                .WithMany(c => c.Cart)
+                .HasForeignKey(c => c.Order_id)
+                .OnDelete(DeleteBehavior.Restrict);
             //Order Entity
-            modelBuilder.Entity<Order>()
-                .HasKey(c => c.Id);
-            modelBuilder.Entity<Order>()
-                .Property(o => o.Total)
-                .IsRequired();
+            //modelBuilder.Entity<Order>()
+            //    .Property(o => o.Total)
+            //    .IsRequired();
             modelBuilder.Entity<Order>()
                 .Property(o => o.Date_created)
                 .IsRequired();
@@ -106,22 +103,23 @@ namespace LivrariaVirtualApp.Infrastructure
                 .Property(o => o.Status)
                 .IsRequired();
             modelBuilder.Entity<Order>()
+                .Property(o => o.UserOrdering)
+                .IsRequired(false);
+            modelBuilder.Entity<Order>()
                 .Property(o => o.Shipping_address)
                 .IsRequired();
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.User)
+                .WithMany(u => u.Order)
+                .HasForeignKey(o => o.User_id);
             //Wishlist Entity
-            modelBuilder.Entity<Wishlist>()
-                .HasKey(c => c.Id);
+            modelBuilder.Entity<Wishlist>().
+                HasIndex(t => new { t.Name, t.User_id }).IsUnique();
             modelBuilder.Entity<Wishlist>()
                 .Property(c => c.Name)
                 .IsRequired()
                 .HasMaxLength(45);
-            modelBuilder.Entity<Wishlist>()
-                .HasOne(w => w.User)
-                .WithMany(u => u.Wishlists)
-                .HasForeignKey(w => w.User_id);
             //User Entity
-            modelBuilder.Entity<User>()
-                .HasKey(u => u.Id);
             modelBuilder.Entity<User>()
                 .Property(u => u.Name)
                 .IsRequired(false)
@@ -141,6 +139,10 @@ namespace LivrariaVirtualApp.Infrastructure
                 .Property(u => u.Phone)
                 .IsRequired(false)
                 .HasMaxLength(20);
+            modelBuilder.Entity<User>()
+                .Property(u => u.Address)
+                .IsRequired(false)
+                .HasMaxLength(256);
             modelBuilder.Entity<User>()
                 .Property(u => u.Admin)
                 .IsRequired()

@@ -110,14 +110,6 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
                 .FirstOrDefaultAsync(user => user.Admin == admin);
         }
 
-        public override Task<IEnumerable<User>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<int> CountAll()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

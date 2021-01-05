@@ -30,22 +30,23 @@ namespace LivrariaVirtualApp.Domain.Models
         private string password;
         public string Birth_date { get; set; }
         public string Phone { get; set; }
+        public string Address { get; set; }
         public int Admin { get; set; }
 
         public List<Wishlist> Wishlists { get; set; }
-        public Cart Cart { get; set; }
         public List<Order> Order { get; set; }    
         public User() { }
         public User(string name, string email, string password, string birth_date, 
-                          string phone, int admin, int user_id)
+                          string phone, int admin, string address , int user_id)
         {
-            this.Name = name;
-            this.Email = email;
-            this.Password = password;
-            this.Birth_date = birth_date;
-            this.Phone = phone;
-            this.Admin = admin;
-            this.Id = user_id;
+            Name = name;
+            Email = email;
+            Password = password;
+            Birth_date = birth_date;
+            Phone = phone;
+            Address = address;
+            Admin = admin;
+            Id = user_id;
             
             
             
@@ -55,7 +56,7 @@ namespace LivrariaVirtualApp.Domain.Models
         /// Returns the User's infos.
         /// </summary>
         public override string ToString() =>  $"Name:{Name}, Email:{Email}, Birthday:{Birth_date}, " +
-                   $"Phone number:{Phone}";
+                   $"Phone number:{Phone}, Address:{Address}";
 
     }
 
