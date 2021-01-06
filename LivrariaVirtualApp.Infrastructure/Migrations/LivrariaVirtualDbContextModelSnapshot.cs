@@ -29,9 +29,6 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                     b.Property<int>("Available")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CartId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Category_id")
                         .HasColumnType("int");
 
@@ -79,57 +76,30 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                     b.Property<DateTime>("Realease_date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("WishlistId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CartId");
 
                     b.HasIndex("Category_id");
 
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.HasIndex("WishlistId");
-
                     b.ToTable("Books");
                 });
 
             modelBuilder.Entity("LivrariaVirtualApp.Domain.Models.Cart", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("BookId")
+                    b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Book_id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Order_id")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                    b.HasKey("BookId", "OrderId");
 
-                    b.Property<int>("User_id")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("Order_id");
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("Book_id", "User_id");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Carts");
                 });
@@ -170,6 +140,9 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UserOrdering")
                         .HasColumnType("nvarchar(max)");
@@ -241,7 +214,7 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Book_id")
+                    b.Property<int>("BookId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -249,60 +222,49 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                         .HasColumnType("nvarchar(45)")
                         .HasMaxLength(45);
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.Property<int>("User_id")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("BookId");
 
-                    b.HasIndex("Name", "User_id")
+                    b.HasIndex("Name")
                         .IsUnique();
+
+                    b.HasIndex("User_id");
 
                     b.ToTable("Wishlists");
                 });
 
             modelBuilder.Entity("LivrariaVirtualApp.Domain.Models.Book", b =>
                 {
-                    b.HasOne("LivrariaVirtualApp.Domain.Models.Cart", null)
-                        .WithMany("Books")
-                        .HasForeignKey("CartId");
-
                     b.HasOne("LivrariaVirtualApp.Domain.Models.Category", "Category")
                         .WithMany("Books")
                         .HasForeignKey("Category_id")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("LivrariaVirtualApp.Domain.Models.Wishlist", null)
-                        .WithMany("Books")
-                        .HasForeignKey("WishlistId");
                 });
 
             modelBuilder.Entity("LivrariaVirtualApp.Domain.Models.Cart", b =>
                 {
                     b.HasOne("LivrariaVirtualApp.Domain.Models.Book", "Book")
                         .WithMany()
-                        .HasForeignKey("BookId");
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("LivrariaVirtualApp.Domain.Models.Order", "Order")
                         .WithMany("Cart")
-                        .HasForeignKey("Order_id")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("LivrariaVirtualApp.Domain.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("LivrariaVirtualApp.Domain.Models.Order", b =>
                 {
                     b.HasOne("LivrariaVirtualApp.Domain.Models.User", "User")
-                        .WithMany("Order")
+                        .WithMany("Orders")
                         .HasForeignKey("User_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -310,9 +272,17 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
 
             modelBuilder.Entity("LivrariaVirtualApp.Domain.Models.Wishlist", b =>
                 {
+                    b.HasOne("LivrariaVirtualApp.Domain.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("LivrariaVirtualApp.Domain.Models.User", "User")
                         .WithMany("Wishlists")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("User_id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

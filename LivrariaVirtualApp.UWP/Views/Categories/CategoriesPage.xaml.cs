@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LivrariaVirtualApp.UWP.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,36 @@ namespace LivrariaVirtualApp.UWP.Views.Categories
     /// </summary>
     public sealed partial class CategoriesPage : Page
     {
+        public CategoryViewModel CategoryViewModel { get; set; }
         public CategoriesPage()
         {
             InitializeComponent();
+            CategoryViewModel = new CategoryViewModel();
+        }
+        private async void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (await CategoryViewModel.UpsertAsync() != null)
+            {
+                Frame.GoBack();
+            }
+            else
+            {
+                FlyoutBase.ShowAttachedFlyout(sender as FrameworkElement);
+            }
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.GoBack();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter != null)
+            {
+                CategoryViewModel = e.Parameter as CategoryViewModel;
+                base.OnNavigatedTo(e);
+            }
         }
     }
 }

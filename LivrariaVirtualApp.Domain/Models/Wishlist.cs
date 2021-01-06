@@ -12,7 +12,7 @@ namespace LivrariaVirtualApp.Domain.Models
                 
         public int User_id { get; set; }
         
-        public int Book_id { get; set; }
+        public int BookId { get; set; }
 
         public User User { get; set; }
         public Book Book { get; set; }

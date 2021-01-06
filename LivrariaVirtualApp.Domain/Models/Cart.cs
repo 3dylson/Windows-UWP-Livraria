@@ -11,7 +11,7 @@ namespace LivrariaVirtualApp.Domain.Models
     /// <summary>
     /// Represents a cart on an order.
     /// </summary>
-    public class Cart : DbContext
+    public class Cart 
     {
         /// <summary>
         /// Gets or sets the quantity of books. 
@@ -19,8 +19,8 @@ namespace LivrariaVirtualApp.Domain.Models
         public int Quantity { get; set; } = 1;
         
         
-        public int Book_id { get; set; }
-        public int Order_id { get; set; }
+        public int BookId { get; set; }
+        public int OrderId { get; set; }
 
         public Book Book { get; set; }
         public Order Order { get; set; } 
@@ -29,8 +29,8 @@ namespace LivrariaVirtualApp.Domain.Models
         public Cart(int quantity, int book_id, int order_id)
         {
             Quantity = quantity;
-            Book_id = book_id;
-            Order_id = order_id;                      
+            BookId = book_id;
+            OrderId = order_id;                      
         }
 
         
