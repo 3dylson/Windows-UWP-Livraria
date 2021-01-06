@@ -5,7 +5,6 @@ using System.Linq;
 
 namespace LivrariaVirtualApp.Domain.Models
 {
-
     /// <summary>
     /// Represents a customer order.
     /// </summary>
@@ -19,30 +18,29 @@ namespace LivrariaVirtualApp.Domain.Models
             }
 
             protected set { }
-            
         }
 
         public DateTime Date_created { get; set; } = DateTime.Now;
         public OrderStatus Status { get; set; } = OrderStatus.Processing;
         public string UserOrdering { get; set; }
         public string Shipping_address { get; set; }
-                
+
         public int User_id { get; set; }
-        
+
         public User User { get; set; }
         public List<Cart> Cart { get; set; } = new List<Cart>();
-        
 
         /// <summary>
         /// Creates a new order.
         /// </summary>
         public Order() { }
-        public Order(User user ) : this()
+
+        public Order(User user) : this()
         {
             User = user;
             UserOrdering = $"{user.Name}";
             Shipping_address = user.Address;
-         }
+        }
 
         public override string ToString()
         {
@@ -56,12 +54,6 @@ namespace LivrariaVirtualApp.Domain.Models
         {
             Processing,
             Concluded
-            
         }
-
-
     }
-
-
 }
-
