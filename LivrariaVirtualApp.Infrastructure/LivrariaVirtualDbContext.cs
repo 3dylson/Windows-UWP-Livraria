@@ -24,16 +24,13 @@ namespace LivrariaVirtualApp.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Category Entity
+            //Category Entity 
             modelBuilder.Entity<Category>()
                 .HasIndex(c => c.Name).IsUnique();
             modelBuilder.Entity<Category>()
                 .Property(c => c.Name)
                 .IsRequired()
                 .HasMaxLength(60);
-            modelBuilder.Entity<Category>()
-                .HasMany(c => c.Books)
-                .WithOne();
             //Book Entity
             modelBuilder.Entity<Book>()
                 .HasIndex(b => b.Name).IsUnique();
@@ -83,19 +80,14 @@ namespace LivrariaVirtualApp.Infrastructure
                 .OnDelete(DeleteBehavior.Restrict);
             //Cart Entity
             modelBuilder.Entity<Cart>()
-                .HasIndex(t => new { t.Book_id, t.User_id });
-            modelBuilder.Entity<Cart>()
                 .Property(c => c.Quantity)
                 .IsRequired();       
             modelBuilder.Entity<Cart>()
-                .HasOne(c => c.Order)
-                .WithMany(c => c.Cart)
-                .HasForeignKey(c => c.Order_id)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasKey(x => new { x.BookId, x.OrderId });
             //Order Entity
-            //modelBuilder.Entity<Order>()
-            //    .Property(o => o.Total)
-            //    .IsRequired();
+            modelBuilder.Entity<Order>()
+                .Property(o => o.Total)
+                .IsRequired();
             modelBuilder.Entity<Order>()
                 .Property(o => o.Date_created)
                 .IsRequired();
@@ -110,15 +102,20 @@ namespace LivrariaVirtualApp.Infrastructure
                 .IsRequired();
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.User)
-                .WithMany(u => u.Order)
+                .WithMany(u => u.Orders)
                 .HasForeignKey(o => o.User_id);
             //Wishlist Entity
-            modelBuilder.Entity<Wishlist>().
-                HasIndex(t => new { t.Name, t.User_id }).IsUnique();
+            modelBuilder.Entity<Wishlist>()
+                .HasIndex(c => c.Name).IsUnique();
             modelBuilder.Entity<Wishlist>()
                 .Property(c => c.Name)
                 .IsRequired()
                 .HasMaxLength(45);
+            modelBuilder.Entity<Wishlist>()
+                .HasOne(w => w.User)
+                .WithMany(u => u.Wishlists)
+                .HasForeignKey(o => o.User_id)
+                .OnDelete(DeleteBehavior.Restrict);
             //User Entity
             modelBuilder.Entity<User>()
                 .Property(u => u.Name)

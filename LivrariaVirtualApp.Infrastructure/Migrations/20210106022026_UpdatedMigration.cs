@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LivrariaVirtualApp.Infrastructure.Migrations
 {
-    public partial class NewMigration : Migration
+    public partial class UpdatedMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,11 +40,42 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Books",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 80, nullable: false),
+                    ISBN = table.Column<string>(maxLength: 20, nullable: false),
+                    Parental_guide = table.Column<string>(maxLength: 3, nullable: true),
+                    Language = table.Column<string>(maxLength: 45, nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
+                    Available = table.Column<int>(nullable: false),
+                    Realease_date = table.Column<DateTime>(nullable: false),
+                    Publisher = table.Column<string>(maxLength: 100, nullable: false),
+                    Pages = table.Column<string>(maxLength: 20, nullable: false),
+                    Overview = table.Column<string>(maxLength: 256, nullable: false),
+                    Image = table.Column<byte[]>(nullable: false),
+                    Category_id = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Books", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Books_Categories_Category_id",
+                        column: x => x.Category_id,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Total = table.Column<decimal>(nullable: false),
                     Date_created = table.Column<DateTime>(nullable: false),
                     Status = table.Column<int>(nullable: false),
                     UserOrdering = table.Column<string>(nullable: true),
@@ -70,15 +101,20 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 45, nullable: false),
                     User_id = table.Column<int>(nullable: false),
-                    Book_id = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: true)
+                    BookId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Wishlists", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Wishlists_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Wishlists_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Wishlists_Users_User_id",
+                        column: x => x.User_id,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -88,85 +124,31 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                 name: "Carts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Quantity = table.Column<int>(nullable: false),
-                    Book_id = table.Column<int>(nullable: false),
-                    User_id = table.Column<int>(nullable: false),
-                    Order_id = table.Column<int>(nullable: false),
-                    BookId = table.Column<int>(nullable: true),
-                    UserId = table.Column<int>(nullable: true)
+                    BookId = table.Column<int>(nullable: false),
+                    OrderId = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Carts", x => x.Id);
+                    table.PrimaryKey("PK_Carts", x => new { x.BookId, x.OrderId });
                     table.ForeignKey(
-                        name: "FK_Carts_Orders_Order_id",
-                        column: x => x.Order_id,
+                        name: "FK_Carts_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Carts_Orders_OrderId",
+                        column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Carts_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Books",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 80, nullable: false),
-                    ISBN = table.Column<string>(maxLength: 20, nullable: false),
-                    Parental_guide = table.Column<string>(maxLength: 3, nullable: true),
-                    Language = table.Column<string>(maxLength: 45, nullable: false),
-                    Price = table.Column<decimal>(nullable: false),
-                    Available = table.Column<int>(nullable: false),
-                    Realease_date = table.Column<DateTime>(nullable: false),
-                    Publisher = table.Column<string>(maxLength: 100, nullable: false),
-                    Pages = table.Column<string>(maxLength: 20, nullable: false),
-                    Overview = table.Column<string>(maxLength: 256, nullable: false),
-                    Image = table.Column<byte[]>(nullable: false),
-                    Category_id = table.Column<int>(nullable: false),
-                    CartId = table.Column<int>(nullable: true),
-                    WishlistId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Books", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Books_Carts_CartId",
-                        column: x => x.CartId,
-                        principalTable: "Carts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Books_Categories_Category_id",
-                        column: x => x.Category_id,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Books_Wishlists_WishlistId",
-                        column: x => x.WishlistId,
-                        principalTable: "Wishlists",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Address", "Admin", "Birth_date", "Email", "Name", "Password", "Phone" },
                 values: new object[] { 1, null, 1, null, "admin@admin.com", "admin", "D033E22AE348AEB5660FC2140AEC35850C4DA997", null });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Books_CartId",
-                table: "Books",
-                column: "CartId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_Category_id",
@@ -180,29 +162,9 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Books_WishlistId",
-                table: "Books",
-                column: "WishlistId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Carts_BookId",
+                name: "IX_Carts_OrderId",
                 table: "Carts",
-                column: "BookId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Carts_Order_id",
-                table: "Carts",
-                column: "Order_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Carts_UserId",
-                table: "Carts",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Carts_Book_id_User_id",
-                table: "Carts",
-                columns: new[] { "Book_id", "User_id" });
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_Name",
@@ -216,48 +178,41 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                 column: "User_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Wishlists_UserId",
+                name: "IX_Wishlists_BookId",
                 table: "Wishlists",
-                column: "UserId");
+                column: "BookId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Wishlists_Name_User_id",
+                name: "IX_Wishlists_Name",
                 table: "Wishlists",
-                columns: new[] { "Name", "User_id" },
+                column: "Name",
                 unique: true);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Carts_Books_BookId",
-                table: "Carts",
-                column: "BookId",
-                principalTable: "Books",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+            migrationBuilder.CreateIndex(
+                name: "IX_Wishlists_User_id",
+                table: "Wishlists",
+                column: "User_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Books_Carts_CartId",
-                table: "Books");
-
             migrationBuilder.DropTable(
                 name: "Carts");
-
-            migrationBuilder.DropTable(
-                name: "Books");
-
-            migrationBuilder.DropTable(
-                name: "Orders");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Wishlists");
 
             migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Books");
+
+            migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

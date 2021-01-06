@@ -18,14 +18,14 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
 
         public async Task<List<Book>> FindAllByCategoryStartWithAsync(int category_id, string name)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Books.Where(c => c.Name.StartsWith(name)
+                && (category_id == 0 || c.Category_id == category_id))
+                .OrderBy(c => c.Name).ToListAsync();
         }
 
         public async Task<Book> FindByNameAsync(string name)
         {
-            return _dbContext.Books.Where(c => c.Name.StartsWith(name))
-                .OrderBy(c => c.Name)
-                .ToListAsync();
+            return await _dbContext.Books.SingleOrDefaultAsync(p => p.Name == name);
         }
 
         public override async Task<Book> FindOrCreate(Book e)
@@ -38,7 +38,12 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             }
             return c;
         }
-
+        /// ///
+        public override Task<IEnumerable<Book>> GetAsync(string search)
+        {
+            throw new NotImplementedException();
+        }
+        /// ///
 
         public override async Task<Book> UpsertAsync(Book e)
         {
@@ -66,9 +71,6 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             return f;
         }
 
-        Task<IEnumerable<Book>> IBookRepository.GetAsync(string search)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

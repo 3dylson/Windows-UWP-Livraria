@@ -78,7 +78,7 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             }
         }
 
-        public async Task<IEnumerable<User>> GetAsync(string search)
+        public override async Task<IEnumerable<User>> GetAsync(string search)
         {
             string[] parameters = search.Split(' ');
             return await _dbContext.Users

@@ -12,11 +12,10 @@ namespace LivrariaVirtualApp.Domain.Models
                 
         public int User_id { get; set; }
         
-        public int Book_id { get; set; }
-        
+        public int BookId { get; set; }
 
         public User User { get; set; }
-        public List<Book> Books { get; set; }
+        public Book Book { get; set; }
         public Wishlist() { }
         public Wishlist(string name_wishlist, int wishlist_id)
         {

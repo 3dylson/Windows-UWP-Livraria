@@ -34,7 +34,7 @@ namespace LivrariaVirtualApp.Domain.Models
         public int Admin { get; set; }
 
         public List<Wishlist> Wishlists { get; set; }
-        public List<Order> Order { get; set; }    
+        public List<Order> Orders { get; set; }    
         public User() { }
         public User(string name, string email, string password, string birth_date, 
                           string phone, int admin, string address , int user_id)

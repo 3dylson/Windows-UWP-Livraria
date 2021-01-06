@@ -15,22 +15,47 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         {
         }
 
-
-        public Task<List<Order>> FindAll()
+        public Task<List<Order>> FindAllByUserIdAsync(int user_id)
         {
-            return _dbContext.Orders.AsNoTracking.ToListAsync();
+            return _dbContext.Orders
+                .Include(m => m.Cart)
+                .ThenInclude(cart => cart.Book)
+                .Where(e => e.User_id == user_id)
+                .ToListAsync();
         }
 
-        public async Task<List<Order>> FindAllByUserIdAsync(int user_id)
+        public Task<Order> FindByIdAndUserAsync(int id, string name)
         {
-            return await _dbContext.Orders.SingleOrDefaultAsync(e => e.User_id == user_id);
+            return _dbContext.Orders
+                .SingleOrDefaultAsync(p => p.Id == id
+                    && p.UserOrdering == name);
         }
 
+        public override async Task<Order> FindOrCreate(Order e)
+        {
+            var f = await _dbContext.Orders
+                .SingleOrDefaultAsync(i => i.Id == e.Id
+                    && i.User_id == e.User_id);
+
+            if (f == null)
+            {
+                f = await CreateAsync(e);
+                await _dbContext.SaveChangesAsync();
+            }
+
+            return f;
+        }
+
+        public override Task<IEnumerable<Order>> GetAsync(string search)
+        {
+            throw new NotImplementedException();
+        }
 
         public override async Task<Order> UpsertAsync(Order e)
         {
             Order f = null;
-            Order existing = await FindByIdAsync(e.User_id);
+            Order existing = await FindByIdAndUserAsync(e.User_id,
+                e.UserOrdering);
 
             if (existing == null)
             {
@@ -48,62 +73,9 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
                 _dbContext.Entry(existing).State = EntityState.Detached;
                 f = await UpdateAsync(e);
             }
-            await _dbContext.SaveChangesAsync();
 
+            await _dbContext.SaveChangesAsync();
             return f;
         }
-
-        public async Task<Order> DeleteAsync(int order_id)
-        {
-            Order entity = _dbContext.Orders.Remove(order_id).Entity;
-            await _dbContext.SaveChangesAsync();
-            return entity;
-        }
-
-        public Task<List<Order>> FindAllByStatusStartWithAsync(string status)
-        {
-            return _dbContext.Orders.Where(c => c.Status.StartsWith(status))
-                .OrderBy(c => c.User_id)
-                .ToListAsync();
-        }
-
-        public Task<List<Order>> FindAllByUserIdAsync(int user_id)
-        {
-            return _dbContext.Orders.Where(c => c.User_id.StartsWith(user_id))
-                .OrderBy(c => c.User_id)
-                .ToListAsync();
-        }
-
-        Task<IEnumerable<Order>> GetForUserAsync(int order_id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override async Task<Order> UpsertAsync(Order order)
-        {
-            Order f = null;
-            Order existing = await FindAllByUserIdAsync(f.User_id);
-
-            if (existing == null)
-            {
-                if (order.Id == 0)
-                {
-                    order = await CreateAsync(order);
-                }
-                else
-                {
-                    f = await UpdateAsync(order);
-                }
-            }
-            else if (existing.Id == order.Id)
-            {
-                _dbContext.Entry(existing).State = EntityState.Detached;
-                f = await UpdateAsync(order);
-            }
-            await _dbContext.SaveChangesAsync();
-
-            return f;
-        }
-    }
     }
 }
