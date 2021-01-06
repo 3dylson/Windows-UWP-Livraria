@@ -55,10 +55,7 @@
 
         <StackPanel Margin="325,65,0,0" Padding="30">
             <TextBlock Margin="0,0,0,30" Height="100" TextAlignment="Left" Canvas.ZIndex="1"
-                       Text="Livros" FontSize="85" FontFamily="Yu Gothic"></TextBlock>
-
-            
-            <Image Source="/Assets/negreiros.png" Height="248" Width="245"></Image>
+                       Text="" FontSize="85" FontFamily="Yu Gothic"></TextBlock>
 
 
         </StackPanel>
