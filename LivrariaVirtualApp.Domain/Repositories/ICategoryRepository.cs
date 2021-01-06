@@ -11,8 +11,6 @@ namespace LivrariaVirtualApp.Domain.Repositories
     {
         Task<Category> FindByNameAsync(string name);
         Task<List<Category>> FindAllByNameStartWithAsync(string name);
-        Task<Category> FindOrCreate(Category e);
-        Task<Category> UpsertAsync(Category e);
-
+        
     }
 }

@@ -13,8 +13,7 @@ namespace LivrariaVirtualApp.Domain.Repositories
 
         Task<Wishlist> FindByNameAsync(string name_wishlist);
         Task<List<Wishlist>> FindAllByNameStartWithAsync(string name_wishlist);
-        Task<Wishlist> FindOrCreate(Wishlist e);
-        Task<Wishlist> UpsertAsync(Wishlist e);
+
 
     }
 }

@@ -11,22 +11,8 @@ namespace LivrariaVirtualApp.Domain.Repositories
     public interface IOrderRepository : IRepository<Order>
     {
         Task<List<Order>> FindAllByUserIdAsync(int user_id);
-        Task<List<Order>> FindAllByStatusStartWithAsync(string status);
 
-        /// <summary>
-        /// Returns all the given User's orders. 
-        /// </summary>
-        Task<IEnumerable<Order>> GetForUserAsync(int order_id);
+        Task<Order> FindByIdAndUserAsync(int id, string name);
 
-        /// <summary>
-        /// Adds a new order if the order does not exist, updates the 
-        /// existing order otherwise.
-        /// </summary>
-        Task<Order> UpsertAsync(Order order);
-
-        /// <summary>
-        /// Deletes an order.
-        /// </summary>
-        Task DeleteAsync(int order_id);
     }
 }

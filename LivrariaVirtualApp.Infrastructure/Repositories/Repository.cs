@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using LivrariaVirtualApp.Domain.SeedWork;
 using System.Threading.Tasks;
-
+using System.Linq;
 
 namespace LivrariaVirtualApp.Infrastructure.Repositories
 {
@@ -52,7 +52,14 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             public abstract Task<T> FindOrCreate(T e);
 
             public abstract Task<T> UpsertAsync(T e);
-            
-        
+        public abstract Task<IEnumerable<T>> GetAsync(string search);
+
+        public async Task<IEnumerable<T>> GetForUserAsync(T e) => 
+            await _dbContext.Set<T>()
+            .AsNoTracking()
+            .ToListAsync();
+
+
+
     }
 }
