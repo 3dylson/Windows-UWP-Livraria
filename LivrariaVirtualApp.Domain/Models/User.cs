@@ -29,7 +29,6 @@ namespace LivrariaVirtualApp.Domain.Models
         }
 
         private string password;
-        public string Birth_date { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
         public int Admin { get; set; }
@@ -41,13 +40,12 @@ namespace LivrariaVirtualApp.Domain.Models
         {
         }
 
-        public User(string name, string email, string password, string birth_date,
+        public User(string name, string email, string password,
                           string phone, int admin, string address, int user_id)
         {
             Name = name;
             Email = email;
             Password = password;
-            Birth_date = birth_date;
             Phone = phone;
             Address = address;
             Admin = admin;
@@ -57,7 +55,7 @@ namespace LivrariaVirtualApp.Domain.Models
         /// <summary>
         /// Returns the User's infos.
         /// </summary>
-        public override string ToString() => $"Name:{Name}, Email:{Email}, Birthday:{Birth_date}, " +
+        public override string ToString() => $"Name:{Name}, Email:{Email}, " +
                    $"Phone number:{Phone}, Address:{Address}";
     }
 }

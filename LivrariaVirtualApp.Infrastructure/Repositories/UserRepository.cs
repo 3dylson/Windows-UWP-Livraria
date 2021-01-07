@@ -86,13 +86,11 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
                     parameters.Any(parameter =>
                         user.Name.StartsWith(parameter) ||
                         user.Email.StartsWith(parameter) ||
-                        user.Birth_date.StartsWith(parameter) ||
                         user.Phone.StartsWith(parameter)))
                 .OrderByDescending(user =>
                     parameters.Count(parameter =>
                         user.Name.StartsWith(parameter) ||
                         user.Email.StartsWith(parameter) ||
-                        user.Birth_date.StartsWith(parameter) ||
                         user.Phone.StartsWith(parameter)))
                 .AsNoTracking()
                 .ToListAsync();

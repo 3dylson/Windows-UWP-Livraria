@@ -127,9 +127,6 @@ namespace LivrariaVirtualApp.Infrastructure
                 .IsRequired(false)
                 .HasMaxLength(45);
             modelBuilder.Entity<User>()
-                .Property(u => u.Birth_date)
-                .IsRequired(false);
-            modelBuilder.Entity<User>()
                 .Property(u => u.Phone)
                 .IsRequired(false)
                 .HasMaxLength(20);

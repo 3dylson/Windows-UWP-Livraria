@@ -16,7 +16,6 @@
         <TextBox x:Name="name" Header="Nome completo*" Text="{x:Bind UserViewModel.User.Name, Mode=TwoWay}" />
         <TextBox x:Name="email" Header="Email*" PlaceholderText="usado no login" Text="{x:Bind UserViewModel.User.Email, Mode=TwoWay}" />
         <PasswordBox x:Name="password" Header="Password*" Password="{x:Bind UserViewModel.User.Password, Mode=TwoWay}" />
-        <DatePicker Header="Aniversário" x:Name="birth_date" SelectedDate="{x:Bind UserViewModel.User.Birth_date, Mode=TwoWay" />
         <TextBox x:Name="phone" Header="Phone" Text="{x:Bind UserViewModel.User.Phone, Mode=TwoWay}" />
         <TextBox x:Name="address" Header="Endereço*" Text="{x:Bind UserViewModel.User.Address, Mode=TwoWay}" />
 
