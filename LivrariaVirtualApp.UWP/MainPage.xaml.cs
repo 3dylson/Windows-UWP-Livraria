@@ -50,7 +50,7 @@ namespace LivrariaVirtualApp.UWP
                         AppFrame.Navigate(typeof(CategoriesPage));
                         break;
                     case "books":
-                        AppFrame.Navigate(typeof(BooksPage));
+                        AppFrame.Navigate(typeof(ManageBooksPage));
                         break;
                        
                 }

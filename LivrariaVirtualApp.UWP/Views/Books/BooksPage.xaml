@@ -54,7 +54,7 @@
                             <TextBlock x:Name="itemOverview"  Text="{x:Bind Overview}" TextWrapping="WrapWholeWords" />
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock x:Name="PriceTextBlock" Text="{x:Bind Price}" Foreground="DarkGray" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalTextAlignment="Left"/>
-                                <TextBlock x:Name="itemsAvailable" Margin="16,0,0,0" Text="{x:Bind Available}" Foreground="DarkGray" TextWrapping="NoWrap" />
+                               
                             </StackPanel>
                         </StackPanel>
                         <StackPanel x:Name="SecondaryCommandPanel" Visibility="Collapsed" Orientation="Horizontal" Grid.Column="2">
