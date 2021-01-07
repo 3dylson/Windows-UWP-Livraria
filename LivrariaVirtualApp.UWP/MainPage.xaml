@@ -8,58 +8,71 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <StackPanel Background="AntiqueWhite" Height="59" VerticalAlignment="Top" Canvas.ZIndex="1" Grid.ColumnSpan="2">
-            <Image Source="Assets/logoliv.png" Width="215" Height="60" Canvas.ZIndex="2" HorizontalAlignment="Left" Margin="100,0,0,0" />
-        </StackPanel>
-        <NavigationView Margin="1,60,1,0" IsPaneToggleButtonVisible="True" IsSettingsVisible="False" IsBackButtonVisible="Collapsed" ItemInvoked="NavigationView_ItemInvoked">
-            <NavigationView.AutoSuggestBox>
-                <AutoSuggestBox QueryIcon="Find" AutomationProperties.Name="Search" />
-            </NavigationView.AutoSuggestBox>
-            <NavigationView.PaneFooter>
-                <StackPanel>
-                    <NavigationViewItem Content="Login" Icon="Permissions" 
+
+
+    <NavigationView x:Name="navBar"  
+    IsSettingsVisible="False"
+    IsBackButtonVisible="Auto"
+    IsBackEnabled="True"
+    ItemInvoked="NavigationView_ItemInvoked"
+    AlwaysShowHeader="False"
+    PaneDisplayMode="Left"
+    ExpandedModeThresholdWidth="500"
+    SelectionFollowsFocus="Disabled"
+    IsTabStop="False" Height="1000" VerticalAlignment="Bottom" >
+
+
+
+
+        <NavigationView.MenuItems>
+            <NavigationViewItem Content="Livros" Icon="Library" Tag="books"/>
+            <NavigationViewItem Content="Categorias" Icon="Bookmarks" Tag="categories"/>
+            <NavigationViewItem Content="Pedidos" Icon="Tag" Tag="orders"/>
+            <NavigationViewItem Content="Admin" Icon="Admin" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="admin"/>
+        </NavigationView.MenuItems>
+
+        <NavigationView.AutoSuggestBox>
+            <AutoSuggestBox QueryIcon="Find" AutomationProperties.Name="Search" />
+        </NavigationView.AutoSuggestBox>
+
+        <NavigationView.PaneFooter>
+            <StackPanel>
+                <NavigationViewItem Content="Login" Icon="Permissions" 
                                         Visibility="{x:Bind UserViewModel.IsNotLogged, Mode=OneWay}"
                                         x:Name="btnLogin"
                                         Tapped="btnLogin_Tapped" />
-                    <NavigationViewItem Content="Logout" Icon="NewWindow"
+                <NavigationViewItem Content="Logout" Icon="NewWindow"
                                         Visibility="{x:Bind UserViewModel.IsLogged, Mode=OneWay}"
                                         x:Name="btnLogout"
                                         Tapped="btnLogout_Tapped" />
-                    <NavigationViewItem Content="Registo" Icon="ContactInfo" 
+                <NavigationViewItem Content="Registo" Icon="ContactInfo" 
                                         Visibility="{x:Bind UserViewModel.IsNotLogged, Mode=OneWay}"
                                         x:Name="btnRegister"
                                         Tapped="btnRegister_Tapped"/>
-                </StackPanel>
-            </NavigationView.PaneFooter>
+            </StackPanel>
+        </NavigationView.PaneFooter>
+        <Grid>
 
-            <NavigationView.MenuItems>
-                <NavigationViewItem Content="Livros" Icon="Library" Tag="books"/>
-                <NavigationViewItem Content="Categorias" Icon="Bookmarks" Tag="categories"/>
-                <NavigationViewItem Content="Contactos" Icon="Mail" Tag="contacts"/>
-                <NavigationViewItem Content="Admin" Icon="Admin"
-                                    Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="admin"/>
-            </NavigationView.MenuItems>
+            <Frame x:Name="frame" Margin="10,70,9,0" >
 
-            
-        </NavigationView>
-        <CommandBar Grid.Column="1" x:Name="mainCommandBar"
-                        Background="Transparent" OverflowButtonVisibility="Collapsed"
-                        DefaultLabelPosition="Right" Height="49" Margin="0,10,0,0" RenderTransformOrigin="0.5,0.5" Canvas.ZIndex="2">
+            </Frame>
 
-            <AppBarButton x:Name="AddButton" Icon="Shop" Label="Carrinho"
+            <StackPanel Background="AntiqueWhite" Height="59" VerticalAlignment="Top" Canvas.ZIndex="1" Grid.ColumnSpan="2">
+                <Image Source="Assets/logoliv.png" Width="215" Height="60" Canvas.ZIndex="2" HorizontalAlignment="Left" Margin="100,0,0,0" />
+                <CommandBar x:Name="mainCommandBar" OverflowButtonVisibility="Collapsed" HorizontalAlignment="Right" Margin="0,-49,0,919"
+                        DefaultLabelPosition="Right" Background="Black" Width="192" Height="41">
+                    <CommandBar.Content>
+                        <Grid/>
+                    </CommandBar.Content>
+                    <AppBarButton x:Name="AddButton" Icon="Shop" Label="Carrinho"
                               ToolTipService.ToolTip="Carrinho" BorderThickness="1,0,1,0" FontFamily="Gill Sans Nova" FontWeight="Normal" />
-            <AppBarButton x:Name="AddButton2" Icon="SolidStar" Label="WhishList"
+                    <AppBarButton x:Name="AddButton2" Icon="SolidStar" Label="WhishList"
                               ToolTipService.ToolTip="Lista de Desejos" BorderThickness="1,0,1,0" FontFamily="Gill Sans Nova Light" FontWeight="Normal" FontStyle="Normal" />
-        </CommandBar>
+                </CommandBar>
+            </StackPanel>
 
-        <StackPanel Margin="325,65,0,0" Padding="30">
-            <TextBlock Margin="0,0,0,30" Height="100" TextAlignment="Left" Canvas.ZIndex="1"
-                       Text="" FontSize="85" FontFamily="Yu Gothic"></TextBlock>
+        </Grid>
+    </NavigationView>
 
 
-        </StackPanel>
-
-        <Frame x:Name="frame" Padding="10" />
-    </Grid>
 </Page>

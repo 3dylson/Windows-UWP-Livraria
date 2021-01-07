@@ -24,12 +24,12 @@
 
                     <SwipeControl.RightItems>
                         <SwipeItems Mode="Reveal">
-                            <SwipeItem Text="Download" Foreground="White" Background="DarkGray" Invoked="SwipeItem_Invoked">
+                            <SwipeItem Text="Download" Foreground="White" Background="DarkGray" >
                                 <SwipeItem.IconSource>
                                     <SymbolIconSource Symbol="Download"/>
                                 </SwipeItem.IconSource>
                             </SwipeItem>
-                            <SwipeItem Text="Favorite" Foreground="White" Background="{ThemeResource SystemAccentColor}" Invoked="FavoriteSwipeItem_Invoked">
+                            <SwipeItem Text="Favorite" Foreground="White" Background="{ThemeResource SystemAccentColor}" >
                                 <SwipeItem.IconSource>
                                     <SymbolIconSource Symbol="Favorite"/>
                                 </SwipeItem.IconSource>
@@ -46,10 +46,8 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Image x:Name="itemImage" Width="128" Height="72">
-                            <Image.Source>
-                                <BitmapImage UriSource="{x:Bind Image}" />
-                            </Image.Source>
+                        <Image x:Name="itemImage" Width="128" Height="72" Source="/Assets/negreiros.png">
+                            
                         </Image>
                         <StackPanel Margin="14,0,0,0" Grid.Column="1" VerticalAlignment="Center" >
                             <TextBlock FontWeight="Bold" x:Name="itemTitle"  Text="{x:Bind Name}" TextWrapping="WrapWholeWords" />
@@ -74,7 +72,7 @@
                             </StackPanel.Resources>
 
                             <!--Add to cart button-->
-                            <Button Width="48" Height="48" Style="{StaticResource ButtonRevealStyle}" Background="{ThemeResource AppBarButtonRevealBackground}" Margin="{StaticResource IconButtonMargin}" CommandParameter="{x:Bind}" ToolTipService.ToolTip="Add to Cart" Click="CartButton_Click">
+                            <Button Width="48" Height="48" Style="{StaticResource ButtonRevealStyle}" Background="{ThemeResource AppBarButtonRevealBackground}" Margin="{StaticResource IconButtonMargin}" CommandParameter="{x:Bind}" ToolTipService.ToolTip="Add to Cart" >
                                 <Button.Content>
                                     <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Width="16" Height="16" >
                                         <SymbolIcon Symbol="Add" />
@@ -84,7 +82,7 @@
 
                             <!--Wishlist button-->
                             <!--TODO: Toggle the star between outline and filled?-->
-                            <Button Width="48" Height="48" Style="{StaticResource ButtonRevealStyle}" Background="{ThemeResource AppBarButtonRevealBackground}" Margin="{StaticResource IconButtonMargin}" ToolTipService.ToolTip="Favorite" CommandParameter="{x:Bind}" Click="WhislistButton_Click" >
+                            <Button Width="48" Height="48" Style="{StaticResource ButtonRevealStyle}" Background="{ThemeResource AppBarButtonRevealBackground}" Margin="{StaticResource IconButtonMargin}" ToolTipService.ToolTip="Favorite" CommandParameter="{x:Bind}"  >
                                 <Button.Content>
                                     <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Width="16" Height="16" >
                                         <SymbolIcon Symbol="OutlineStar" />
@@ -98,11 +96,7 @@
 
             <DataTemplate x:Key="GriditemTemplate" x:DataType="models:Book">
                 <Grid Width="200" Height="200" x:Name="RootGrid"    >
-                    <Image>
-                        <Image.Source>
-                            <BitmapImage UriSource="{x:Bind Image}" />
-                        </Image.Source>
-                    </Image>
+                    <Image Source="/Assets/negreiros.png"></Image>
                     <TextBlock Text="{x:Bind Name}" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Bottom" />
                 </Grid>
             </DataTemplate>
@@ -121,7 +115,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Image x:Name="podimage" Width="272" Height="272"  VerticalAlignment="Top" HorizontalAlignment="Left" ImageOpened="Podimage_ImageOpened" Visibility="Visible"
+            <Image x:Name="podimage" Width="272" Height="272"  VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Visible"
                    >
                 <!--<Image.Source>
                     <BitmapImage UriSource="{x:Bind ViewModels.CurrentBook.Image}" />
@@ -140,7 +134,7 @@
                 <TextBlock x:Name="feeddetails" Grid.Row="2" Style="{ThemeResource BodyTextBlockStyle}" Margin="0,10,0,0" Foreground="{ThemeResource SystemControlForegroundChromeWhiteBrush}" HorizontalAlignment="Left" FontSize="14" MaxWidth="500" TextWrapping="Wrap" Text="{x:Bind Path=ViewModels.CurrentBook.Overview}" />-->
 
                 <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,0" >
-                    <Button x:Name="btnrefresh" Content="Fetch the latest content"  Click="RefreshButton_Click" RightTapped="Button_RightTapped" IsRightTapEnabled="True" RequestedTheme="Dark" Style="{StaticResource ButtonRevealStyle}" />
+                    <Button x:Name="btnrefresh" Content="Fetch the latest content"   IsRightTapEnabled="True" RequestedTheme="Dark" Style="{StaticResource ButtonRevealStyle}" />
                     <TextBlock x:Name="RefreshStatusTextBlock" Margin="10,0,0,0" RequestedTheme="Dark" VerticalAlignment="Center" />
                 </StackPanel>
 
@@ -148,13 +142,13 @@
         </Grid>
         <TextBlock x:Name="Bookheader" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Medium" Text="Livros" RelativePanel.Below="TopBorder" Margin="24,16,0,0"/>
 
-        <ListView x:Name="feeditems"
+        <!--<ListView x:Name="feeditems"
                   ItemContainerTransitions="{x:Null}"
                   ItemTemplate="{StaticResource itemTemplate}"
                   IsItemClickEnabled="True"
                   ItemClick="Feeditems_ItemClick"
                   ChoosingItemContainer="Feeditems_ChoosingItemContainer">
-            <!--ItemsSource="{x:Bind ViewModels.BookData}"-->
+            <ItemsSource="{x:Bind BookViewModel.BookData}"
                   RelativePanel.AlignLeftWithPanel="True"
                   RelativePanel.AlignRightWithPanel="True"
                   RelativePanel.Below="episodesheader"
@@ -164,7 +158,7 @@
                   animations:Connected.ListItemElementName="itemImage"
                   animations:Implicit.ShowAnimations="{StaticResource DefaultListShowAnimations}"
                   animations:Implicit.HideAnimations="{StaticResource DefaultListHideAnimations}">
-            <ListView.ItemContainerStyle>
+            <ListView.ItemContainer>
                 <Style TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemRevealStyle}" >
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     <Setter Property="Padding" Value="0" />
@@ -182,8 +176,8 @@
                         </Setter.Value>
                     </Setter>
                 </Style>
-            </ListView.ItemContainerStyle>
-        </ListView>
+            </ListView.ItemContainer>
+        </ListView>-->
 
     </RelativePanel>
 </Page>
