@@ -1,7 +1,4 @@
 ﻿using LivrariaVirtualApp.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LivrariaVirtualApp.Domain
 {
@@ -12,6 +9,5 @@ namespace LivrariaVirtualApp.Domain
         ICategoryRepository CategoryRepository { get; }
         IOrderRepository OrderRepository { get; }
         IWishlistRepository WishlistRepository { get; }
-
     }
 }
