@@ -1,0 +1,108 @@
+﻿<Page
+    x:Class="LivrariaVirtualApp.UWP.Views.Books.BookFormPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LivrariaVirtualApp.UWP.Views.Books"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Adicionar/editar Livro" Style="{StaticResource HeaderTextBlockStyle}"/>
+                <CommandBar Grid.Column="1"  VerticalAlignment="Center"                         
+                        x:Name="mainCommandBar" Background="Transparent"      
+                        OverflowButtonVisibility="Collapsed"
+                        DefaultLabelPosition="Right">
+
+                    <AppBarButton
+                    x:Name="btnSave"
+                    Click="btnSave_Click"
+                    Icon="Save"
+                    Label="Guardar"
+                    IsEnabled="{x:Bind BookViewModel.Valid, Mode=OneWay}"
+                    ToolTipService.ToolTip="Guardar">
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout>
+                                <Border Background="#dc3545" Padding="10">
+                                    <TextBlock Text="Livro já existe." Foreground="White"/>
+                                </Border>
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+                    </AppBarButton>
+                    <AppBarButton
+                    x:Name="btnCancel"
+                    Click="btnCancel_Click"
+                    Icon="Cancel"
+                    Label="Cancelar"
+                    ToolTipService.ToolTip="Cancelar" />
+
+                </CommandBar>
+
+            </Grid>
+            <ScrollViewer Grid.Row="1">
+                <StackPanel>
+
+                    <!-- TODO: Use combobox as an alternative to AutoSuggestBox
+                    DO NOT use both -->
+                    <!--<ComboBox x:Name="categories" Header="Categegory" ItemsSource="{x:Bind CategoryViewModel.Categories}"
+                          SelectedValue="{x:Bind ProductViewModel.CategoryName, Mode=TwoWay}"
+                          SelectedValuePath="Name"/>-->
+                    <AutoSuggestBox x:Name="AutoSuggestBox"
+                    Header="Category" QueryIcon="Find" DisplayMemberPath="Name"
+                    Text="{x:Bind BookViewModel.CategoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    TextChanged="AutoSuggestBox_TextChanged"
+                    QuerySubmitted="AutoSuggestBox_QuerySubmitted"
+                    SuggestionChosen="AutoSuggestBox_SuggestionChosen"/>
+                    <TextBox Header="Nome" x:Name="name" 
+                    Text="{x:Bind BookViewModel.BookName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox Header="ISBN" x:Name="isbn" 
+                    Text="{x:Bind BookViewModel.BookISBN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox Header="Parental guide" x:Name="pg" 
+                    Text="{x:Bind BookViewModel.BookParental_guide, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox Header="Language" x:Name="language" 
+                    Text="{x:Bind BookViewModel.BookLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox Header="Price" x:Name="price" 
+                    Text="{x:Bind BookViewModel.BookPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <DatePicker Header="Realease date" x:Name="realease_date" 
+                    SelectedDate="{x:Bind BookViewModel.BookRealease_date, Converter={StaticResource DateTimeFormatConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox Header="Publisher" x:Name="publisher" 
+                    Text="{x:Bind BookViewModel.BookPublisher, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox Header="Pages" x:Name="pages" 
+                    Text="{x:Bind BookViewModel.BookPages, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBox Header="Overview" x:Name="overview" 
+                    Text="{x:Bind BookViewModel.BookOverview, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <Image Margin="0,10" x:Name="image" MaxWidth="500" MaxHeight="500"
+                       Source="{x:Bind BookViewModel.Image, Converter={StaticResource bytesToImageConverter}, Mode=OneWay}"/>
+                    <Button x:Name="btnThumb" Margin="0,10" Content="Escolher Imagem..." Tapped="btnThumb_Tapped"/>
+                    <Border Background="Red" BorderBrush="Black" BorderThickness="2" Margin="5"
+                    Visibility="{x:Bind BookViewModel.Invalid, Mode=OneWay}">
+                        <TextBlock Text="Livro inválido"/>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+
+    </Grid>
+</Page>

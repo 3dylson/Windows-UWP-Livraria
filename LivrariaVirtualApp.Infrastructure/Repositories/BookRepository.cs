@@ -23,6 +23,12 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
                 .OrderBy(c => c.Name).ToListAsync();
         }
 
+        /// ///
+        public Task<List<Book>> FindAllByUserIdAsync(int userId)
+        {
+            throw new NotImplementedException();
+        }
+        /// ///
         public async Task<Book> FindByNameAsync(string name)
         {
             return await _dbContext.Books.SingleOrDefaultAsync(p => p.Name == name);
