@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LivrariaVirtualApp.Infrastructure.Migrations
 {
     [DbContext(typeof(LivrariaVirtualDbContext))]
-    [Migration("20210106022026_UpdatedMigration")]
+    [Migration("20210107105209_UpdatedMigration")]
     partial class UpdatedMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,9 +27,6 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Available")
-                        .HasColumnType("int");
 
                     b.Property<int>("Category_id")
                         .HasColumnType("int");

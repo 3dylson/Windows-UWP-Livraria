@@ -50,7 +50,6 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                     Parental_guide = table.Column<string>(maxLength: 3, nullable: true),
                     Language = table.Column<string>(maxLength: 45, nullable: false),
                     Price = table.Column<decimal>(nullable: false),
-                    Available = table.Column<int>(nullable: false),
                     Realease_date = table.Column<DateTime>(nullable: false),
                     Publisher = table.Column<string>(maxLength: 100, nullable: false),
                     Pages = table.Column<string>(maxLength: 20, nullable: false),

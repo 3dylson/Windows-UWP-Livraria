@@ -26,9 +26,6 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Available")
-                        .HasColumnType("int");
-
                     b.Property<int>("Category_id")
                         .HasColumnType("int");
 
