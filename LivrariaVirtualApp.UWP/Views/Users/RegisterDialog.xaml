@@ -16,11 +16,9 @@
         <TextBox x:Name="name" Header="Nome completo*" Text="{x:Bind UserViewModel.User.Name, Mode=TwoWay}" />
         <TextBox x:Name="email" Header="Email*" PlaceholderText="usado no login" Text="{x:Bind UserViewModel.User.Email, Mode=TwoWay}" />
         <PasswordBox x:Name="password" Header="Password*" Password="{x:Bind UserViewModel.User.Password, Mode=TwoWay}" />
-        <TextBlock Name="birth_date" 
-             Text="Enter your Birth date or click the calendar."/>
-                <!--<DatePicker CalendarOpened="DatePicker_CalendarOpened"
-              CalendarClosed="DatePicker_CalendarClosed"/>-->
+        <DatePicker Header="Aniversário" x:Name="birth_date" SelectedDate="{x:Bind UserViewModel.User.Birth_date, Mode=TwoWay" />
         <TextBox x:Name="phone" Header="Phone" Text="{x:Bind UserViewModel.User.Phone, Mode=TwoWay}" />
+        <TextBox x:Name="address" Header="Endereço*" Text="{x:Bind UserViewModel.User.Address, Mode=TwoWay}" />
 
         <Border Background="Red" BorderBrush="Black" BorderThickness="2" Margin="0,10" Padding="5" 
                 Visibility="{x:Bind UserViewModel.ShowError, Mode=OneWay}">
