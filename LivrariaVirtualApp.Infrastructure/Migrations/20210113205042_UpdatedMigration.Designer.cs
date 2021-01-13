@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LivrariaVirtualApp.Infrastructure.Migrations
 {
     [DbContext(typeof(LivrariaVirtualDbContext))]
-    [Migration("20210107105209_UpdatedMigration")]
+    [Migration("20210113205042_UpdatedMigration")]
     partial class UpdatedMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,9 +71,6 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
-
-                    b.Property<DateTime>("Realease_date")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -171,9 +168,6 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
-
-                    b.Property<string>("Birth_date")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(100)")

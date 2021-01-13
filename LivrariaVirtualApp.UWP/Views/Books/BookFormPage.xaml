@@ -80,8 +80,8 @@
                     <TextBox Header="Price" x:Name="price" 
                     Text="{x:Bind BookViewModel.BookPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <DatePicker Header="Realease date" x:Name="realease_date" 
-                    SelectedDate="{x:Bind BookViewModel.BookRealease_date, Converter={StaticResource DateTimeFormatConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--<DatePicker Header="Realease date" x:Name="realease_date" 
+                    SelectedDate="{x:Bind BookViewModel.BookRealease_date, Converter={StaticResource DateTimeOffsetConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
 
                     <TextBox Header="Publisher" x:Name="publisher" 
                     Text="{x:Bind BookViewModel.BookPublisher, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />

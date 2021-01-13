@@ -77,14 +77,14 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         }
 
 
-        private DateTime _bookRealease_date;
+        //private DateTime _bookRealease_date;
 
-        public DateTime BookRealease_date
-        {
-            get { return _bookRealease_date; }
-            set { Set(ref _bookRealease_date, value); }
+        //public DateTime BookRealease_date
+        //{
+        //    get { return _bookRealease_date; }
+        //    set { Set(ref _bookRealease_date, value); }
 
-        }
+        //}
 
         private string _bookPublisher;
 
@@ -170,7 +170,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
                 BookParental_guide = _book?.Parental_guide;
                 BookLanguage = _book?.Language;
                 BookPrice = (decimal)(_book?.Price);
-                BookRealease_date = (DateTime)(_book?.Realease_date);
+                //BookRealease_date = (DateTime)(_book?.Realease_date);
                 BookPublisher = _book?.Publisher;
                 BookPages = _book?.Pages;
                 BookOverview = _book?.Overview;
@@ -216,7 +216,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             Category category = new Category(CategoryName);
             Category categoryUpdated = await App.UnitOfWork.CategoryRepository.FindOrCreate(category);
 
-            // Fill Product fields
+            // Fill Book fields
             Book.Category_id = categoryUpdated.Id;
             Book.Category = null;
             Book.Name = BookName;
@@ -224,12 +224,12 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             Book.Parental_guide = BookParental_guide;
             Book.Language = BookLanguage;
             Book.Price = BookPrice;
-            Book.Realease_date = BookRealease_date;
+            //Book.Realease_date = BookRealease_date;
             Book.Publisher = BookPublisher;
             Book.Overview = BookOverview;
             Book.Image = Image;
 
-            // Create Product
+            // Create Book
             return await App.UnitOfWork.BookRepository.UpsertAsync(Book);
         }
 

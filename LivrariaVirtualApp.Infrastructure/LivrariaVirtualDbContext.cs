@@ -52,9 +52,9 @@ namespace LivrariaVirtualApp.Infrastructure
             modelBuilder.Entity<Book>()
                 .Property(b => b.Price)
                 .IsRequired();
-            modelBuilder.Entity<Book>()
-                .Property(b => b.Realease_date)
-                .IsRequired();
+            //modelBuilder.Entity<Book>()
+            //    .Property(b => b.Realease_date)
+            //    .IsRequired();
             modelBuilder.Entity<Book>()
                 .Property(b => b.Publisher)
                 .IsRequired()

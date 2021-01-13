@@ -29,7 +29,6 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                     Name = table.Column<string>(maxLength: 100, nullable: true),
                     Email = table.Column<string>(maxLength: 100, nullable: true),
                     Password = table.Column<string>(maxLength: 45, nullable: true),
-                    Birth_date = table.Column<string>(nullable: true),
                     Phone = table.Column<string>(maxLength: 20, nullable: true),
                     Address = table.Column<string>(maxLength: 256, nullable: true),
                     Admin = table.Column<int>(nullable: false, defaultValue: 0)
@@ -50,7 +49,6 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                     Parental_guide = table.Column<string>(maxLength: 3, nullable: true),
                     Language = table.Column<string>(maxLength: 45, nullable: false),
                     Price = table.Column<decimal>(nullable: false),
-                    Realease_date = table.Column<DateTime>(nullable: false),
                     Publisher = table.Column<string>(maxLength: 100, nullable: false),
                     Pages = table.Column<string>(maxLength: 20, nullable: false),
                     Overview = table.Column<string>(maxLength: 256, nullable: false),
@@ -146,8 +144,8 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Address", "Admin", "Birth_date", "Email", "Name", "Password", "Phone" },
-                values: new object[] { 1, null, 1, null, "admin@admin.com", "admin", "D033E22AE348AEB5660FC2140AEC35850C4DA997", null });
+                columns: new[] { "Id", "Address", "Admin", "Email", "Name", "Password", "Phone" },
+                values: new object[] { 1, null, 1, "admin@admin.com", "admin", "D033E22AE348AEB5660FC2140AEC35850C4DA997", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_Category_id",

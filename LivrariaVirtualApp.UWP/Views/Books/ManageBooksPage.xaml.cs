@@ -37,7 +37,7 @@ namespace LivrariaVirtualApp.UWP.Views.Books
             base.OnNavigatedTo(e);
         }
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(BookFormPage));
         }
