@@ -64,9 +64,9 @@
                     <CommandBar.Content>
                         <Grid/>
                     </CommandBar.Content>
-                    <AppBarButton x:Name="AddButton" Icon="Shop" Label="Carrinho"
+                    <AppBarButton Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="AddButton" Icon="Shop" Label="Carrinho"
                               ToolTipService.ToolTip="Carrinho" BorderThickness="1,0,1,0" FontFamily="Gill Sans Nova" FontWeight="Normal" />
-                    <AppBarButton x:Name="AddButton2" Icon="SolidStar" Label="WhishList"
+                    <AppBarButton Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="AddButton2" Icon="SolidStar" Label="WhishList"
                               ToolTipService.ToolTip="Lista de Desejos" BorderThickness="1,0,1,0" FontFamily="Gill Sans Nova Light" FontWeight="Normal" FontStyle="Normal" />
                 </CommandBar>
             </StackPanel>
