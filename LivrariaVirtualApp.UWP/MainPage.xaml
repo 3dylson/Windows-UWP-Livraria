@@ -10,7 +10,8 @@
 
 
 
-    <NavigationView x:Name="navBar"  
+    <NavigationView x:Name="navBar"
+    PaneTitle="{x:Bind UserViewModel.LoggedUser.Name, Mode=OneWay}"               
     IsSettingsVisible="False"
     IsBackButtonVisible="Auto"
     IsBackEnabled="True"

@@ -1,22 +1,10 @@
-﻿using LivrariaVirtualApp.Domain.Models;
-using LivrariaVirtualApp.UWP.ViewModels;
+﻿using LivrariaVirtualApp.UWP.ViewModels;
 using LivrariaVirtualApp.UWP.Views.Books;
 using LivrariaVirtualApp.UWP.Views.Categories;
 using LivrariaVirtualApp.UWP.Views.Users;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 
 namespace LivrariaVirtualApp.UWP
@@ -27,6 +15,7 @@ namespace LivrariaVirtualApp.UWP
         public UserViewModel UserViewModel { get; set; }
         public BookViewModel BookViewModel { get; set; }
         public CategoryViewModel CategoryViewModel { get; set; }
+        public AdminViewModel AdminViewModel { get; set; }
 
         public MainPage()
         {
@@ -36,6 +25,7 @@ namespace LivrariaVirtualApp.UWP
             CategoryViewModel = App.CategoryViewModel;
             BookViewModel = App.BookViewModel;
         }
+            
 
         public Frame AppFrame => frame;
 
@@ -52,7 +42,10 @@ namespace LivrariaVirtualApp.UWP
                     case "books":
                         AppFrame.Navigate(typeof(ManageBooksPage));
                         break;
-                       
+                    case "admin":
+                        AppFrame.Navigate(typeof(AdminDashBoard));
+                        break;
+
                 }
             }
         }
@@ -63,9 +56,9 @@ namespace LivrariaVirtualApp.UWP
             var res = await dlg.ShowAsync();
             if (res == ContentDialogResult.Primary)
             {
-                if (App.UserViewModel.IsAdmin)
+                if (App.UserViewModel.IsLogged)
                 {
-                    AppFrame.Navigate(typeof(AdminPage));
+                    AppFrame.Navigate(typeof(BooksPage));
                 }
             }
         }
@@ -85,7 +78,7 @@ namespace LivrariaVirtualApp.UWP
             {
                 if (App.UserViewModel.IsAdmin)
                 {
-                    AppFrame.Navigate(typeof(AdminPage));
+                    AppFrame.Navigate(typeof(AdminDashBoard));
                 }
             }
         }
