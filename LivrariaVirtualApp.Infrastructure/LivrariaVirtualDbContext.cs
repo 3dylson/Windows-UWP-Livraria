@@ -80,7 +80,7 @@ namespace LivrariaVirtualApp.Infrastructure
                 .Property(c => c.Quantity)
                 .IsRequired();       
             modelBuilder.Entity<Cart>()
-                .HasKey(x => new { x.BookId, x.OrderId });
+                .HasKey(x => new { x.BookId, x.OrderId, x.UserId });
             //Order Entity
             modelBuilder.Entity<Order>()
                 .Property(o => o.Total)
