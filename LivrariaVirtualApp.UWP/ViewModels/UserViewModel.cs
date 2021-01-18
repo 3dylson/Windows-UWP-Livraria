@@ -24,6 +24,22 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private List<User> _users;
+
+        public List<User> Users 
+        {
+            get => _users;
+            set => _users = value;
+
+        }
+
+        public async void LoadAllUsersAsync()
+        {
+            Users = await App.UnitOfWork.UserRepository.FindAllAsync();
+
+        }
+
+
         public User User { get; set; }
 
         private User _loggedUser;

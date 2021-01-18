@@ -78,7 +78,7 @@ namespace LivrariaVirtualApp.UWP
             {
                 if (App.UserViewModel.IsAdmin)
                 {
-                    AppFrame.Navigate(typeof(AdminDashBoard));
+                    AppFrame.Navigate(typeof(BooksPage));
                 }
             }
         }

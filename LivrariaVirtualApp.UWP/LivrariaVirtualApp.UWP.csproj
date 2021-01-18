@@ -119,8 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\WindowTitle\WindowTitle.cs" />
-    <Compile Include="Controls\WrapPanel\WrapPanel.cs" />
+    <Compile Include="local_Controls\WindowTitle\WindowTitle.cs" />
     <Compile Include="Converters\BytesToImageConverter.cs" />
     <Compile Include="Converters\DateTimeFormatConverter.cs" />
     <Compile Include="Converters\DateTimeOffsetConverter.cs" />
@@ -275,6 +274,12 @@
       <Version>6.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Animations">
+      <Version>6.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>6.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
       <Version>6.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">

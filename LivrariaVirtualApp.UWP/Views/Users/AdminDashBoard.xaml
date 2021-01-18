@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:LivrariaVirtualApp.UWP.Views.Users"
-    xmlns:controls="using:LivrariaVirtualApp.UWP.Controls"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:controls1="using:LivrariaVirtualApp.UWP.local_Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -22,7 +22,7 @@
     </Page.Resources>
 
     <Grid Background="WhiteSmoke">
-        <controls:WindowTitle Title="" />
+        <controls1:WindowTitle Title="" />
 
         <Grid>
             <Grid.RowDefinitions>
@@ -45,7 +45,7 @@
                         <controls:WrapPanel />
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
-                <views:UsersPane  Margin="12" Width="600" Height="250" ItemsSource="{x:Bind AdminViewModel.Users, Mode=OneWay}" Tag="Users" />
+                <views:UsersPane  Margin="12" Width="600" Height="250" ItemsSource="{x:Bind Users, Mode=OneWay}" Tag="Users" />
 
                 <!--<views:BooksPane Margin="12" 
                                         Width="400"

@@ -1,4 +1,5 @@
 ﻿using LivrariaVirtualApp.Domain.Models;
+using LivrariaVirtualApp.UWP.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,19 +25,24 @@ namespace LivrariaVirtualApp.UWP.Views.Users
     /// </summary>
     public sealed partial class UsersPane : UserControl
     {
+
+        public UserViewModel UserViewModel { get; set; }
         public UsersPane()
         {
             this.InitializeComponent();
+            //UserViewModel = App.UserViewModel;
+            //UserViewModel.User = new User();
         }
 
         #region ItemsSource
-        public List<User> ItemsSource
+        public IList<User> ItemsSource
         {
-            get { return (List<User>)GetValue(ItemsSourceProperty); }
+            get { return (IList<User>)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
 
-        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(List<User>), typeof(UsersPane), new PropertyMetadata(null));
+        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IList<User>), typeof(User), new PropertyMetadata(null));
         #endregion
+
     }
 }
