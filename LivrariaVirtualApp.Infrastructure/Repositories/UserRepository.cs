@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
-using LivrariaVirtualApp.Domain.Models;
+﻿using LivrariaVirtualApp.Domain.Models;
 using LivrariaVirtualApp.Domain.Repositories;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LivrariaVirtualApp.Infrastructure.Repositories
 {
     public class UserRepository : Repository<User>, IUserRepository
     {
-
         public UserRepository(LivrariaVirtualDbContext dbContext) : base(dbContext)
         {
         }
@@ -27,7 +24,6 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             return c;
         }
 
-  
         public override async Task<User> UpsertAsync(User e)
         {
             User f = null;
@@ -59,7 +55,7 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             return await _dbContext.Users.SingleOrDefaultAsync(e => e.Email == email
                     && e.Password == password);
         }
-        
+
         public async Task<User> FindByEmail(string email)
         {
             return await _dbContext.Users.SingleOrDefaultAsync(e => e.Email == email);
@@ -68,8 +64,8 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         public async Task DeleteAsync(int user_id)
         {
             var user = await _dbContext.Users.FirstOrDefaultAsync(_user => _user.Id == user_id);
-            
-            if(null != user) 
+
+            if (null != user)
             {
                 var orders = await _dbContext.Orders.Where(order => order.User_id == user_id).ToListAsync();
                 _dbContext.Orders.RemoveRange(orders);
@@ -107,7 +103,5 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
                 .AsNoTracking()
                 .FirstOrDefaultAsync(user => user.Admin == admin);
         }
-
-        
     }
 }

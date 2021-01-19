@@ -4,14 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LivrariaVirtualApp.Infrastructure.Repositories
 {
     public class BookRepository : Repository<Book>, IBookRepository
     {
-
         public BookRepository(LivrariaVirtualDbContext dbContext) : base(dbContext)
         {
         }
@@ -28,6 +26,7 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
+
         /// ///
         public async Task<Book> FindByNameAsync(string name)
         {
@@ -44,11 +43,13 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             }
             return c;
         }
+
         /// ///
         public override Task<IEnumerable<Book>> GetAsync(string search)
         {
             throw new NotImplementedException();
         }
+
         /// ///
 
         public override async Task<Book> UpsertAsync(Book e)
@@ -76,7 +77,5 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
 
             return f;
         }
-
-       
     }
 }

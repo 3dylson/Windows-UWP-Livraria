@@ -1,10 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using LivrariaVirtualApp.Domain;
+﻿using LivrariaVirtualApp.Domain;
 using LivrariaVirtualApp.Domain.Repositories;
 using LivrariaVirtualApp.Infrastructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace LivrariaVirtualApp.Infrastructure
 {
@@ -18,8 +15,6 @@ namespace LivrariaVirtualApp.Infrastructure
         public IWishlistRepository WishlistRepository => new WishlistRepository(new LivrariaVirtualDbContext(Options));
         public IUserRepository UserRepository => new UserRepository(new LivrariaVirtualDbContext(Options));
 
-
-
         public UnitOfWork(DbContextOptions<LivrariaVirtualDbContext> options)
         {
             Options = options;
@@ -29,7 +24,5 @@ namespace LivrariaVirtualApp.Infrastructure
                 _dbContext.Database.Migrate();
             }
         }
-
     }
 }
-

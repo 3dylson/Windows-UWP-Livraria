@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using LivrariaVirtualApp.Domain.Models;
-using System;
+﻿using LivrariaVirtualApp.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LivrariaVirtualApp.Infrastructure
 {
@@ -12,7 +11,6 @@ namespace LivrariaVirtualApp.Infrastructure
         public DbSet<Order> Orders { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Wishlist> Wishlists { get; set; }
-        
 
         public LivrariaVirtualDbContext()
         {
@@ -24,7 +22,7 @@ namespace LivrariaVirtualApp.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Category Entity 
+            //Category Entity
             modelBuilder.Entity<Category>()
                 .HasIndex(c => c.Name).IsUnique();
             modelBuilder.Entity<Category>()
@@ -78,9 +76,9 @@ namespace LivrariaVirtualApp.Infrastructure
             //Cart Entity
             modelBuilder.Entity<Cart>()
                 .Property(c => c.Quantity)
-                .IsRequired();       
+                .IsRequired();
             modelBuilder.Entity<Cart>()
-                .HasKey(x => new { x.BookId, x.OrderId });
+                .HasKey(x => new { x.BookId, x.OrderId, x.UserId });
             //Order Entity
             modelBuilder.Entity<Order>()
                 .Property(o => o.Total)
@@ -141,10 +139,6 @@ namespace LivrariaVirtualApp.Infrastructure
             //Admin User created on DB building
             modelBuilder.Entity<User>().HasData(new User
             { Id = 1, Name = "admin", Email = "admin@admin.com", Password = "admin", Admin = 1 });
-
-
         }
-
     }
 }
-

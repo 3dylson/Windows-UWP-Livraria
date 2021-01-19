@@ -1,26 +1,22 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using LivrariaVirtualApp.Domain;
+﻿using LivrariaVirtualApp.Domain;
 using LivrariaVirtualApp.Infrastructure;
-using LivrariaVirtualApp.Domain.Models;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace LivrariaVirtualAppConsole
 {
-    class Program
+    internal class Program
     {
         public static string SqlConnectionString = @"Server=tcp:localhost,1433;Initial Catalog=dbLivraria; User ID=userLivraria; Password=Livraria; Connection Timeout = 30;";
 
-
         public static IUnitOfWork UOW { get; private set; }
 
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             ConfigReposAsync();
         }
 
-        static void ConfigReposAsync()
+        private static void ConfigReposAsync()
         {
             var optionsBuilder = new DbContextOptionsBuilder<LivrariaVirtualDbContext>();
             optionsBuilder.UseSqlServer(Program.SqlConnectionString);

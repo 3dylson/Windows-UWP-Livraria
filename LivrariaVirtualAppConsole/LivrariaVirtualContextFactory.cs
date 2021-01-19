@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using LivrariaVirtualApp.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using LivrariaVirtualApp.Infrastructure;
 
-namespace LivrariaVirtualAppConsole 
+namespace LivrariaVirtualAppConsole
 {
-    class LivrariaVirtualContextFactory : IDesignTimeDbContextFactory<LivrariaVirtualDbContext>
+    internal class LivrariaVirtualContextFactory : IDesignTimeDbContextFactory<LivrariaVirtualDbContext>
     {
         public LivrariaVirtualDbContext CreateDbContext(string[] args)
         {
@@ -15,8 +12,5 @@ namespace LivrariaVirtualAppConsole
             builder.UseSqlServer(Program.SqlConnectionString);
             return new LivrariaVirtualDbContext(builder.Options);
         }
-
-
-
     }
 }
