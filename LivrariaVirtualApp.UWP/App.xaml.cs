@@ -26,6 +26,10 @@ namespace LivrariaVirtualApp.UWP
     /// </summary>
     sealed partial class App : Application
     {
+        /// <summary>
+        /// Gets the app-wide MainViewModel singleton instance.
+        /// </summary>
+        public static MainViewModel ViewModel { get; } = new MainViewModel();
         public static UserViewModel UserViewModel { get; set; }
         public static BookViewModel BookViewModel { get; set; }
         public static CategoryViewModel CategoryViewModel { get; set; }

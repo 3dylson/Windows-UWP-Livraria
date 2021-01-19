@@ -45,7 +45,7 @@
                         <controls:WrapPanel />
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
-                <views:UsersPane  Margin="12" Width="600" Height="250" ItemsSource="{x:Bind Users, Mode=OneWay}" Tag="Users" />
+                <!--<views:UsersPane  Margin="12" Width="600" Height="250" ItemsSource="{x:Bind ViewModel.Users, Mode=OneWay}" Tag="Users" />-->
 
                 <!--<views:BooksPane Margin="12" 
                                         Width="400"

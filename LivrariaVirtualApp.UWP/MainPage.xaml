@@ -26,18 +26,22 @@
 
 
         <NavigationView.MenuItems>
-            <NavigationViewItem Content="Livros" Icon="Library" Tag="books"/>
-            <NavigationViewItem Content="Categorias" Icon="Bookmarks" Tag="categories"/>
+            <NavigationViewItem Content="Livros" Icon="Library" Tag="displaybooks"/>
+            <NavigationViewItem Content="Categorias" Icon="Bookmarks" Tag="displaycategories"/>
             <NavigationViewItem Content="Pedidos" Icon="Tag" Tag="orders"/>
-            <NavigationViewItem Content="Admin" Icon="Admin" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="admin"/>
+            <NavigationViewItemSeparator Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}"/>
+            <NavigationViewItemHeader Content="Admin actions:" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}"/>
+            <NavigationViewItem Content="Dashboard" Icon="Admin" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="admin"/>
+            <NavigationViewItem Content="User List" Icon="Account" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="userlist"/>
+            <NavigationViewItem Content="Order List" Icon="Calendar" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="orderlist"/>
+            <NavigationViewItem Content="Manage Book" Icon="Manage" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="books"/>
+            <NavigationViewItem Content="Manage Categorie" Icon="Manage" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="categories"/>
         </NavigationView.MenuItems>
 
-        <NavigationView.AutoSuggestBox>
-            <AutoSuggestBox QueryIcon="Find" AutomationProperties.Name="Search" />
-        </NavigationView.AutoSuggestBox>
 
         <NavigationView.PaneFooter>
             <StackPanel>
+                <NavigationViewItemSeparator/>
                 <NavigationViewItem Content="Login" Icon="Permissions" 
                                         Visibility="{x:Bind UserViewModel.IsNotLogged, Mode=OneWay}"
                                         x:Name="btnLogin"

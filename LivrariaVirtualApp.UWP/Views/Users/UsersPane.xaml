@@ -53,11 +53,11 @@
             <ContentControl ContentTemplate="{StaticResource HeaderTemplate}" HorizontalContentAlignment="Stretch" />
             <Border Margin="4" BorderBrush="LightGray" BorderThickness="0,0,0,1" />
         </Grid>
-        <ListView Grid.Row="2" 
+        <!--<ListView Grid.Row="2" 
                   ItemsSource="{x:Bind UserViewModel.Users, Mode=OneWay}" 
                   ItemTemplate="{StaticResource ItemTemplate}"
                   
-                  IsHitTestVisible="False" />
+                  IsHitTestVisible="False" />-->
                   <!--ItemContainerStyle="{StaticResource RowItemStyle}"-->
     </Grid>
 </UserControl>

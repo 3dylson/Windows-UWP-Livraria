@@ -1,4 +1,5 @@
 ﻿using LivrariaVirtualApp.Domain.Models;
+using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -189,11 +190,101 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             if (IsNewUser)
             {
                 IsNewUser = false;
-                App.UnitOfWork.UserRepository.Add(this);
+                App.ViewModel.Users.Add(this);
             }
 
-            await App.Repository.Customers.UpsertAsync(Model);
+            await App.UnitOfWork.UserRepository.UpsertAsync(User);
         }
+
+        /// <summary>
+        /// Raised when the admin cancels the changes they've made to the user data.
+        /// </summary>
+        public event EventHandler AddNewUserCanceled;
+
+        /// <summary>
+        /// Cancels any in progress edits.
+        /// </summary>
+        public async Task CancelEditsAsync()
+        {
+            if (IsNewUser)
+            {
+                AddNewUserCanceled?.Invoke(this, EventArgs.Empty);
+            }
+            else
+            {
+                await RevertChangesAsync();
+            }
+        }
+
+        /// <summary>
+        /// Discards any edits that have been made, restoring the original values.
+        /// </summary>
+        public async Task RevertChangesAsync()
+        {
+            IsInEdit = false;
+            if (IsModified)
+            {
+                await RefreshUserAsync();
+                IsModified = false;
+            }
+        }
+
+        /// <summary>
+        /// Enables edit mode.
+        /// </summary>
+        public void StartEdit() => IsInEdit = true;
+
+        /// <summary>
+        /// Reloads all of the user data.
+        /// </summary>
+        public async Task RefreshUserAsync()
+        {
+            RefreshOrders();
+            User = await App.UnitOfWork.UserRepository.FindByIdAsync(User.Id);
+        }
+
+        /// <summary>
+        /// Resets the user detail fields to the current values.
+        /// </summary>
+        public void RefreshOrders() => Task.Run(LoadOrdersAsync);
+
+        /// <summary>
+        /// Loads the order data for the user.
+        /// </summary>
+        public async Task LoadOrdersAsync()
+        {
+            await DispatcherHelper.ExecuteOnUIThreadAsync(() =>
+            {
+                IsLoading = true;
+            });
+
+            var orders = await App.UnitOfWork.OrderRepository.FindAllByUserIdAsync(User.Id);
+
+            await DispatcherHelper.ExecuteOnUIThreadAsync(() =>
+            {
+                Orders.Clear();
+                foreach (var order in orders)
+                {
+                    Orders.Add(order);
+                }
+
+                IsLoading = false;
+            });
+        }
+
+        public void BeginEdit()
+        {
+            throw new NotImplementedException(); //Not used
+        }
+        /// <summary>
+        /// Called when a bound DataGrid control cancels the edits that have been made to a customer.
+        /// </summary>
+        public async void CancelEdit() => await CancelEditsAsync();
+
+        /// <summary>
+        /// Called when a bound DataGrid control commits the edits that have been made to a customer.
+        /// </summary>
+        public async void EndEdit() => await SaveAsync();
 
 
         internal async Task<bool> DoLoginAsync()
@@ -226,6 +317,8 @@ namespace LivrariaVirtualApp.UWP.ViewModels
 
             return !ShowError;
         }
+
+        
 
         private bool _showError;
 

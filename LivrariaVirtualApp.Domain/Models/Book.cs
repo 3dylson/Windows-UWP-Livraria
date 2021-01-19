@@ -1,5 +1,4 @@
 ﻿using LivrariaVirtualApp.Domain.SeedWork;
-using System;
 
 namespace LivrariaVirtualApp.Domain.Models
 {
@@ -10,8 +9,10 @@ namespace LivrariaVirtualApp.Domain.Models
         public string Parental_guide { get; set; }
         public string Language { get; set; }
         public decimal Price { get; set; }
+
         //public DateTime Realease_date { get; set; }
         public string Publisher { get; set; }
+
         public string Pages { get; set; }
         public string Overview { get; set; }
         public byte[] Image { get; set; }

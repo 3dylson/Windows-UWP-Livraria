@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
-using LivrariaVirtualApp.Domain.Models;
+﻿using LivrariaVirtualApp.Domain.Models;
 using LivrariaVirtualApp.Domain.Repositories;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LivrariaVirtualApp.Infrastructure.Repositories
 {
@@ -14,7 +13,6 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         public CategoryRepository(LivrariaVirtualDbContext dbContext) : base(dbContext)
         {
         }
-
 
         public Task<List<Category>> FindAllByNameStartWithAsync(string name)
         {
@@ -70,6 +68,4 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             return f;
         }
     }
-
 }
-

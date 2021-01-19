@@ -15,11 +15,13 @@ namespace LivrariaVirtualApp.UWP.Views.Users
 
         public AdminViewModel AdminViewModel  { get; }
         public UserViewModel UserViewModel { get; set; }
+        public MainViewModel ViewModel { get; set; }
         public AdminDashBoard()
         {
             this.InitializeComponent();
             AdminViewModel = new AdminViewModel();
             UserViewModel = App.UserViewModel;
+           
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

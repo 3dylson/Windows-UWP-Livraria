@@ -16,6 +16,7 @@ namespace LivrariaVirtualApp.UWP
         public BookViewModel BookViewModel { get; set; }
         public CategoryViewModel CategoryViewModel { get; set; }
         public AdminViewModel AdminViewModel { get; set; }
+        public MainViewModel ViewModel { get; set; }
 
         public MainPage()
         {
@@ -24,6 +25,7 @@ namespace LivrariaVirtualApp.UWP
             UserViewModel = App.UserViewModel;
             CategoryViewModel = App.CategoryViewModel;
             BookViewModel = App.BookViewModel;
+            ViewModel = App.ViewModel;
         }
             
 
@@ -45,6 +47,20 @@ namespace LivrariaVirtualApp.UWP
                     case "admin":
                         AppFrame.Navigate(typeof(AdminDashBoard));
                         break;
+                    case "displaybooks":
+                        AppFrame.Navigate(typeof(BooksPage));
+                        break;
+                    //case "displaycategories":
+                    //    AppFrame.Navigate(typeof(DisplayCategoriesPage));
+                    //    break;
+                    case "userlist":
+                        AppFrame.Navigate(typeof(UserListPage));
+                        break;
+                    //case "orderlist":
+                    //    AppFrame.Navigate(typeof(OrderListPage));
+                    //    break;
+
+
 
                 }
             }
@@ -78,7 +94,7 @@ namespace LivrariaVirtualApp.UWP
             {
                 if (App.UserViewModel.IsAdmin)
                 {
-                    AppFrame.Navigate(typeof(BooksPage));
+                    AppFrame.Navigate(typeof(AdminDashBoard));
                 }
             }
         }
