@@ -36,7 +36,7 @@ namespace LivrariaVirtualApp.UWP
         public static AdminViewModel AdminViewModel { get; set; }
         public static IUnitOfWork UnitOfWork { get; set; }
 
-        public static string SqlConnectionString = @"Server=tcp:localhost,1433;Initial Catalog=dbLivraria; User ID=userLivraria; Password=Livraria; Connection Timeout = 30;";
+        public static string SqlConnectionString = @"Server=tcp:localhost;Initial Catalog=dbLivraria; User ID=userLivraria; Password=Livraria; Connection Timeout = 30;";
 
 
         /// <summary>

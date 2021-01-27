@@ -35,10 +35,7 @@
                 x:Name="PageTitle"
                 Text="Customers"/>
 
-            <!--
-                On Windows 10, version 1607 or later, set DefaultLabelPosition to Right in code.
-                See CommandBar_Loaded event handler.
-            -->
+           
             <CommandBar IsOpen="False"
                 x:Name="mainCommandBar"
                 HorizontalAlignment="Stretch"
@@ -115,32 +112,31 @@
 
                     </toolkit:DataGrid.Columns>
                 </toolkit:DataGrid>
-
                 <MUXC:ProgressBar
                     Margin="0,50,0,0"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Top"
                     IsIndeterminate="True"
-                    Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay}" />
+                    Visibility="{x:Bind Mode=OneWay, Path=ViewModel.IsLoading}" />
 
             </Grid>
         </RelativePanel>
 
-        <!--<VisualStateManager.VisualStateGroups>
+        <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{StaticResource LargeWindowSnapPoint}" />
+                        <AdaptiveTrigger />
                     </VisualState.StateTriggers>
                 </VisualState>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{StaticResource MediumWindowSnapPoint}" />
+                        <AdaptiveTrigger  />
                     </VisualState.StateTriggers>
                 </VisualState>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="{StaticResource MinWindowSnapPoint}" />
+                        <AdaptiveTrigger />
                     </VisualState.StateTriggers>
                 </VisualState>
                 <VisualState>
@@ -156,7 +152,7 @@
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>-->
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>
 
