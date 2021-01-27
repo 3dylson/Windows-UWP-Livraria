@@ -1,6 +1,7 @@
 ﻿using LivrariaVirtualApp.Domain.SeedWork;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -52,17 +53,18 @@ namespace LivrariaVirtualApp.Domain.Models
             Id = user_id;
         }
 
-        public Cart AddBook(Book book)
+
+        public Wishlist AddBook(Book book)
         {
-            var existingBook = Carts.SingleOrDefault(p => p.BookId == book.Id);
+            var existingBook = Wishlists
+                .SingleOrDefault(p => p.BookId == book.Id);
 
             if (existingBook == null)
             {
-                existingBook = new Cart( book.Id);
-                Carts.Add(existingBook);
+                existingBook = new Wishlist(Name, book.Id);
+                Wishlists.Add(existingBook);
             }
-
-            return existingBook;
+               return existingBook;
         }
 
 

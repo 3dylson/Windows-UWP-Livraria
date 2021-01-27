@@ -29,21 +29,6 @@
             OrderId = order_id;
         }
 
-        public Cart AddBook(int userId, int quantity)
-        {
-            var existingBook = Carts
-                .SingleOrDefault(p => p.UserId == userId);
-            
-            if (existingBook == null)
-            {
-                Cart slp = new Cart(quantity, userId);
-                Carts.Add(slp);
-            }
-            else
-            {
-                existingBook.Quantity += quantity;
-            }
-            return existingBook;
-        }
+
     }
 }

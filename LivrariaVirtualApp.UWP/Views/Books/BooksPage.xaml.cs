@@ -22,9 +22,29 @@ namespace LivrariaVirtualApp.UWP.Views.Books
     /// </summary>
     public sealed partial class BooksPage : Page
     {
+        public BookViewModel BookViewModel { }
+
         public BooksPage()
         {
             InitializeComponent();
+
         }
+
+
+
+
+
+        //private void btnAdd_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Frame.Navigate(typeof(ProductAddToFormPage), ProductViewModel);
+        //}
+
+        //private void btnDelete_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (sender is FrameworkElement fe && fe.DataContext is ShoppingListProduct p)
+        //    {
+        //        ProductViewModel.DeleteAsync(p);
+        //    }
+        //}
     }
 }

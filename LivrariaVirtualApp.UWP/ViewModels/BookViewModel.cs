@@ -16,6 +16,10 @@ namespace LivrariaVirtualApp.UWP.ViewModels
 
         public ObservableCollection<Wishlist> Wishlists { get; set; }
 
+        public ObservableCollection<Cart> Carts { get; set; }
+
+        public Wishlist Wishlist { get; set; }
+
         private string _categoryName;
 
         public string CategoryName
@@ -144,6 +148,8 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         {
             Book = new Book();
             Books = new ObservableCollection<Book>();
+            Wishlists = new ObservableCollection<Wishlist>();
+            Carts = new ObservableCollection<Cart>();
 
             TitleText = "Books";
         }
@@ -256,6 +262,8 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             return new ObservableCollection<Book>(list);
         }
 
+
+
         public async void LoadAllByWishlistAsync()
         {
             if (Wishlist.Id != 0)
@@ -278,8 +286,12 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             Book book = new Book(BookName);
             Book bookupdated = await App.UnitOfWork.BookRepository.FindOrCreate(book);
 
+            User user = await App.UnitOfWork.UserRepository.FindByIdAsync(App.UserViewModel.LoggedUser.Id);
+            Wishlist w = user.AddBook(bookupdated);
+            await App.UnitOfWork.UserRepository.UpdateAsync(user);
+
             Wishlist wishlist = await App.UnitOfWork.WishlistRepository.FindByIdAsync(Wishlist.Id);
-            wishlist.AddBook(bookupdated.Id, 1);
+            
 
             return await App.UnitOfWork.WishlistRepository.UpsertAsync(wishlist) != null;
         }
@@ -289,12 +301,13 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             Book book = new Book(BookName);
             Book bookupdated = await App.UnitOfWork.BookRepository.FindOrCreate(book);
 
-            User user = await App.UnitOfWork.UserRepository.FindByIdAsync(App.UserViewModel.LoggedUser.Id);
-            Cart c = user.AddBook(bookupdated);
-            await App.UnitOfWork.UserRepository.UpdateAsync(user);
+            Order order = new Order();
+            Order orderupdated = await App.UnitOfWork.OrderRepository.FindOrCreate(order);
+            Cart c = order.AddBook(bookupdated.Id, 1);
+            await App.UnitOfWork.OrderRepository.UpdateAsync(order);
 
 
-            return await c != null;
+            return await App.UnitOfWork.OrderRepository.UpsertAsync(order) != null;
         }
 
 
