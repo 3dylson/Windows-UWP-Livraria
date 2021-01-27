@@ -23,6 +23,23 @@ namespace LivrariaVirtualApp.Domain.Models
             Id = wishlist_id;
         }
 
+        public Wishlist AddBook(int userId)
+        {
+            var existingbook = Wishlists
+                .SingleOrDefault(p => p.User_id == userId);
+
+            if (existingbook == null)
+            {
+                Wishlist slp = new Wishlist(Id, userId);
+                Wishlists.Add(slp)
+            }
+            else
+            {
+                existingbook = null;
+            }
+            return existingbook;
+        }
+
         public override string ToString()
         {
             return Name;

@@ -52,6 +52,20 @@ namespace LivrariaVirtualApp.Domain.Models
             Id = user_id;
         }
 
+        public Cart AddBook(Book book)
+        {
+            var existingBook = Carts.SingleOrDefault(p => p.BookId == book.Id);
+
+            if (existingBook == null)
+            {
+                existingBook = new Cart( book.Id);
+                Carts.Add(existingBook);
+            }
+
+            return existingBook;
+        }
+
+
         /// <summary>
         /// Returns the User's infos.
         /// </summary>

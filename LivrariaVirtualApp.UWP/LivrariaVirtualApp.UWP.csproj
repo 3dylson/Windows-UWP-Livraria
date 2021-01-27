@@ -134,6 +134,7 @@
     <Compile Include="StateTriggers\MobileScreenTrigger.cs" />
     <Compile Include="ViewModels\BindableBase.cs" />
     <Compile Include="ViewModels\BookViewModel.cs" />
+    <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\Converters.cs" />
@@ -172,9 +173,6 @@
     </Compile>
     <Compile Include="Views\Users\UserListPage.xaml.cs">
       <DependentUpon>UserListPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Users\UsersPane.xaml.cs">
-      <DependentUpon>UsersPane.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -295,10 +293,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Users\UserListPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Users\UsersPane.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

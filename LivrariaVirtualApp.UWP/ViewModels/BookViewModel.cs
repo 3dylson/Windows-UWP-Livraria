@@ -14,6 +14,8 @@ namespace LivrariaVirtualApp.UWP.ViewModels
     {
         public ObservableCollection<Book> Books { get; set; }
 
+        public ObservableCollection<Wishlist> Wishlists { get; set; }
+
         private string _categoryName;
 
         public string CategoryName
@@ -253,5 +255,49 @@ namespace LivrariaVirtualApp.UWP.ViewModels
                 .FindAllByCategoryStartWithAsync(categoryId, text);
             return new ObservableCollection<Book>(list);
         }
+
+        public async void LoadAllByWishlistAsync()
+        {
+            if (Wishlist.Id != 0)
+            {
+                var userId = App.UserViewModel.LoggedUser.Id;
+                var list = await App.UnitOfWork.BookRepository
+                    .FindAllByUserIdAndWishlistAsync(userId, Wishlist.Id);
+
+                Books.Clear();
+
+                foreach (var l in list)
+                    Books.Add(l);
+
+                TitleText = $"Books of {Wishlist.Name}";
+            }
+        }
+
+        internal async Task <object> AddBookToWishlistAsync()
+        {
+            Book book = new Book(BookName);
+            Book bookupdated = await App.UnitOfWork.BookRepository.FindOrCreate(book);
+
+            Wishlist wishlist = await App.UnitOfWork.WishlistRepository.FindByIdAsync(Wishlist.Id);
+            wishlist.AddBook(bookupdated.Id, 1);
+
+            return await App.UnitOfWork.WishlistRepository.UpsertAsync(wishlist) != null;
+        }
+
+        internal async Task<object> AddBookToCartAsync()
+        {
+            Book book = new Book(BookName);
+            Book bookupdated = await App.UnitOfWork.BookRepository.FindOrCreate(book);
+
+            User user = await App.UnitOfWork.UserRepository.FindByIdAsync(App.UserViewModel.LoggedUser.Id);
+            Cart c = user.AddBook(bookupdated);
+            await App.UnitOfWork.UserRepository.UpdateAsync(user);
+
+
+            return await c != null;
+        }
+
+
+
     }
 }

@@ -21,7 +21,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
 
         public async void LoadAllUsersAsync()
         {
-              List<User> _users = await App.UnitOfWork.UserRepository.FindAllAsync();
+            Users = await App.UnitOfWork.UserRepository.FindAllAsync();
 
         }
 
