@@ -1,7 +1,5 @@
 ﻿using LivrariaVirtualApp.UWP.ViewModels;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using LivrariaVirtualApp.UWP.local_Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -12,28 +10,24 @@ namespace LivrariaVirtualApp.UWP.Views.Users
     /// </summary>
     public sealed partial class AdminDashBoard : Page
     {
-
-        public AdminViewModel AdminViewModel  { get; }
-        public UserViewModel UserViewModel { get; set; }
+        public AdminViewModel AdminViewModel { get; }
         public MainViewModel ViewModel { get; set; }
+
         public AdminDashBoard()
         {
             this.InitializeComponent();
-            AdminViewModel = new AdminViewModel();
-            UserViewModel = App.UserViewModel;
-           
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            AdminViewModel.LoadAllUsersAsync();
-            //base.OnNavigatedTo(e);
-        }
+        //protected override void OnNavigatedTo(NavigationEventArgs e)
+        //{
+        //    AdminViewModel.LoadAllUsersAsync();
+        //    base.OnNavigatedTo(e);
+        //}
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            AdminViewModel.Unload();
-        }
+        //protected override void OnNavigatedFrom(NavigationEventArgs e)
+        //{
+        //    AdminViewModel.Unload();
+        //}
 
         //private void OnItemClick(object sender, ItemClickEventArgs e)
         //{

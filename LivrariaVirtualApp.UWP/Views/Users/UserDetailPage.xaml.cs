@@ -3,18 +3,9 @@ using LivrariaVirtualApp.UWP.ViewModels;
 using LivrariaVirtualApp.UWP.Views.Orders;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
@@ -72,7 +63,7 @@ namespace LivrariaVirtualApp.UWP.Views.Users
         {
             if (ViewModel.IsModified)
             {
-                // Cancel the navigation immediately, otherwise it will continue at the await call. 
+                // Cancel the navigation immediately, otherwise it will continue at the await call.
                 e.Cancel = true;
 
                 void resumeNavigation()
@@ -97,10 +88,12 @@ namespace LivrariaVirtualApp.UWP.Views.Users
                         await ViewModel.SaveAsync();
                         resumeNavigation();
                         break;
+
                     case SaveChangesDialogResult.DontSave:
                         await ViewModel.RevertChangesAsync();
                         resumeNavigation();
                         break;
+
                     case SaveChangesDialogResult.Cancel:
                         break;
                 }
@@ -110,7 +103,7 @@ namespace LivrariaVirtualApp.UWP.Views.Users
         }
 
         /// <summary>
-        /// Disconnects the AddNewUserCanceled event handler from the ViewModel 
+        /// Disconnects the AddNewUserCanceled event handler from the ViewModel
         /// when the parent frame navigates to a different page.
         /// </summary>
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -198,6 +191,5 @@ namespace LivrariaVirtualApp.UWP.Views.Users
         /// </summary>
         private void DataGrid_Sorting(object sender, DataGridColumnEventArgs e) =>
             (sender as DataGrid).Sort(e.Column, ViewModel.Orders.Sort);
-
     }
 }

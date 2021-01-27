@@ -17,10 +17,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <RelativePanel >
+        <RelativePanel>
 
             <TextBlock
-                x:Name="PageTitle"                
+                x:Name="PageTitle"
                 Text="{x:Bind ViewModel.Name, Mode=OneWay}" />
 
             <CommandBar
@@ -72,7 +72,7 @@
                 VerticalScrollBarVisibility="Auto"
                 VerticalScrollMode="Auto">
 
-                <StackPanel 
+                <StackPanel
                     Margin="0,8,4,0">
 
                     <toolkit:Expander
@@ -82,12 +82,12 @@
 
                         <toolkit:Expander.Header>
                             <Grid>
-                                <TextBlock 
-                                    Text="General"
-                                    Style="{ThemeResource SubtitleTextBlockStyle}"/>
                                 <TextBlock
-                                    Text="{x:Bind Mode=OneWay, Path=ViewModel.Email}" 
-                                    Style="{StaticResource CaptionTextBlockStyle}" Margin="117,0,0,0"/>
+                                    Text="General"
+                                    Style="{ThemeResource SubtitleTextBlockStyle}" />
+                                <TextBlock
+                                    Text="{x:Bind Mode=OneWay, Path=ViewModel.Email}"
+                                    Style="{StaticResource CaptionTextBlockStyle}" Margin="117,0,0,0" />
                             </Grid>
                         </toolkit:Expander.Header>
 
@@ -109,7 +109,7 @@
                                 Header="Email"
                                 InputScope="EmailNameOrAddress"
                                 IsReadOnly="{x:Bind Mode=OneWay, Path=vm:Converters.Not(ViewModel.IsInEdit)}"
-                                RelativePanel.Below="FullName"                                
+                                RelativePanel.Below="FullName"
                                 Text="{x:Bind Mode=TwoWay, Path=ViewModel.Email}" />
                             <TextBox
                                 x:Name="PhoneNumber"
@@ -123,9 +123,7 @@
                                 RelativePanel.Below="FullName"
                                 RelativePanel.RightOf="EmailText"
                                 Text="{x:Bind Mode=TwoWay, Path=ViewModel.Phone}" />
-
                         </RelativePanel>
-
                     </toolkit:Expander>
 
                     <toolkit:Expander
@@ -136,10 +134,10 @@
                             <Grid>
                                 <TextBlock
                                     Text="Addresses"
-                                    Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                                    Style="{ThemeResource SubtitleTextBlockStyle}" />
                                 <TextBlock
-                                    Text="{x:Bind Mode=OneWay, Path=ViewModel.Address}" 
-                                    Style="{StaticResource CaptionTextBlockStyle}" HorizontalAlignment="Left" Width="96" Margin="129,0,0,0"/>
+                                    Text="{x:Bind Mode=OneWay, Path=ViewModel.Address}"
+                                    Style="{StaticResource CaptionTextBlockStyle}" HorizontalAlignment="Left" Width="96" Margin="129,0,0,0" />
                             </Grid>
                         </toolkit:Expander.Header>
 
@@ -148,7 +146,6 @@
                             Header="Primary address"
                             IsReadOnly="{x:Bind Mode=OneWay, Path=vm:Converters.Not(ViewModel.IsInEdit)}"
                             Text="{x:Bind Mode=TwoWay, Path=ViewModel.Address}" />
-
                     </toolkit:Expander>
 
                     <toolkit:Expander
@@ -158,7 +155,7 @@
                         <toolkit:Expander.Header>
                             <TextBlock
                                 Text="Orders"
-                                Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                                Style="{ThemeResource SubtitleTextBlockStyle}" />
                         </toolkit:Expander.Header>
 
                         <Grid
@@ -183,7 +180,7 @@
                                                 <HyperlinkButton
                                                     Content="{x:Bind Path=Id}"
                                                     Margin="12,0"
-                                                    Click="ViewOrderButton_Click"/>
+                                                    Click="ViewOrderButton_Click" />
                                             </DataTemplate>
                                         </toolkit:DataGridTemplateColumn.CellTemplate>
                                     </toolkit:DataGridTemplateColumn>
@@ -194,8 +191,7 @@
                                             <DataTemplate x:DataType="models:Order">
                                                 <TextBlock
                                                     VerticalAlignment="Center"
-                                                    Margin="12,0"
-                                                    />
+                                                    Margin="12,0" />
                                             </DataTemplate>
                                         </toolkit:DataGridTemplateColumn.CellTemplate>
                                     </toolkit:DataGridTemplateColumn>
@@ -204,17 +200,16 @@
                                         Tag="GrandTotal">
                                         <toolkit:DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate x:DataType="models:Order">
-                                                <TextBlock 
+                                                <TextBlock
                                                     VerticalAlignment="Center"
-                                                    Margin="12,0"
-                                                    />
+                                                    Margin="12,0" />
                                             </DataTemplate>
                                         </toolkit:DataGridTemplateColumn.CellTemplate>
                                     </toolkit:DataGridTemplateColumn>
                                     <toolkit:DataGridTextColumn
                                         Header="Status"
                                         Tag="Status"
-                                        Binding="{Binding Status}"/>
+                                        Binding="{Binding Status}" />
                                 </toolkit:DataGrid.Columns>
                             </toolkit:DataGrid>
 
@@ -224,7 +219,6 @@
                                 VerticalAlignment="Top"
                                 IsIndeterminate="True"
                                 Visibility="{x:Bind Mode=OneWay, Path=ViewModel.IsLoading}" />
-
                         </Grid>
                     </toolkit:Expander>
                 </StackPanel>
@@ -234,17 +228,17 @@
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger  />
+                        <AdaptiveTrigger />
                     </VisualState.StateTriggers>
                 </VisualState>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger  />
+                        <AdaptiveTrigger />
                     </VisualState.StateTriggers>
                 </VisualState>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger  />
+                        <AdaptiveTrigger />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="EmailText.(RelativePanel.AlignLeftWithPanel)" Value="True" />
@@ -268,6 +262,5 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-
     </Grid>
 </Page>
