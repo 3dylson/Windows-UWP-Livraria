@@ -4,180 +4,55 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:LivrariaVirtualApp.UWP.Views.Books"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:models="using:LivrariaVirtualApp.Domain.Models"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:models="using:LivrariaVirtualApp.Domain.Models"
+    xmlns:sys="using:System"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:c="using:LivrariaVirtualApp.UWP.Controls"
+    xmlns:vm="using:LivrariaVirtualApp.UWP.ViewModels"
+    xmlns:MUXC="using:Microsoft.UI.Xaml.Controls"
+    xmlns:stateTriggers="using:LivrariaVirtualApp.UWP.StateTriggers"
     mc:Ignorable="d"
-    
-    
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    NavigationCacheMode="Required">
 
-    <Page.Resources>
-        <SolidColorBrush x:Key="ButtonRevealBorderBrushPointerOver" Color="Transparent"/>
-        <SolidColorBrush x:Key="ButtonRevealBorderBrushPressed" Color="Transparent"/>
-    </Page.Resources>
+    <GridView
+    x:Name="ContentGridView"
+    ItemsSource="{x:Bind BookViewModel.Books }"    
+    IsItemClickEnabled="True"
+    CanDragItems="False"
+    AllowDrop="False"
+    CanReorderItems="False"
+    SelectionMode="Single"
+    SelectionChanged="ContentGridView_SelectionChanged"
+    ItemClick="ContentGridView_ItemClick"
+    FlowDirection="LeftToRight">
 
-    <RelativePanel>
-        <RelativePanel.Resources>
+        <GridView.ItemTemplate>
+            <DataTemplate x:DataType="models:Book">
+                <Grid AutomationProperties.Name="{x:Bind Name}" Width="280">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                    <Image Source="{x:Bind Image,Converter={StaticResource bytesToImageConverter}, Mode=OneWay}" Height="100" Stretch="Fill" VerticalAlignment="Top"/>
+                <StackPanel Grid.Column="1" Margin="8,0,0,8">
+                    <TextBlock Text="{x:Bind Name}"  Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,8"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{x:Bind Overview}" Style="{ThemeResource CaptionTextBlockStyle}"/>
 
-            <DataTemplate x:Key="itemTemplate" x:DataType="models:Book">
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{x:Bind Price}" Style="{ThemeResource BodyTextBlockStyle}"/>
+                        <TextBlock Text="Price:" Style="{ThemeResource TitleTextBlockStyle}"/>
 
-                <SwipeControl x:Name="swipeContainer">
+                    </StackPanel>
 
-                    <SwipeControl.RightItems>
-                        <SwipeItems Mode="Reveal">
-                            <SwipeItem Text="Download" Foreground="White" Background="DarkGray" >
-                                <SwipeItem.IconSource>
-                                    <SymbolIconSource Symbol="Download"/>
-                                </SwipeItem.IconSource>
-                            </SwipeItem>
-                            <SwipeItem Text="Favorite" Foreground="White" Background="{ThemeResource SystemAccentColor}" >
-                                <SwipeItem.IconSource>
-                                    <SymbolIconSource Symbol="Favorite"/>
-                                </SwipeItem.IconSource>
-                            </SwipeItem>
-                        </SwipeItems>
-                    </SwipeControl.RightItems>
-
-                    <Grid Height="90" x:Name="RootGrid" Margin="12,0,12,0">
-                        <Grid.Resources>
-                            <Thickness x:Key="IconButtonMargin">12,0,0,0</Thickness>
-                        </Grid.Resources>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="128" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Image x:Name="itemImage" Width="128" Height="72" Source="/Assets/negreiros.png">
-                            
-                        </Image>
-                        <StackPanel Margin="14,0,0,0" Grid.Column="1" VerticalAlignment="Center" >
-                            <TextBlock FontWeight="Bold" x:Name="itemTitle"  Text="{x:Bind Name}" TextWrapping="WrapWholeWords" />
-                            <TextBlock x:Name="itemOverview"  Text="{x:Bind Overview}" TextWrapping="WrapWholeWords" />
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock x:Name="PriceTextBlock" Text="{x:Bind Price}" Foreground="DarkGray" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalTextAlignment="Left"/>
-                               
-                            </StackPanel>
-                        </StackPanel>
-                        <StackPanel x:Name="SecondaryCommandPanel" Visibility="Collapsed" Orientation="Horizontal" Grid.Column="2">
-                            <StackPanel.Resources>
-                                <ResourceDictionary>
-                                    <ResourceDictionary.ThemeDictionaries>
-                                        <ResourceDictionary x:Key="Light">
-                                            <SolidColorBrush x:Key="ButtonRevealBackgroundPressed" Color="DarkGray" />
-                                        </ResourceDictionary>
-                                        <ResourceDictionary x:Key="Dark">
-                                            <SolidColorBrush x:Key="ButtonRevealBackgroundPressed" Color="DarkGray" />
-                                        </ResourceDictionary>
-                                    </ResourceDictionary.ThemeDictionaries>
-                                </ResourceDictionary>
-                            </StackPanel.Resources>
-
-                            <!--Add to cart button-->
-                            <Button Width="48" Height="48" Style="{StaticResource ButtonRevealStyle}" Background="{ThemeResource AppBarButtonRevealBackground}" Margin="{StaticResource IconButtonMargin}" CommandParameter="{x:Bind}" ToolTipService.ToolTip="Add to Cart" >
-                                <Button.Content>
-                                    <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Width="16" Height="16" >
-                                        <SymbolIcon Symbol="Add" />
-                                    </Viewbox>
-                                </Button.Content>
-                            </Button>
-
-                            <!--Wishlist button-->
-                            <!--TODO: Toggle the star between outline and filled?-->
-                            <Button Width="48" Height="48" Style="{StaticResource ButtonRevealStyle}" Background="{ThemeResource AppBarButtonRevealBackground}" Margin="{StaticResource IconButtonMargin}" ToolTipService.ToolTip="Favorite" CommandParameter="{x:Bind}"  >
-                                <Button.Content>
-                                    <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Width="16" Height="16" >
-                                        <SymbolIcon Symbol="OutlineStar" />
-                                    </Viewbox>
-                                </Button.Content>
-                            </Button>
-                        </StackPanel>
-                    </Grid>
-                </SwipeControl>
-            </DataTemplate>
-
-            <DataTemplate x:Key="GriditemTemplate" x:DataType="models:Book">
-                <Grid Width="200" Height="200" x:Name="RootGrid"    >
-                    <Image Source="/Assets/negreiros.png"></Image>
-                    <TextBlock Text="{x:Bind Name}" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Bottom" />
+                </StackPanel>
                 </Grid>
             </DataTemplate>
+        </GridView.ItemTemplate>
+    </GridView>
 
-        </RelativePanel.Resources>
 
-        <Grid Grid.Row="0" x:Name="TopBorder"
-              RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"
-              Padding="24,52,24,24" Height="348">
-            <!--animations:Implicit.ShowAnimations="{StaticResource DefaultShowAnimations}"
-              animations:Implicit.HideAnimations="{StaticResource DefaultHideAnimations}"-->
-              
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Image x:Name="podimage" Width="272" Height="272"  VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Visible"
-                   >
-                <!--<Image.Source>
-                    <BitmapImage UriSource="{x:Bind ViewModels.CurrentBook.Image}" />
-                </Image.Source>-->
-            </Image>
-
-            <Grid x:Name="DescriptionRoot" Grid.Column="1" VerticalAlignment="Stretch" Margin="24,0,0,0" Visibility="Visible"> <!--animations:Connected.AnchorElement="{x:Bind podimage}-->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <!--<TextBlock x:Name="feedtitle" Grid.Row="0" Style="{ThemeResource SubheaderTextBlockStyle}" Text="{x:Bind Path=ViewModels.CurrentBook.Name}" Foreground="{ThemeResource SystemControlForegroundChromeWhiteBrush}"/>
-                <TextBlock x:Name="feedauthor" Grid.Row="1" Style="{ThemeResource TitleTextBlockStyle}" Text="{x:Bind Path=ViewModels.CurrentBook.Price}" Foreground="{ThemeResource SystemControlForegroundChromeWhiteBrush}" />
-                <TextBlock x:Name="feeddetails" Grid.Row="2" Style="{ThemeResource BodyTextBlockStyle}" Margin="0,10,0,0" Foreground="{ThemeResource SystemControlForegroundChromeWhiteBrush}" HorizontalAlignment="Left" FontSize="14" MaxWidth="500" TextWrapping="Wrap" Text="{x:Bind Path=ViewModels.CurrentBook.Overview}" />-->
-
-                <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,0" >
-                    <Button x:Name="btnrefresh" Content="Fetch the latest content"   IsRightTapEnabled="True" RequestedTheme="Dark" Style="{StaticResource ButtonRevealStyle}" />
-                    <TextBlock x:Name="RefreshStatusTextBlock" Margin="10,0,0,0" RequestedTheme="Dark" VerticalAlignment="Center" />
-                </StackPanel>
-
-            </Grid>
-        </Grid>
-        <TextBlock x:Name="Bookheader" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Medium" Text="Livros" RelativePanel.Below="TopBorder" Margin="24,16,0,0"/>
-
-        <!--<ListView x:Name="feeditems"
-                  ItemContainerTransitions="{x:Null}"
-                  ItemTemplate="{StaticResource itemTemplate}"
-                  IsItemClickEnabled="True"
-                  ItemClick="Feeditems_ItemClick"
-                  ChoosingItemContainer="Feeditems_ChoosingItemContainer">
-            <ItemsSource="{x:Bind BookViewModel.BookData}"
-                  RelativePanel.AlignLeftWithPanel="True"
-                  RelativePanel.AlignRightWithPanel="True"
-                  RelativePanel.Below="episodesheader"
-                  Grid.Row="1" 
-                  Padding="12,7,12,10"
-                  animations:Connected.ListItemKey="FeedItemImage"
-                  animations:Connected.ListItemElementName="itemImage"
-                  animations:Implicit.ShowAnimations="{StaticResource DefaultListShowAnimations}"
-                  animations:Implicit.HideAnimations="{StaticResource DefaultListHideAnimations}">
-            <ListView.ItemContainer>
-                <Style TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemRevealStyle}" >
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    <Setter Property="Padding" Value="0" />
-
-                    <Setter Property="ContextFlyout">
-                        <Setter.Value>
-                            <MenuFlyout Opening="MenuFlyout_Opening">
-                                <MenuFlyoutItem Text="Add to Cart" Icon="Add" Click="AddFlyoutItem_Click" />
-                                <MenuFlyoutSeparator></MenuFlyoutSeparator>
-                                <MenuFlyoutItem Text="Favorite" Icon="OutlineStar" Click="FavoriteFlyoutItem_Click" />
-                                <MenuFlyoutSeparator></MenuFlyoutSeparator>
-                                <MenuFlyoutItem Text="Details" Click="FavoriteFlyoutItem_Click" />
-
-                            </MenuFlyout>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListView.ItemContainer>
-        </ListView>-->
-
-    </RelativePanel>
 </Page>

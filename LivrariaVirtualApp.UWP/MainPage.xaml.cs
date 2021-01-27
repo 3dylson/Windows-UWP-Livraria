@@ -26,6 +26,7 @@ namespace LivrariaVirtualApp.UWP
             CategoryViewModel = App.CategoryViewModel;
             BookViewModel = App.BookViewModel;
             ViewModel = App.ViewModel;
+            AdminViewModel = App.AdminViewModel;
         }
             
 

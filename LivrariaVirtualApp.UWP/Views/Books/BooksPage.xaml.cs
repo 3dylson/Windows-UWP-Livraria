@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LivrariaVirtualApp.UWP.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,13 +23,29 @@ namespace LivrariaVirtualApp.UWP.Views.Books
     /// </summary>
     public sealed partial class BooksPage : Page
     {
-        public BookViewModel BookViewModel { }
 
+        public BookViewModel BookViewModel { get; set; }
         public BooksPage()
         {
             InitializeComponent();
+            BookViewModel = new BookViewModel();
 
         }
+
+        
+
+
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+
+            BookViewModel.LoadAllAsync();
+            base.OnNavigatedTo(e);
+
+        }
+
+        private void 
+
 
 
 

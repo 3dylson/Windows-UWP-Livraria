@@ -1,4 +1,5 @@
 ﻿using LivrariaVirtualApp.Domain.Models;
+using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,6 +13,8 @@ namespace LivrariaVirtualApp.UWP.ViewModels
 {
     public class BookViewModel : BindableBase
     {
+        
+
         public ObservableCollection<Book> Books { get; set; }
 
         public ObservableCollection<Wishlist> Wishlists { get; set; }
@@ -19,6 +22,15 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         public ObservableCollection<Cart> Carts { get; set; }
 
         public Wishlist Wishlist { get; set; }
+
+        private bool _isLoading = false;
+
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set => Set(ref _isLoading, value);
+        }
+
 
         private string _categoryName;
 
