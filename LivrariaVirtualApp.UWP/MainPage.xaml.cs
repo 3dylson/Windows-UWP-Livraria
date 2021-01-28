@@ -1,8 +1,12 @@
 ﻿using LivrariaVirtualApp.UWP.ViewModels;
 using LivrariaVirtualApp.UWP.Views.Books;
+using LivrariaVirtualApp.UWP.Views.Cart;
 using LivrariaVirtualApp.UWP.Views.Categories;
+using LivrariaVirtualApp.UWP.Views.Orders;
 using LivrariaVirtualApp.UWP.Views.Users;
+using LivrariaVirtualApp.UWP.Views.Wishlist;
 using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
@@ -13,9 +17,6 @@ namespace LivrariaVirtualApp.UWP
     public sealed partial class MainPage : Page
     {
         public UserViewModel UserViewModel { get; set; }
-        public BookViewModel BookViewModel { get; set; }
-        public CategoryViewModel CategoryViewModel { get; set; }
-        public AdminViewModel AdminViewModel { get; set; }
         public MainViewModel ViewModel { get; set; }
 
         public MainPage()
@@ -23,9 +24,8 @@ namespace LivrariaVirtualApp.UWP
             InitializeComponent();
 
             UserViewModel = App.UserViewModel;
-            CategoryViewModel = App.CategoryViewModel;
-            BookViewModel = App.BookViewModel;
-            ViewModel = App.ViewModel;
+            ViewModel = new MainViewModel();
+            
         }
             
 
@@ -50,20 +50,49 @@ namespace LivrariaVirtualApp.UWP
                     case "displaybooks":
                         AppFrame.Navigate(typeof(BooksPage));
                         break;
-                    //case "displaycategories":
-                    //    AppFrame.Navigate(typeof(DisplayCategoriesPage));
-                    //    break;
+                    case "displaycategories":
+                        AppFrame.Navigate(typeof(DisplayCategoriesPage));
+                        break;
                     case "userlist":
                         AppFrame.Navigate(typeof(UserListPage));
                         break;
-                    //case "orderlist":
-                    //    AppFrame.Navigate(typeof(OrderListPage));
-                    //    break;
+                    case "orderlist":
+                        AppFrame.Navigate(typeof(OrderListPage));
+                        break;
+                    case "orders":
+                        AppFrame.Navigate(typeof(OrdersPage));
+                        break;
 
 
 
                 }
             }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            AppFrame.Navigate(typeof(BooksPage));
+        }
+
+        private void BtnCart(object sender, RoutedEventArgs e)
+        {
+            AppFrame.Navigate(typeof(CartPage));
+        }
+
+        private void btnWishlist(object sender, RoutedEventArgs e)
+        {
+            AppFrame.Navigate(typeof(WishlistPage));
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.RequestedTheme = ElementTheme.Light;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var validUser = App.UserViewModel.LoggedUser;
+            ViewModel.Theme();
         }
 
         private async void btnRegister_Tapped(object sender, TappedRoutedEventArgs e)

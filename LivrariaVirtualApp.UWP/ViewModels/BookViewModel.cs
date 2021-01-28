@@ -1,18 +1,39 @@
 ﻿using LivrariaVirtualApp.Domain.Models;
+using Microsoft.Toolkit.Uwp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace LivrariaVirtualApp.UWP.ViewModels
 {
     public class BookViewModel : BindableBase
     {
+        
+
         public ObservableCollection<Book> Books { get; set; }
+
+        public ObservableCollection<Wishlist> Wishlists { get; set; }
+
+        public ObservableCollection<Cart> Carts { get; set; }
+
+        public Wishlist Wishlist { get; set; }
+
+        private bool _isLoading = false;
+
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set => Set(ref _isLoading, value);
+        }
+
+
 
         private string _categoryName;
 
@@ -142,6 +163,8 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         {
             Book = new Book();
             Books = new ObservableCollection<Book>();
+            Wishlists = new ObservableCollection<Wishlist>();
+            Carts = new ObservableCollection<Cart>();
 
             TitleText = "Books";
         }
@@ -169,7 +192,8 @@ namespace LivrariaVirtualApp.UWP.ViewModels
                 BookISBN = _book?.ISBN;
                 BookParental_guide = _book?.Parental_guide;
                 BookLanguage = _book?.Language;
-                BookPrice = (decimal)(_book?.Price);
+                decimal? price = _book?.Price;
+                BookPrice = (decimal)price;
                 //BookRealease_date = (DateTime)(_book?.Realease_date);
                 BookPublisher = _book?.Publisher;
                 BookPages = _book?.Pages;
@@ -210,6 +234,19 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             }
         }
 
+        internal async void LoadFile(StorageFile file)
+        {
+            if (file != null)
+            {
+                using (Stream stream = await file.OpenStreamForReadAsync())
+                {
+                    byte[] content = new byte[stream.Length];
+                    await stream.ReadAsync(content, 0, content.Length);
+                    Book.Image = content;
+                }
+            }
+        }
+
         internal async Task<Book> AddBookAsync()
         {
             // Get existing Category or Create a new one
@@ -226,6 +263,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             Book.Price = BookPrice;
             //Book.Realease_date = BookRealease_date;
             Book.Publisher = BookPublisher;
+            Book.Pages = BookPages;
             Book.Overview = BookOverview;
             Book.Image = Image;
 
@@ -253,5 +291,56 @@ namespace LivrariaVirtualApp.UWP.ViewModels
                 .FindAllByCategoryStartWithAsync(categoryId, text);
             return new ObservableCollection<Book>(list);
         }
+
+
+
+        public async void LoadAllByWishlistAsync()
+        {
+            if (Wishlist.Id != 0)
+            {
+                var userId = App.UserViewModel.LoggedUser.Id;
+                var list = await App.UnitOfWork.BookRepository
+                    .FindAllByUserIdAndWishlistAsync(userId, Wishlist.Id);
+
+                Books.Clear();
+
+                foreach (var l in list)
+                    Books.Add(l);
+
+                TitleText = $"Books of {Wishlist.Name}";
+            }
+        }
+
+        internal async Task <object> AddBookToWishlistAsync()
+        {
+            Book book = new Book(BookName);
+            Book bookupdated = await App.UnitOfWork.BookRepository.FindOrCreate(book);
+
+            User user = await App.UnitOfWork.UserRepository.FindByIdAsync(App.UserViewModel.LoggedUser.Id);
+            Wishlist w = user.AddBook(bookupdated);
+            await App.UnitOfWork.UserRepository.UpdateAsync(user);
+
+            Wishlist wishlist = await App.UnitOfWork.WishlistRepository.FindByIdAsync(Wishlist.Id);
+            
+
+            return await App.UnitOfWork.WishlistRepository.UpsertAsync(wishlist) != null;
+        }
+
+        internal async Task<object> AddBookToCartAsync()
+        {
+            Book book = new Book(BookName);
+            Book bookupdated = await App.UnitOfWork.BookRepository.FindOrCreate(book);
+
+            Order order = new Order();
+            Order orderupdated = await App.UnitOfWork.OrderRepository.FindOrCreate(order);
+            Cart c = order.AddBook(bookupdated.Id, 1);
+            await App.UnitOfWork.OrderRepository.UpdateAsync(order);
+
+
+            return await App.UnitOfWork.OrderRepository.UpsertAsync(order) != null;
+        }
+
+
+
     }
 }

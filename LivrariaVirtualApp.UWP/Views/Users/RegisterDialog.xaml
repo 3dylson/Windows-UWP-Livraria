@@ -19,21 +19,18 @@
         <TextBox x:Name="phone" Header="Phone" Text="{x:Bind UserViewModel.User.Phone, Mode=TwoWay}" />
         <TextBox x:Name="address" Header="Endereço*" Text="{x:Bind UserViewModel.User.Address, Mode=TwoWay}" />
 
-        <Border Background="Red" BorderBrush="Black" BorderThickness="2" Margin="0,10" Padding="5" 
+        <Border Background="Red" BorderBrush="Black" BorderThickness="2" Margin="0,10" Padding="5"
                 Visibility="{x:Bind UserViewModel.ShowError, Mode=OneWay}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition  Width="9*"/>
+                    <ColumnDefinition  Width="9*" />
                 </Grid.ColumnDefinitions>
 
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE1E0;" />
                 <TextBlock Grid.Column="1" VerticalAlignment="Center"
                            Margin="0" Text="Falha no registo" />
-
             </Grid>
         </Border>
-
     </StackPanel>
-
 </ContentDialog>

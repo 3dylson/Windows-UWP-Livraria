@@ -5,10 +5,262 @@
     xmlns:local="using:LivrariaVirtualApp.UWP.Views.Users"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:LivrariaVirtualApp.UWP.ViewModels"
+    xmlns:stateTriggers="using:LivrariaVirtualApp.UWP.StateTriggers"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:sys="using:System"
+    xmlns:models="using:LivrariaVirtualApp.Domain.Models"
+    xmlns:c="using:LivrariaVirtualApp.UWP.Controls"
+    xmlns:MUXC="using:Microsoft.UI.Xaml.Controls"
+    NavigationCacheMode="Enabled"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <RelativePanel>
 
+            <TextBlock
+                x:Name="PageTitle"
+                Text="{x:Bind ViewModel.Name, Mode=OneWay}" />
+
+            <CommandBar
+                x:Name="mainCommandBar"
+                HorizontalAlignment="Stretch"
+                Background="Transparent"
+                Loaded="CommandBar_Loaded"
+                RelativePanel.LeftOf="CustomerSearchBox"
+                RelativePanel.RightOf="PageTitle">
+                <AppBarButton
+                    Click="{x:Bind ViewModel.SaveAsync}"
+                    Icon="Save"
+                    Label="Save"
+                    Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                <AppBarButton
+                    Click="{x:Bind ViewModel.CancelEditsAsync}"
+                    Icon="Cancel"
+                    Label="Cancel"
+                    Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" />
+                <AppBarSeparator Visibility="{x:Bind ViewModel.IsInEdit, Mode=OneWay}" MaxHeight="40" />
+                <AppBarButton
+                    Click="{x:Bind ViewModel.StartEdit}"
+                    Icon="Edit"
+                    IsEnabled="{x:Bind vm:Converters.Not(ViewModel.IsInEdit), Mode=OneWay}"
+                    Label="Edit" />
+                <!--<AppBarButton
+                    Click="AddOrder_Click"
+                    Icon="Shop"
+                    Label="Add order"
+                    Visibility="{x:Bind ViewModel.IsNewUser, Mode=OneWay}" />-->
+                <AppBarButton
+                    Click="{x:Bind ViewModel.RefreshOrders}"
+                    Icon="Refresh"
+                    Label="Refresh orders" />
+            </CommandBar>
+
+            <c:CollapsibleSearchBox
+                x:Name="CustomerSearchBox"
+                Width="240"
+                Margin="12,8,12,0"
+                Loaded="CustomerSearchBox_Loaded"
+                RelativePanel.AlignRightWithPanel="True" />
+
+            <ScrollViewer
+                x:Name="DetailPanel"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                RelativePanel.Below="PageTitle"
+                VerticalScrollBarVisibility="Auto"
+                VerticalScrollMode="Auto">
+
+                <StackPanel
+                    Margin="0,8,4,0">
+
+                    <toolkit:Expander
+                        IsExpanded="True"
+                        HorizontalAlignment="Left"
+                        HorizontalContentAlignment="Left" Width="876">
+
+                        <toolkit:Expander.Header>
+                            <Grid>
+                                <TextBlock
+                                    Text="General"
+                                    Style="{ThemeResource SubtitleTextBlockStyle}" />
+                                <TextBlock
+                                    Text="{x:Bind Mode=OneWay, Path=ViewModel.Email}"
+                                    Style="{StaticResource CaptionTextBlockStyle}" Margin="117,0,0,0" />
+                            </Grid>
+                        </toolkit:Expander.Header>
+
+                        <RelativePanel Margin="8,0,0,12">
+                            <TextBox
+                                x:Name="FullName"
+                                MinWidth="120"
+                                Margin="0,8,16,8"
+                                Header="Name"
+                                IsReadOnly="{x:Bind Mode=OneWay, Path=vm:Converters.Not(ViewModel.IsInEdit)}"
+                                RelativePanel.AlignLeftWithPanel="True"
+                                Text="{x:Bind Mode=TwoWay, Path=ViewModel.Name}"
+                                Visibility="{x:Bind Mode=OneWay, Path=ViewModel.IsInEdit}" />
+                            <TextBox
+                                x:Name="EmailText"
+                                Grid.Column="2"
+                                MinWidth="160"
+                                Margin="0,8,16,0"
+                                Header="Email"
+                                InputScope="EmailNameOrAddress"
+                                IsReadOnly="{x:Bind Mode=OneWay, Path=vm:Converters.Not(ViewModel.IsInEdit)}"
+                                RelativePanel.Below="FullName"
+                                Text="{x:Bind Mode=TwoWay, Path=ViewModel.Email}" />
+                            <TextBox
+                                x:Name="PhoneNumber"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                MinWidth="132"
+                                Margin="0,8,16,0"
+                                Header="Primary phone"
+                                InputScope="TelephoneNumber"
+                                IsReadOnly="{x:Bind Mode=OneWay, Path=vm:Converters.Not(ViewModel.IsInEdit)}"
+                                RelativePanel.Below="FullName"
+                                RelativePanel.RightOf="EmailText"
+                                Text="{x:Bind Mode=TwoWay, Path=ViewModel.Phone}" />
+                        </RelativePanel>
+                    </toolkit:Expander>
+
+                    <toolkit:Expander
+                        IsExpanded="True"
+                        HorizontalContentAlignment="Left">
+
+                        <toolkit:Expander.Header>
+                            <Grid>
+                                <TextBlock
+                                    Text="Addresses"
+                                    Style="{ThemeResource SubtitleTextBlockStyle}" />
+                                <TextBlock
+                                    Text="{x:Bind Mode=OneWay, Path=ViewModel.Address}"
+                                    Style="{StaticResource CaptionTextBlockStyle}" HorizontalAlignment="Left" Width="96" Margin="129,0,0,0" />
+                            </Grid>
+                        </toolkit:Expander.Header>
+
+                        <TextBox
+                            Margin="8,8,0,12"
+                            Header="Primary address"
+                            IsReadOnly="{x:Bind Mode=OneWay, Path=vm:Converters.Not(ViewModel.IsInEdit)}"
+                            Text="{x:Bind Mode=TwoWay, Path=ViewModel.Address}" />
+                    </toolkit:Expander>
+
+                    <toolkit:Expander
+                        IsExpanded="True"
+                        HorizontalContentAlignment="Left">
+
+                        <toolkit:Expander.Header>
+                            <TextBlock
+                                Text="Orders"
+                                Style="{ThemeResource SubtitleTextBlockStyle}" />
+                        </toolkit:Expander.Header>
+
+                        <Grid
+                            Margin="0,4,0,0">
+
+                            <toolkit:DataGrid
+                                BorderThickness="0"
+                                CanUserReorderColumns="False"
+                                CanUserResizeColumns="False"
+                                GridLinesVisibility="None"
+                                IsReadOnly="True"
+                                AutoGenerateColumns="False"
+                                ItemsSource="{x:Bind Mode=OneWay, Path=ViewModel.Orders}"
+                                SelectedItem="{x:Bind Mode=TwoWay, Path=ViewModel.SelectedOrder}"
+                                Sorting="DataGrid_Sorting">
+                                <toolkit:DataGrid.Columns>
+                                    <toolkit:DataGridTemplateColumn
+                                        Header="Id"
+                                        Tag="InvoiceNumber">
+                                        <toolkit:DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate x:DataType="models:Order">
+                                                <HyperlinkButton
+                                                    Content="{x:Bind Path=Id}"
+                                                    Margin="12,0"
+                                                    Click="ViewOrderButton_Click" />
+                                            </DataTemplate>
+                                        </toolkit:DataGridTemplateColumn.CellTemplate>
+                                    </toolkit:DataGridTemplateColumn>
+                                    <toolkit:DataGridTemplateColumn
+                                        Header="Placed"
+                                        Tag="DatePlaced">
+                                        <toolkit:DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate x:DataType="models:Order">
+                                                <TextBlock
+                                                    VerticalAlignment="Center"
+                                                    Margin="12,0" />
+                                            </DataTemplate>
+                                        </toolkit:DataGridTemplateColumn.CellTemplate>
+                                    </toolkit:DataGridTemplateColumn>
+                                    <toolkit:DataGridTemplateColumn
+                                        Header="Total"
+                                        Tag="GrandTotal">
+                                        <toolkit:DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate x:DataType="models:Order">
+                                                <TextBlock
+                                                    VerticalAlignment="Center"
+                                                    Margin="12,0" />
+                                            </DataTemplate>
+                                        </toolkit:DataGridTemplateColumn.CellTemplate>
+                                    </toolkit:DataGridTemplateColumn>
+                                    <toolkit:DataGridTextColumn
+                                        Header="Status"
+                                        Tag="Status"
+                                        Binding="{Binding Status}" />
+                                </toolkit:DataGrid.Columns>
+                            </toolkit:DataGrid>
+
+                            <MUXC:ProgressBar
+                                Margin="0,48,0,0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Top"
+                                IsIndeterminate="True"
+                                Visibility="{x:Bind Mode=OneWay, Path=ViewModel.IsLoading}" />
+                        </Grid>
+                    </toolkit:Expander>
+                </StackPanel>
+            </ScrollViewer>
+        </RelativePanel>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="EmailText.(RelativePanel.AlignLeftWithPanel)" Value="True" />
+                        <Setter Target="EmailText.(RelativePanel.Below)" Value="FullName" />
+                        <Setter Target="DetailPanel.Margin" Value="12,0,0,0" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <stateTriggers:MobileScreenTrigger InteractionMode="Touch" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="DetailPanel.(RelativePanel.Above)" Value="mainCommandBar" />
+                        <Setter Target="mainCommandBar.(RelativePanel.AlignBottomWithPanel)" Value="True" />
+                        <Setter Target="mainCommandBar.(RelativePanel.AlignLeftWithPanel)" Value="True" />
+                        <Setter Target="mainCommandBar.(RelativePanel.AlignRightWithPanel)" Value="True" />
+                        <Setter Target="CustomerSearchBox.Width" Value="300" />
+                        <Setter Target="EmailText.(RelativePanel.AlignLeftWithPanel)" Value="True" />
+                        <Setter Target="EmailText.(RelativePanel.Below)" Value="FullName" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>

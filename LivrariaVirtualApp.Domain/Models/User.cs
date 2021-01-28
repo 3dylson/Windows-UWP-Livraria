@@ -1,6 +1,7 @@
 ﻿using LivrariaVirtualApp.Domain.SeedWork;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -51,6 +52,21 @@ namespace LivrariaVirtualApp.Domain.Models
             Admin = admin;
             Id = user_id;
         }
+
+
+        public Wishlist AddBook(Book book)
+        {
+            var existingBook = Wishlists
+                .SingleOrDefault(p => p.BookId == book.Id);
+
+            if (existingBook == null)
+            {
+                existingBook = new Wishlist(Name, book.Id);
+                Wishlists.Add(existingBook);
+            }
+               return existingBook;
+        }
+
 
         /// <summary>
         /// Returns the User's infos.

@@ -23,6 +23,7 @@ namespace LivrariaVirtualApp.Domain.Models
             Id = wishlist_id;
         }
 
+
         public override string ToString()
         {
             return Name;

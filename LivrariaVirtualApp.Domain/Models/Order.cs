@@ -42,6 +42,24 @@ namespace LivrariaVirtualApp.Domain.Models
             Shipping_address = user.Address;
         }
 
+        public Cart AddBook(int userId, int quantity)
+        {
+            var existingBook = Cart
+                .SingleOrDefault(p => p.UserId == userId);
+
+            if (existingBook == null)
+            {
+                Cart slp = new Cart(quantity, userId, Id);
+                Cart.Add(slp);
+            }
+            else
+            {
+                existingBook.Quantity += quantity;
+            }
+            return existingBook;
+        }
+
+
         public override string ToString()
         {
             return $"Total:{Total}€, Ordered at:{Date_created}, Status:{Status}, Your Shipping Address is:{Shipping_address} \nThank You {UserOrdering}! ";

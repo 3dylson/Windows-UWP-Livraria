@@ -25,21 +25,19 @@ namespace LivrariaVirtualApp.Domain.Models
         {
         }
 
-        public Book(string name, string isbn, string pg, string language,
-                     decimal price, /*DateTime release_date,*/ string publisher,
-                     string pages, string overview, byte[] image, int category_id)
+        public Book(string name) /*string isbn, string pg, string language, decimal price, string publisher, string pages, string overview, byte[] image, int category_id*/
         {
-            Name = name;
-            ISBN = isbn;
-            Parental_guide = pg;
-            Language = language;
-            Price = price;
-            //Realease_date = release_date;
-            Publisher = publisher;
-            Pages = pages;
-            Overview = overview;
-            Image = image;
-            Category_id = category_id;
+            this.Name = name;
+            //this.ISBN = isbn;
+            //this.Parental_guide = pg;
+            //this.Language = language;
+            //this.Price = price;
+            
+            //this.Publisher = publisher;
+            //this.Pages = pages;
+            //this.Overview = overview;
+            //this.Image = image;
+            //this.Category_id = category_id;
         }
 
         public override string ToString()

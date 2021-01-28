@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 
@@ -28,7 +29,7 @@
         <NavigationView.MenuItems>
             <NavigationViewItem Content="Livros" Icon="Library" Tag="displaybooks"/>
             <NavigationViewItem Content="Categorias" Icon="Bookmarks" Tag="displaycategories"/>
-            <NavigationViewItem Content="Pedidos" Icon="Tag" Tag="orders"/>
+            <NavigationViewItem Content="Pedidos" Visibility="{x:Bind UserViewModel.IsLogged}" Icon="Tag" Tag="orders"/>
             <NavigationViewItemSeparator Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}"/>
             <NavigationViewItemHeader Content="Admin actions:" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}"/>
             <NavigationViewItem Content="Dashboard" Icon="Admin" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="admin"/>
@@ -54,6 +55,9 @@
                                         Visibility="{x:Bind UserViewModel.IsNotLogged, Mode=OneWay}"
                                         x:Name="btnRegister"
                                         Tapped="btnRegister_Tapped"/>
+                <NavigationViewItem Icon="Switch" >
+                    <Button Content="Theme" Click="Button_Click_1"/>
+                </NavigationViewItem>
             </StackPanel>
         </NavigationView.PaneFooter>
         <Grid>
@@ -62,16 +66,16 @@
 
             </Frame>
 
-            <StackPanel Background="AntiqueWhite" Height="59" VerticalAlignment="Top" Canvas.ZIndex="1" Grid.ColumnSpan="2">
+            <StackPanel  Background="AntiqueWhite" Height="59" VerticalAlignment="Top" Canvas.ZIndex="1" Grid.ColumnSpan="2">
                 <Image Source="Assets/logoliv.png" Width="215" Height="60" Canvas.ZIndex="2" HorizontalAlignment="Left" Margin="100,0,0,0" />
                 <CommandBar x:Name="mainCommandBar" OverflowButtonVisibility="Collapsed" HorizontalAlignment="Right" Margin="0,-49,0,919"
                         DefaultLabelPosition="Right" Background="Black" Width="192" Height="41">
                     <CommandBar.Content>
                         <Grid/>
                     </CommandBar.Content>
-                    <AppBarButton Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="AddButton" Icon="Shop" Label="Carrinho"
+                    <AppBarButton Click="BtnCart" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="AddButton" Icon="Shop" Label="Carrinho"
                               ToolTipService.ToolTip="Carrinho" BorderThickness="1,0,1,0" FontFamily="Gill Sans Nova" FontWeight="Normal" />
-                    <AppBarButton Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="AddButton2" Icon="SolidStar" Label="WhishList"
+                    <AppBarButton Click="btnWishlist" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="AddButton2" Icon="SolidStar" Label="WhishList"
                               ToolTipService.ToolTip="Lista de Desejos" BorderThickness="1,0,1,0" FontFamily="Gill Sans Nova Light" FontWeight="Normal" FontStyle="Normal" />
                 </CommandBar>
             </StackPanel>

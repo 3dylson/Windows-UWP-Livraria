@@ -2,6 +2,7 @@
 using LivrariaVirtualApp.UWP.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -14,35 +15,37 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using MUXC = Microsoft.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace LivrariaVirtualApp.UWP.Views.Users
+namespace LivrariaVirtualApp.UWP.Views.Cart
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class UsersPane : UserControl
+    public sealed partial class CartPage : Page
     {
-
-        public UserViewModel UserViewModel { get; set; }
-        public UsersPane()
+        public CartViewModel CartViewModel { get; set; }
+        public BookViewModel BookViewModel { get; set; }
+        
+        public CartPage()
         {
             this.InitializeComponent();
-            //UserViewModel = App.UserViewModel;
-            //UserViewModel.User = new User();
+            CartViewModel = new CartViewModel();
         }
 
-        #region ItemsSource
-        public IList<User> ItemsSource
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            get { return (IList<User>)GetValue(ItemsSourceProperty); }
-            set { SetValue(ItemsSourceProperty, value); }
+
+            BookViewModel.LoadAllByLoggedUserAsync();
+            base.OnNavigatedTo(e);
+
         }
 
-        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IList<User>), typeof(User), new PropertyMetadata(null));
-        #endregion
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }
