@@ -59,7 +59,9 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             get { return !Valid; }
         }
 
-        public async void LoadAllAsync()
+        public async 
+        Task
+LoadAllAsync()
         {
             var list = await App.UnitOfWork.CategoryRepository
                 .FindAllAsync();
