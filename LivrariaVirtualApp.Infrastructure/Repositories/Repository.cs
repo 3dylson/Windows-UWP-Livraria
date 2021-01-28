@@ -55,5 +55,7 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             await _dbContext.Set<T>()
             .AsNoTracking()
             .ToListAsync();
+        public abstract Task<T> GetAsync(int id);
+        public abstract Task<IEnumerable<T>> GetAsync();
     }
 }

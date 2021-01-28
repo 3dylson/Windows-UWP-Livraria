@@ -45,10 +45,40 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             return f;
         }
 
-        public override Task<IEnumerable<Order>> GetAsync(string search)
+        public override async Task<IEnumerable<Order>> GetAsync(string search)
         {
-            throw new NotImplementedException();
+            string[] parameters = search.Split(' ');
+            return await _dbContext.Orders
+                .Include(order => order.User)
+                .Include(order => order.Cart)
+                .ThenInclude(lineItem => lineItem.Book)
+                .Where(order => parameters
+                    .Any(parameter =>
+                        order.Shipping_address.StartsWith(parameter) ||
+                        order.User.Name.StartsWith(parameter) ||                        
+                        order.Id.ToString().StartsWith(parameter)))
+                .OrderByDescending(order => parameters
+                    .Count(parameter =>
+                        order.Shipping_address.StartsWith(parameter) ||
+                        order.User.Name.StartsWith(parameter) ||
+                        order.Id.ToString().StartsWith(parameter)))
+                .AsNoTracking()
+                .ToListAsync();
         }
+
+        public override async Task<Order> GetAsync(int id) =>
+            await _dbContext.Orders
+                .Include(order => order.Cart)
+                .ThenInclude(cart => cart.Book)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(order => order.Id == id);
+
+        public override async Task<IEnumerable<Order>> GetAsync() =>
+            await _dbContext.Orders
+                .Include(order => order.Cart)
+                .ThenInclude(cart => cart.Book)
+                .AsNoTracking()
+                .ToListAsync();
 
         public override async Task<Order> UpsertAsync(Order e)
         {

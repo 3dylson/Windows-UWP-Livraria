@@ -55,6 +55,16 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
+        public override Task<Book> GetAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<IEnumerable<Book>> GetAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         //public Task<IList<Book>> GetBooksAsync(DataRequest<Book> request)
         //{
         //    throw new NotImplementedException();

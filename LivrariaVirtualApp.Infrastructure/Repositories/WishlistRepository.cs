@@ -42,6 +42,16 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
+        public override Task<Wishlist> GetAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<IEnumerable<Wishlist>> GetAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public override async Task<Wishlist> UpsertAsync(Wishlist e)
         {
             Wishlist f = null;
