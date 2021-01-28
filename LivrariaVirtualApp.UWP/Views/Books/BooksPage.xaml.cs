@@ -44,12 +44,25 @@ namespace LivrariaVirtualApp.UWP.Views.Books
 
         }
 
-        private void 
+        private void ContentGridView_SelectionChanged(object sender, RoutedEventArgs e)
+        {
 
+        }
 
+        private void ContentGridView_ItemClick(object sender, RoutedEventArgs e)
+        {
 
+        }
 
+        private void Buy_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void Fav_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         //private void btnAdd_Click(object sender, RoutedEventArgs e)
         //{

@@ -2,15 +2,25 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI;
+using Windows.UI.Xaml.Media;
 
 namespace LivrariaVirtualApp.UWP.ViewModels
 {
     public class MainViewModel : BindableBase
     {
-        public MainViewModel() => Task.Run(GetUserListAsync);
+        public MainViewModel()
+        {
+            Task.Run(GetUserListAsync);
+            MyBackGround = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+        }
+        
+             
 
         public ObservableCollection<UserViewModel> Users { get; }
             = new ObservableCollection<UserViewModel>();
@@ -29,6 +39,33 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         {
             get => _isLoading;
             set => Set(ref _isLoading, value);
+        }
+
+        private Brush _myBackGround;
+
+        public Brush MyBackGround
+        {
+            get
+            {
+                return _myBackGround;
+            }
+            set
+            {
+                _myBackGround = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public new event PropertyChangedEventHandler PropertyChanged;
+
+        protected new void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        internal void Theme()
+        {
+            MyBackGround = new SolidColorBrush(Color.FromArgb(255, 0, 0, 255));
         }
 
 

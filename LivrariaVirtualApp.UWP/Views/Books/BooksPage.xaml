@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:models="using:LivrariaVirtualApp.Domain.Models"
+    xmlns:con="using:LivrariaVirtualApp.UWP.Converters"
     xmlns:sys="using:System"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:c="using:LivrariaVirtualApp.UWP.Controls"
@@ -14,11 +15,18 @@
     xmlns:stateTriggers="using:LivrariaVirtualApp.UWP.StateTriggers"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    
     NavigationCacheMode="Required">
+
+    <!--<ContentPage.Resources>
+        <ResourceDictionary>
+            <con:BytesToImageConverter x:Key="BytesToImageConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>-->
 
     <GridView
     x:Name="ContentGridView"
-    ItemsSource="{x:Bind BookViewModel.Books }"    
+    ItemsSource="{x:Bind BookViewModel.Books }"
     IsItemClickEnabled="True"
     CanDragItems="False"
     AllowDrop="False"
@@ -30,25 +38,24 @@
 
         <GridView.ItemTemplate>
             <DataTemplate x:DataType="models:Book">
-                <Grid AutomationProperties.Name="{x:Bind Name}" Width="280">
+                <Grid Background="Goldenrod" AutomationProperties.Name="{x:Bind Name}" Width="280">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                    <Image Source="{x:Bind Image,Converter={StaticResource bytesToImageConverter}, Mode=OneWay}" Height="100" Stretch="Fill" VerticalAlignment="Top"/>
+                    <Image x:Name="thumb" Source="{Binding Image, Converter={StaticResource bytesToImageConverter}}" Height="100" Stretch="Fill" VerticalAlignment="Top"/>
                 <StackPanel Grid.Column="1" Margin="8,0,0,8">
                     <TextBlock Text="{x:Bind Name}"  Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,8"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{x:Bind Overview}" Style="{ThemeResource CaptionTextBlockStyle}"/>
-
+                    <StackPanel Orientation="Horizontal">                        
+                        <TextBlock Text="Idioma " Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        <TextBlock Text="{x:Bind Language}" Style="{ThemeResource CaptionTextBlockStyle}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{x:Bind Price}" Style="{ThemeResource BodyTextBlockStyle}"/>
-                        <TextBlock Text="Price:" Style="{ThemeResource TitleTextBlockStyle}"/>
-
+                        <TextBlock Text="Price: " Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        <TextBlock Text="{x:Bind Price}" Style="{ThemeResource CaptionTextBlockStyle}"/>
                     </StackPanel>
-
-                </StackPanel>
+                        
+                    </StackPanel>
                 </Grid>
             </DataTemplate>
         </GridView.ItemTemplate>

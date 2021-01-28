@@ -93,6 +93,7 @@ namespace LivrariaVirtualApp.UWP.Views.Books
 
             // Open the file picker.
             StorageFile file = await openPicker.PickSingleFileAsync();
+            BookViewModel.LoadFile(file);
 
             // 'file' is null if user cancels the file picker.
             if (file != null)

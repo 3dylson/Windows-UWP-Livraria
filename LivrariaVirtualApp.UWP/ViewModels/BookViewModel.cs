@@ -4,10 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace LivrariaVirtualApp.UWP.ViewModels
 {
@@ -30,6 +32,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             get => _isLoading;
             set => Set(ref _isLoading, value);
         }
+
 
 
         private string _categoryName;
@@ -189,7 +192,8 @@ namespace LivrariaVirtualApp.UWP.ViewModels
                 BookISBN = _book?.ISBN;
                 BookParental_guide = _book?.Parental_guide;
                 BookLanguage = _book?.Language;
-                BookPrice = (decimal)(_book?.Price);
+                decimal? price = _book?.Price;
+                BookPrice = (decimal)price;
                 //BookRealease_date = (DateTime)(_book?.Realease_date);
                 BookPublisher = _book?.Publisher;
                 BookPages = _book?.Pages;
@@ -230,6 +234,19 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             }
         }
 
+        internal async void LoadFile(StorageFile file)
+        {
+            if (file != null)
+            {
+                using (Stream stream = await file.OpenStreamForReadAsync())
+                {
+                    byte[] content = new byte[stream.Length];
+                    await stream.ReadAsync(content, 0, content.Length);
+                    Book.Image = content;
+                }
+            }
+        }
+
         internal async Task<Book> AddBookAsync()
         {
             // Get existing Category or Create a new one
@@ -246,6 +263,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             Book.Price = BookPrice;
             //Book.Realease_date = BookRealease_date;
             Book.Publisher = BookPublisher;
+            Book.Pages = BookPages;
             Book.Overview = BookOverview;
             Book.Image = Image;
 

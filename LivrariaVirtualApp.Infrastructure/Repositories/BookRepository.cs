@@ -21,6 +21,11 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
                 .OrderBy(c => c.Name).ToListAsync();
         }
 
+        public Task<List<Book>> FindAllByUserIdAndWishlistAsync(int userId, int wishlist_id)
+        {
+            throw new NotImplementedException();
+        }
+
         /// ///
         public Task<List<Book>> FindAllByUserIdAsync(int userId)
         {
@@ -49,6 +54,11 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
+
+        //public Task<IList<Book>> GetBooksAsync(DataRequest<Book> request)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         /// ///
 

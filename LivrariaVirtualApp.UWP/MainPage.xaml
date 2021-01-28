@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 
@@ -54,6 +55,9 @@
                                         Visibility="{x:Bind UserViewModel.IsNotLogged, Mode=OneWay}"
                                         x:Name="btnRegister"
                                         Tapped="btnRegister_Tapped"/>
+                <NavigationViewItem Icon="Switch" >
+                    <Button Content="Theme" Click="Button_Click_1"/>
+                </NavigationViewItem>
             </StackPanel>
         </NavigationView.PaneFooter>
         <Grid>

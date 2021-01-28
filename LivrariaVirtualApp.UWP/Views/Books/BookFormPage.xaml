@@ -90,11 +90,9 @@
                     Text="{x:Bind BookViewModel.BookPages, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                     <TextBox Header="Overview" x:Name="overview" 
-                    Text="{x:Bind BookViewModel.BookOverview, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                    <Image Margin="0,10" x:Name="image" MaxWidth="500" MaxHeight="500"
-                       Source="{x:Bind BookViewModel.Image, Converter={StaticResource bytesToImageConverter}, Mode=OneWay}"/>
-                    <Button x:Name="btnThumb" Margin="0,10" Content="Escolher Imagem..." Tapped="btnThumb_Tapped"/>
+                    Text="{x:Bind BookViewModel.BookOverview, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />                   
+                       
+                    <Button x:Name="btnThumb"  Margin="0,10" Content="Escolher Imagem..." Tapped="btnThumb_Tapped"/>
                     <Border Background="Red" BorderBrush="Black" BorderThickness="2" Margin="5"
                     Visibility="{x:Bind BookViewModel.Invalid, Mode=OneWay}">
                         <TextBlock Text="Livro inválido"/>
