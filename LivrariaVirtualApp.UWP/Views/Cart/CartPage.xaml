@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:LivrariaVirtualApp.UWP.Views.Cart"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:models="using:LivrariaVirtualApp.Domain.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
@@ -29,17 +29,17 @@
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Book">
+                    <DataTemplate x:DataType="models:Cart">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Margin="10" x:Name="thumb" Source="{x:Bind Cart.Book.Image, 
+                            <Image Grid.Column="0" Margin="10" x:Name="thumb" Source="{x:Bind Book.Image, 
                             Converter={StaticResource bytesToImageConverter}}"/>
                             <StackPanel Grid.Column="1">
-                                <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="{x:Bind Cart.Book.Name}"/>
+                                <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="{x:Bind Book.Name}"/>
                                 <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" 
                                        Text="{x:Bind Quantity}"/>
                             </StackPanel>
