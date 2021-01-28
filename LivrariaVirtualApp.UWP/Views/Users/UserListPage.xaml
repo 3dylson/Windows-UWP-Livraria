@@ -17,10 +17,12 @@
         <MenuFlyout x:Key="DataGridContextMenu">
             <MenuFlyoutItem
                 Click="ViewDetails_Click"
+                Style="{StaticResource MenuFlyoutItemRevealStyle}"
                 Tag="&#xE1A5;"
                 Text="View details" />
             <MenuFlyoutItem
                 Click="AddOrder_Click"
+                Style="{StaticResource MenuFlyoutItemRevealStyle}"
                 Tag="&#xE14D;"
                 Text="Add order" />
         </MenuFlyout>
@@ -33,6 +35,7 @@
 
             <TextBlock
                 x:Name="PageTitle"
+                Style="{StaticResource TitleTextBlockStyle}"
                 Text="Customers" />
 
             <CommandBar IsOpen="False"
@@ -91,11 +94,11 @@
                     SelectedItem="{x:Bind ViewModel.SelectedUser, Mode=TwoWay}"
                     KeyDown="DataGrid_KeyDown"
                     RightTapped="DataGrid_RightTapped"
-                    ContextFlyout="{StaticResource DataGridContextMenu}" Margin="0,27,0,0">
+                    ContextFlyout="{StaticResource DataGridContextMenu}" >
                     <toolkit:DataGrid.Columns>
                         <toolkit:DataGridTextColumn
                             Header="Name"
-                            Tag="Name"
+                            Tag="Name"                            
                             Binding="{Binding Name}" />
                         <toolkit:DataGridTextColumn
                             Header="Email"
@@ -104,9 +107,12 @@
                         <toolkit:DataGridTextColumn
                             Header="Phone"
                             Binding="{Binding Phone}"
-                            CanUserSort="True" />
+                            HeaderStyle="{StaticResource DataGridNonSortableColumnHeaderStyle}"
+                            CanUserSort="False" />
                         <toolkit:DataGridTextColumn
                             Header="Address"
+                            HeaderStyle="{StaticResource DataGridNonSortableColumnHeaderStyle}"
+                            CanUserSort="False"
                             Binding="{Binding Address}" />
                     </toolkit:DataGrid.Columns>
                 </toolkit:DataGrid>
