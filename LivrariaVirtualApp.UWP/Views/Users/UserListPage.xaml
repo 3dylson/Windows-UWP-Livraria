@@ -99,21 +99,17 @@
                         <toolkit:DataGridTextColumn
                             Header="Name"
                             Tag="Name"                            
-                            Binding="{Binding Name}" />
+                            Binding="{Binding Name}"/>
                         <toolkit:DataGridTextColumn
                             Header="Email"
                             Tag="Email"
-                            Binding="{Binding Email}" />
+                            Binding="{Binding Email}"/>
                         <toolkit:DataGridTextColumn
                             Header="Phone"
-                            Binding="{Binding Phone}"
-                            HeaderStyle="{StaticResource DataGridNonSortableColumnHeaderStyle}"
-                            CanUserSort="False" />
+                            Binding="{Binding Phone}"/>
                         <toolkit:DataGridTextColumn
-                            Header="Address"
-                            HeaderStyle="{StaticResource DataGridNonSortableColumnHeaderStyle}"
-                            CanUserSort="False"
-                            Binding="{Binding Address}" />
+                            Header="Address"                                                       
+                            Binding="{Binding Address}"/>
                     </toolkit:DataGrid.Columns>
                 </toolkit:DataGrid>
                 <MUXC:ProgressBar

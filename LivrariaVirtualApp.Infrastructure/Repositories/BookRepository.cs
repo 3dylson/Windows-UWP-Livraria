@@ -50,9 +50,13 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         }
 
         /// ///
-        public override Task<IEnumerable<Book>> GetAsync(string search)
+        public override async Task<IEnumerable<Book>> GetAsync(string search)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Books.Where(book =>
+                book.Name.StartsWith(search) ||
+                book.ISBN.StartsWith(search))
+            .AsNoTracking()
+            .ToListAsync();
         }
 
         public override Task<Book> GetAsync(int id)

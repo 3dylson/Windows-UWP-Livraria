@@ -39,10 +39,22 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             }
         }
 
+        private string _titleText;
+        public string TitleText
+        {
+            get { return _titleText; }
+            set
+            {
+                Set(ref _titleText, value);
+            }
+        }
+
         public CategoryViewModel()
         {
             Category = new Category();
             Categories = new ObservableCollection<Category>();
+
+            TitleText = "Categorias";
         }
 
         public bool Valid
@@ -91,6 +103,11 @@ LoadAllAsync()
             var list = await App.UnitOfWork.CategoryRepository
                 .FindAllByNameStartWithAsync(categoryName);
             return new ObservableCollection<Category>(list);
+        }
+
+        internal async Task InsertAsync()
+        {
+            await App.UnitOfWork.CategoryRepository.CreateAsync(Category);
         }
     }
 }
