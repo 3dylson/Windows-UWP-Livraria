@@ -53,7 +53,7 @@ namespace LivrariaVirtualApp.UWP
             CategoryViewModel = new CategoryViewModel();
             BookViewModel = new BookViewModel();
             AdminViewModel = new AdminViewModel();
-            OrderViewModel = new OrderViewModel();
+            
         }
 
         /// <summary>

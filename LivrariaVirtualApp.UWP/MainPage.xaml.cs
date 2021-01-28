@@ -9,7 +9,7 @@ using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-
+using Windows.UI.Xaml.Navigation;
 
 namespace LivrariaVirtualApp.UWP
 {
@@ -31,9 +31,9 @@ namespace LivrariaVirtualApp.UWP
 
         public Frame AppFrame => frame;
 
-        private void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        private void NavigationView_ItemInvoked(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
         {
-            var selectedItem = args.InvokedItemContainer as NavigationViewItem;
+            var selectedItem = args.InvokedItem as NavigationViewItem;
             if (selectedItem != null)
             {
                 switch (selectedItem.Tag)
@@ -66,6 +66,62 @@ namespace LivrariaVirtualApp.UWP
 
 
                 }
+            }
+        }
+
+        /// <summary>
+        /// Ensures the nav menu reflects reality when navigation is triggered outside of
+        /// the nav menu buttons.
+        /// </summary>
+        private void OnNavigatingToPage(object sender, NavigatingCancelEventArgs e)
+        {
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                if (e.SourcePageType == typeof(CategoriesPage))
+                {
+                    navBar.SelectedItem = categories;
+                }
+                else if (e.SourcePageType == typeof(ManageBooksPage))
+                {
+                    navBar.SelectedItem = books;
+                }
+                else if (e.SourcePageType == typeof(AdminDashBoard))
+                {
+                    navBar.SelectedItem = admin;
+                }
+                else if (e.SourcePageType == typeof(BooksPage))
+                {
+                    navBar.SelectedItem = displaybooks;
+                }
+                else if (e.SourcePageType == typeof(DisplayCategoriesPage))
+                {
+                    navBar.SelectedItem = displaycategories;
+                }
+                else if (e.SourcePageType == typeof(UserListPage))
+                {
+                    navBar.SelectedItem = userlist;
+                }
+                else if (e.SourcePageType == typeof(OrderListPage))
+                {
+                    navBar.SelectedItem = orderlist;
+                }
+                else if (e.SourcePageType == typeof(OrdersPage))
+                {
+                    navBar.SelectedItem = orders;                       ;
+                }
+            }
+        }
+
+
+
+        /// <summary>
+        /// Navigates the frame to the previous page.
+        /// </summary>
+        private void NavigationView_BackRequested(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewBackRequestedEventArgs args)
+        {
+            if (AppFrame.CanGoBack)
+            {
+                AppFrame.GoBack();
             }
         }
 
