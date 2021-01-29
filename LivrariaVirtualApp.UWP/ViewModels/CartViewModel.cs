@@ -23,6 +23,12 @@ namespace LivrariaVirtualApp.UWP.ViewModels
 
         public ObservableCollection<Book> Books { get; set; }
 
+        public async void LoadAllAsync()
+        {
+            var userId = App.UserViewModel.LoggedUser.Id;
+            var list = await App.UnitOfWork.WishlistRepository
+                .FindAllByUserIdAsync(userId);
+        }
 
         public User User
         {
@@ -35,7 +41,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         /// </summary>
         public Cart Cart { get; }
 
-        public User User { get; set; }
+        
 
         /// <summary>
         /// Gets or sets the book for the cart.

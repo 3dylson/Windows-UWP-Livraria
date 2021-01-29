@@ -27,6 +27,7 @@ namespace LivrariaVirtualApp.UWP.Views.Cart
     {
         public CartViewModel CartViewModel { get; set; }
         public BookViewModel BookViewModel { get; set; }
+        public UserViewModel UserViewModel { get; set; }
         
         public CartPage()
         {
@@ -38,7 +39,7 @@ namespace LivrariaVirtualApp.UWP.Views.Cart
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
 
-            BookViewModel.LoadAllByLoggedUserAsync();
+            CartViewModel.LoadAllAsync();
             base.OnNavigatedTo(e);
 
         }

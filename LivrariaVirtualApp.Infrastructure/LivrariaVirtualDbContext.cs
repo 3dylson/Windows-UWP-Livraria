@@ -59,7 +59,7 @@ namespace LivrariaVirtualApp.Infrastructure
                 .HasMaxLength(100);
             modelBuilder.Entity<Book>()
                 .Property(b => b.Pages)
-                .IsRequired()
+                .IsRequired(false)
                 .HasMaxLength(20);
             modelBuilder.Entity<Book>()
                 .Property(b => b.Overview)
@@ -67,7 +67,7 @@ namespace LivrariaVirtualApp.Infrastructure
                 .HasMaxLength(256);
             modelBuilder.Entity<Book>()
                 .Property(b => b.Image)
-                .IsRequired();
+                .IsRequired(false);
             modelBuilder.Entity<Book>()
                 .HasOne(b => b.Category)
                 .WithMany(c => c.Books)
@@ -139,6 +139,8 @@ namespace LivrariaVirtualApp.Infrastructure
             //Admin User created on DB building
             modelBuilder.Entity<User>().HasData(new User
             { Id = 1, Name = "admin", Email = "admin@admin.com", Password = "admin", Admin = 1 });
+            modelBuilder.Entity<User>().HasData(new User
+            { Id = 2, Name = "test", Email = "test@test.com", Password = "test", Admin = 0 });
         }
     }
 }

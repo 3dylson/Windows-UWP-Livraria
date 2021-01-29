@@ -14,6 +14,7 @@ namespace LivrariaVirtualApp.Infrastructure
         public IOrderRepository OrderRepository => new OrderRepository(new LivrariaVirtualDbContext(Options));
         public IWishlistRepository WishlistRepository => new WishlistRepository(new LivrariaVirtualDbContext(Options));
         public IUserRepository UserRepository => new UserRepository(new LivrariaVirtualDbContext(Options));
+        public ICartRepository CartRepository => new CartRepository(new LivrariaVirtualDbContext(Options));
 
         public UnitOfWork(DbContextOptions<LivrariaVirtualDbContext> options)
         {

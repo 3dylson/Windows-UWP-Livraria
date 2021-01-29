@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a cart on an order.
     /// </summary>
-    public class Cart   
+    public class Cart
     {
         /// <summary>
         /// Gets or sets the quantity of books.
