@@ -35,6 +35,8 @@ namespace LivrariaVirtualApp.UWP
         public static CategoryViewModel CategoryViewModel { get; set; }
         public static AdminViewModel AdminViewModel { get; set; }
         public static OrderViewModel OrderViewModel { get; set; }
+        public static CartViewModel CartViewModel { get; set; }
+        public static WishlistViewModel WishlistViewModel { get; set; }
         public static IUnitOfWork UnitOfWork { get; set; }
 
         public static string SqlConnectionString = @"Server=tcp:localhost;Initial Catalog=dbLivraria; User ID=userLivraria; Password=Livraria; Connection Timeout = 30;";
@@ -50,9 +52,10 @@ namespace LivrariaVirtualApp.UWP
             Suspending += OnSuspending;
 
             UserViewModel = new UserViewModel();
-            CategoryViewModel = new CategoryViewModel();
-            BookViewModel = new BookViewModel();
+            CategoryViewModel = new CategoryViewModel();            
             AdminViewModel = new AdminViewModel();
+            BookViewModel = new BookViewModel();
+            
             
         }
 

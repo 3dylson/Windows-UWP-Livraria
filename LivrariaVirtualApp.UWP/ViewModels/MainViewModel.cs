@@ -17,13 +17,17 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         public MainViewModel()
         {
             Task.Run(GetUserListAsync);
+            //Task.Run(GetBookListAsync);
             MyBackGround = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
         }
+
         
-             
 
         public ObservableCollection<UserViewModel> Users { get; }
             = new ObservableCollection<UserViewModel>();
+
+        public ObservableCollection<BookViewModel> Books { get; }
+            = new ObservableCollection<BookViewModel>();
 
         private UserViewModel _selectedUser;
 
@@ -31,6 +35,14 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         {
             get => _selectedUser;
             set => Set(ref _selectedUser, value);
+        }
+
+        private BookViewModel _selectedBook;
+
+        public BookViewModel SelectedBook
+        {
+            get => _selectedBook;
+            set => Set(ref _selectedBook, value);
         }
 
         private bool _isLoading = false;

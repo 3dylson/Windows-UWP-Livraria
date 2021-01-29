@@ -35,7 +35,9 @@ namespace LivrariaVirtualApp.UWP
                 navBar.SelectedItem = displaycategories;
                 navBar.SelectedItem = userlist;
                 navBar.SelectedItem = orderlist;
-                navBar.SelectedItem = orders;
+                navBar.SelectedItem = cart;
+                navBar.SelectedItem = wishlist;
+                
             };
 
         }
@@ -51,6 +53,8 @@ namespace LivrariaVirtualApp.UWP
         public readonly string Userlist = "User List";
         public readonly string Orderlist = "Order List";
         public readonly string Orders = "Pedidos";
+        public readonly string Cart = "Carrinho";
+        public readonly string Wishlist = "Wishlist";
 
         private void NavigationView_ItemInvoked(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
         {
@@ -63,6 +67,8 @@ namespace LivrariaVirtualApp.UWP
                 selectedItem == Displaycategories ? typeof(DisplayCategoriesPage) :
                 selectedItem == Userlist ? typeof(UserListPage) :
                 selectedItem == Orderlist ? typeof(OrderListPage) :
+                selectedItem == Cart ? typeof(CartPage) :
+                selectedItem == Wishlist ? typeof(WishlistPage) :
                 selectedItem == Orders ? typeof(OrdersPage) : null;
             if (pageType != null && pageType != AppFrame.CurrentSourcePageType)
             {
@@ -107,10 +113,15 @@ namespace LivrariaVirtualApp.UWP
                 {
                     navBar.SelectedItem = orderlist;
                 }
-                else if (e.SourcePageType == typeof(OrdersPage))
+                else if (e.SourcePageType == typeof(CartPage))
                 {
-                    navBar.SelectedItem = orders;                       ;
+                    navBar.SelectedItem = cart;
                 }
+                else if (e.SourcePageType == typeof(WishlistPage))
+                {
+                    navBar.SelectedItem = wishlist;
+                }
+                
             }
         }
 
@@ -149,8 +160,7 @@ namespace LivrariaVirtualApp.UWP
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var validUser = App.UserViewModel.LoggedUser;
-            ViewModel.Theme();
+            this.RequestedTheme = ElementTheme.Dark;
         }
 
         private async void btnRegister_Tapped(object sender, TappedRoutedEventArgs e)
