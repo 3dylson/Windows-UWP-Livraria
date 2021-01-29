@@ -40,31 +40,31 @@ namespace LivrariaVirtualApp.UWP.ViewModels
 
         internal async Task<Wishlist> UpsertAsync()
         {
-            Wishlist.UserId = App.UserViewModel.LoggedUser.Id;
+            Wishlist.User_id = App.UserViewModel.LoggedUser.Id;
 
             if (Wishlist.Id == 0)
             {
-                Wishlist.CreationDate = DateTime.Now;
+                
             }
             Wishlist.Color = WishlistColor.ToString();
 
-            var newShoppingList = await App.UnitOfWork.WishlistRepository
+            var newWishlist = await App.UnitOfWork.WishlistRepository
                 .UpsertAsync(Wishlist);
 
             return newWishlist;
         }
 
-        internal async Task<bool> DeleteWishlistAsync(Wishlist model)
-        {
-            bool res = false;
-            if (!model.WishlistBooks.Any())
-            {
-                await App.UnitOfWork.WishlistRepository.DeleteAsync(model);
-                res = true;
-            }
+        //internal async Task<bool> DeleteWishlistAsync(Wishlist model)
+        //{
+        //    bool res = false;
+        //    if (!model.Any())
+        //    {
+        //        await App.UnitOfWork.WishlistRepository.DeleteAsync(model);
+        //        res = true;
+        //    }
 
-            return res;
-        }
+        //    return res;
+        //}
 
         internal void RefreshItem(Wishlist model)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LivrariaVirtualApp.UWP.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,41 @@ namespace LivrariaVirtualApp.UWP.Views.Wishlist
     /// </summary>
     public sealed partial class WishlistPage : Page
     {
+        public WishlistViewModel WishlistViewModel { get; set; }
+
         public WishlistPage()
         {
             this.InitializeComponent();
+            WishlistViewModel = new WishlistViewModel();
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+
+            WishlistViewModel.LoadAllAsync();
+            base.OnNavigatedTo(e);
+
+        }
+
+        private void StackPanel_Tapped(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
     }
 }

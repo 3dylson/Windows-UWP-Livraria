@@ -17,8 +17,7 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         public Task<List<Wishlist>> FindAllByUserIdAsync(int userId)
         {
             return _dbContext.Wishlists
-                .Include(m => m.ShoppingListProducts)
-                .Where(e => e.UserId == userId).ToListAsync();
+                  .Where(e => e.User_id == userId).ToListAsync();
         }
 
         public Task<List<Wishlist>> FindAllByNameStartWithAsync(string name_wishlist)

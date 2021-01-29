@@ -38,8 +38,8 @@
             </CommandBar>
         </Grid>
 
-        <GridView x:Name="grid" Grid.Row="1" 
-                  ItemsSource="{x:Bind WishlistViewModel.Wishlists}">
+        <GridView x:Name="grid" Grid.Row="1" >
+            <!--ItemsSource="{x:Bind Wishlist.Wishlists}"-->
 
             <FlyoutBase.AttachedFlyout>
                 <Flyout>
