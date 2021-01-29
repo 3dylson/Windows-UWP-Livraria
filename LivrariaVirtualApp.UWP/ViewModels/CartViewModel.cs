@@ -31,7 +31,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         /// </summary>
         public Cart Cart { get; }
 
-        public User User { get; }
+        public User User { get; set; }
 
         /// <summary>
         /// Gets or sets the book for the cart.

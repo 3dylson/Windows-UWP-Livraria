@@ -4,11 +4,76 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:LivrariaVirtualApp.UWP.Views.Wishlist"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:models="using:LivrariaVirtualApp.Domain.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Wishlist" 
+                       Style="{StaticResource HeaderTextBlockStyle}" />
+
+            <CommandBar Grid.Column="1"  VerticalAlignment="Center"                         
+                            x:Name="mainCommandBar" Background="Transparent"      
+                            OverflowButtonVisibility="Collapsed"
+                            DefaultLabelPosition="Right">
+
+                <AppBarButton
+                        x:Name="btnAdd"
+                        Click="btnAdd_Click"
+                        Icon="Add"
+                        Label="Add Wishlist"
+                        ToolTipService.ToolTip="New Wishlist" />
+
+            </CommandBar>
+        </Grid>
+
+        <GridView x:Name="grid" Grid.Row="1" 
+                  ItemsSource="{x:Bind WishlistViewModel.Wishlists}">
+
+            <FlyoutBase.AttachedFlyout>
+                <Flyout>
+                    <Border Background="#dc3545" Padding="10">
+                        <TextBlock Text="Não foi possivel eliminar" Foreground="White"/>
+                    </Border>
+                </Flyout>
+            </FlyoutBase.AttachedFlyout>
+
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="models:Wishlist">
+                    <StackPanel Background="{x:Bind utils:ColorConverter.GetBrushFromCode(Color)}"
+                                Padding="5" MinWidth="100" MinHeight="100" Width="200"
+                                Tapped="StackPanel_Tapped">
+
+                        <StackPanel.ContextFlyout>
+                            <MenuFlyout Placement="BottomEdgeAlignedRight">
+                                <MenuFlyoutItem x:Name="Edit" Text="Edit"
+                                                Icon="Edit" Click="Edit_Click" />
+                                <MenuFlyoutItem x:Name="Delete" Text="Delete"
+                                                Icon="Delete" Click="Delete_Click" />
+                            </MenuFlyout>
+                        </StackPanel.ContextFlyout>
+
+                        <TextBlock Text="{x:Bind Name}" TextWrapping="NoWrap"
+                                   TextTrimming="CharacterEllipsis"
+                                   Foreground="{x:Bind utils:ColorConverter.InvertColorToBrush(Color)}"
+                                   Style="{ThemeResource SubheaderTextBlockStyle}" />
+
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+
+        </GridView>
 
     </Grid>
 </Page>
