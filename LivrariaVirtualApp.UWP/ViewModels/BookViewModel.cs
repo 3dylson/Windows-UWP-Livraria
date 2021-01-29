@@ -27,6 +27,14 @@ namespace LivrariaVirtualApp.UWP.ViewModels
 
         public Wishlist Wishlist { get; set; }
 
+        private BookViewModel _selectedBook;
+
+        public BookViewModel SelectedBook
+        {
+            get => _selectedBook;
+            set => Set(ref _selectedBook, value);
+        }
+
         private bool _isLoading = false;
 
         public bool IsLoading
