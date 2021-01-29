@@ -1,7 +1,7 @@
-﻿using Windows.UI.Xaml.Data;
-using Windows.System.UserProfile;
+﻿using System;
 using Windows.Globalization.DateTimeFormatting;
-using System;
+using Windows.System.UserProfile;
+using Windows.UI.Xaml.Data;
 
 namespace LivrariaVirtualApp.UWP.Converters
 {

@@ -59,7 +59,6 @@ namespace LivrariaVirtualApp.Domain.Models
             return existingBook;
         }
 
-
         public override string ToString()
         {
             return $"Total:{Total}€, Ordered at:{Date_created}, Status:{Status}, Your Shipping Address is:{Shipping_address} \nThank You {UserOrdering}! ";

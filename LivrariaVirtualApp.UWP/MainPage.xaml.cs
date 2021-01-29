@@ -13,7 +13,6 @@ using Windows.UI.Xaml.Navigation;
 
 namespace LivrariaVirtualApp.UWP
 {
-
     public sealed partial class MainPage : Page
     {
         public UserViewModel UserViewModel { get; set; }
@@ -37,11 +36,8 @@ namespace LivrariaVirtualApp.UWP
                 navBar.SelectedItem = orderlist;
                 navBar.SelectedItem = cart;
                 navBar.SelectedItem = wishlist;
-                
             };
-
         }
-            
 
         public Frame AppFrame => frame;
 
@@ -74,7 +70,6 @@ namespace LivrariaVirtualApp.UWP
             {
                 AppFrame.Navigate(pageType);
             }
-                       
         }
 
         /// <summary>
@@ -121,11 +116,8 @@ namespace LivrariaVirtualApp.UWP
                 {
                     navBar.SelectedItem = wishlist;
                 }
-                
             }
         }
-
-
 
         /// <summary>
         /// Navigates the frame to the previous page.

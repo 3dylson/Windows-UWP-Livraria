@@ -1,11 +1,5 @@
 ﻿using LivrariaVirtualApp.Domain.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Navigation;
 
 namespace LivrariaVirtualApp.UWP.ViewModels
 {
@@ -19,7 +13,6 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         public BookViewModel BookViewModel { get; set; }
 
         public UserViewModel UserViewModel { get; set; }
-       
 
         public ObservableCollection<Book> Books { get; set; }
 
@@ -41,8 +34,6 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         /// </summary>
         public Cart Cart { get; }
 
-        
-
         /// <summary>
         /// Gets or sets the book for the cart.
         /// </summary>
@@ -59,7 +50,6 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             }
         }
 
-
         /// <summary>
         /// Gets or sets the book quantity for the Cart.
         /// </summary>
@@ -75,11 +65,5 @@ namespace LivrariaVirtualApp.UWP.ViewModels
                 }
             }
         }
-
-        
-
-
-
-
     }
 }

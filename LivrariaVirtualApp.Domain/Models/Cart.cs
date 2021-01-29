@@ -28,7 +28,5 @@
             BookId = book_id;
             OrderId = order_id;
         }
-
-
     }
 }

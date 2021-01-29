@@ -1,11 +1,6 @@
 ﻿using LivrariaVirtualApp.Domain.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LivrariaVirtualApp.UWP.ViewModels
@@ -40,6 +35,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         }
 
         private string _titleText;
+
         public string TitleText
         {
             get { return _titleText; }
@@ -71,7 +67,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             get { return !Valid; }
         }
 
-        public async 
+        public async
         Task
 LoadAllAsync()
         {

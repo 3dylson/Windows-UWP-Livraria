@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
 
 namespace LivrariaVirtualApp.UWP.Utils
 {
-    class ColorConverter
+    internal class ColorConverter
     {
         public static Brush GetBrushFromCode(string colorCode)
         {
@@ -26,7 +22,6 @@ namespace LivrariaVirtualApp.UWP.Utils
 
         public static Color GetColorFromCode(string colorCode)
         {
-
             colorCode = colorCode.Replace("#", string.Empty);
             byte a = (byte)(Convert.ToUInt32(colorCode.Substring(0, 2), 16));
             a = 255;
@@ -34,7 +29,6 @@ namespace LivrariaVirtualApp.UWP.Utils
             byte g = (byte)(Convert.ToUInt32(colorCode.Substring(4, 2), 16));
             byte b = (byte)(Convert.ToUInt32(colorCode.Substring(6, 2), 16));
             return Color.FromArgb(a, r, g, b);
-
         }
     }
 }

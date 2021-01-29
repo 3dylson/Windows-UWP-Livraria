@@ -1,19 +1,12 @@
 ﻿using LivrariaVirtualApp.UWP.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -27,9 +20,10 @@ namespace LivrariaVirtualApp.UWP.Views.Books
     {
         public BookViewModel BookViewModel { get; set; }
         public CategoryViewModel CategoryViewModel { get; set; }
+
         public BookFormPage()
         {
-            this.InitializeComponent();            
+            this.InitializeComponent();
             CategoryViewModel = new CategoryViewModel();
             BookViewModel = new BookViewModel();
         }
@@ -98,9 +92,9 @@ namespace LivrariaVirtualApp.UWP.Views.Books
             // 'file' is null if user cancels the file picker.
             if (file != null)
             {
-                 //Open a stream for the selected file.
-                 //The 'using' block ensures the stream is disposed
-                 //after the image is loaded.
+                //Open a stream for the selected file.
+                //The 'using' block ensures the stream is disposed
+                //after the image is loaded.
                 using (Stream stream = await file.OpenStreamForReadAsync())
                 {
                     byte[] bytes = new byte[stream.Length];

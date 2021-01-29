@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LivrariaVirtualApp.UWP.ViewModels
 {
@@ -26,7 +22,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         }
 
         /// <summary>
-        /// Initializes a new instance of the OrderSavingException class with 
+        /// Initializes a new instance of the OrderSavingException class with
         /// the specified error message and inner exception.
         /// </summary>
         public OrderSavingException(string message, Exception innerException) : base(message, innerException)
@@ -54,7 +50,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         }
 
         /// <summary>
-        /// Initializes a new instance of the OrderDeletionException class with 
+        /// Initializes a new instance of the OrderDeletionException class with
         /// the specified error message and inner exception.
         /// </summary>
         public OrderDeletionException(string message,

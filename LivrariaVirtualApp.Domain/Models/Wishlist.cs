@@ -25,7 +25,6 @@ namespace LivrariaVirtualApp.Domain.Models
             //Color = colorCode;
         }
 
-
         public override string ToString()
         {
             return Name;

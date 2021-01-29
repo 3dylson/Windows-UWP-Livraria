@@ -1,11 +1,8 @@
 ﻿using Microsoft.Toolkit.Uwp.Helpers;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
@@ -20,8 +17,6 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             //Task.Run(GetBookListAsync);
             MyBackGround = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
         }
-
-        
 
         public ObservableCollection<UserViewModel> Users { get; }
             = new ObservableCollection<UserViewModel>();
@@ -80,7 +75,6 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             MyBackGround = new SolidColorBrush(Color.FromArgb(255, 0, 0, 255));
         }
 
-
         /// <summary>
         /// Gets the complete list of users from the database.
         /// </summary>
@@ -123,7 +117,5 @@ namespace LivrariaVirtualApp.UWP.ViewModels
                 IsLoading = false;
             });
         }
-
-
     }
 }

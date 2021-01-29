@@ -12,10 +12,8 @@
     Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-
-
     <MUXC:NavigationView x:Name="navBar"
-    PaneTitle="{x:Bind UserViewModel.LoggedUser.Name, Mode=OneWay}"               
+    PaneTitle="{x:Bind UserViewModel.LoggedUser.Name, Mode=OneWay}"
     IsSettingsVisible="False"
     IsBackButtonVisible="Visible"
     BackRequested="NavigationView_BackRequested"
@@ -25,30 +23,26 @@
     PaneDisplayMode="Left"
     ExpandedModeThresholdWidth="500"
     SelectionFollowsFocus="Disabled"
-    IsTabStop="False" Height="1000" VerticalAlignment="Bottom" >
-
-
-
+    IsTabStop="False" Height="1000" VerticalAlignment="Bottom">
 
         <MUXC:NavigationView.MenuItems>
-            <MUXC:NavigationViewItem x:Name="displaybooks" Content="Livros" Icon="Library" Tag="displaybooks"/>
-            <MUXC:NavigationViewItem x:Name="displaycategories" Content="Categorias" Icon="Bookmarks" Tag="displaycategories"/>
-            <MUXC:NavigationViewItem Visibility="{x:Bind UserViewModel.IsLogged, Mode=OneWay}" x:Name="cart" Icon="Shop" Content="Carrinho" Tag="cart"/>
-            <MUXC:NavigationViewItem Visibility="{x:Bind UserViewModel.IsLogged, Mode=OneWay}" x:Name="wishlist" Icon="SolidStar" Content="Wishlist" Tag="wishlist"/>            
-            <MUXC:NavigationViewItemSeparator Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}"/>
-            <MUXC:NavigationViewItemHeader Content="Admin actions:" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}"/>
-            <MUXC:NavigationViewItem x:Name="admin" Content="Dashboard" Icon="Admin" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="admin"/>
-            <MUXC:NavigationViewItem x:Name="userlist" Content="User List" Icon="Account" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="userlist"/>
-            <MUXC:NavigationViewItem x:Name="orderlist" Content="Order List" Icon="Calendar" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="orderlist"/>
-            <MUXC:NavigationViewItem x:Name="books" Content="Manage Book" Icon="Manage" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="books"/>
-            <MUXC:NavigationViewItem x:Name="categories" Content="Manage Categorie" Icon="Manage" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="categories"/>
+            <MUXC:NavigationViewItem x:Name="displaybooks" Content="Livros" Icon="Library" Tag="displaybooks" />
+            <MUXC:NavigationViewItem x:Name="displaycategories" Content="Categorias" Icon="Bookmarks" Tag="displaycategories" />
+            <MUXC:NavigationViewItem Visibility="{x:Bind UserViewModel.IsLogged, Mode=OneWay}" x:Name="cart" Icon="Shop" Content="Carrinho" Tag="cart" />
+            <MUXC:NavigationViewItem Visibility="{x:Bind UserViewModel.IsLogged, Mode=OneWay}" x:Name="wishlist" Icon="SolidStar" Content="Wishlist" Tag="wishlist" />
+            <MUXC:NavigationViewItemSeparator Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" />
+            <MUXC:NavigationViewItemHeader Content="Admin actions:" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" />
+            <MUXC:NavigationViewItem x:Name="admin" Content="Dashboard" Icon="Admin" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="admin" />
+            <MUXC:NavigationViewItem x:Name="userlist" Content="User List" Icon="Account" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="userlist" />
+            <MUXC:NavigationViewItem x:Name="orderlist" Content="Order List" Icon="Calendar" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="orderlist" />
+            <MUXC:NavigationViewItem x:Name="books" Content="Manage Book" Icon="Manage" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="books" />
+            <MUXC:NavigationViewItem x:Name="categories" Content="Manage Categorie" Icon="Manage" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}" Tag="categories" />
         </MUXC:NavigationView.MenuItems>
-
 
         <MUXC:NavigationView.PaneFooter>
             <StackPanel>
-                <MUXC:NavigationViewItemSeparator/>
-                <MUXC:NavigationViewItem Content="Login" Icon="Permissions" 
+                <MUXC:NavigationViewItemSeparator />
+                <MUXC:NavigationViewItem Content="Login" Icon="Permissions"
                                         Visibility="{x:Bind UserViewModel.IsNotLogged, Mode=OneWay}"
                                         x:Name="btnLogin"
                                         Tapped="btnLogin_Tapped" />
@@ -56,18 +50,18 @@
                                         Visibility="{x:Bind UserViewModel.IsLogged, Mode=OneWay}"
                                         x:Name="btnLogout"
                                         Tapped="btnLogout_Tapped" />
-                <MUXC:NavigationViewItem Content="Registo" Icon="ContactInfo" 
+                <MUXC:NavigationViewItem Content="Registo" Icon="ContactInfo"
                                         Visibility="{x:Bind UserViewModel.IsNotLogged, Mode=OneWay}"
                                         x:Name="btnRegister"
-                                        Tapped="btnRegister_Tapped"/>
-                <MUXC:NavigationViewItem Icon="Switch" >
-                    <ToggleButton Content="Theme" Style="{StaticResource ToggleButtonRevealStyle}" Click="Button_Click_1"/>
+                                        Tapped="btnRegister_Tapped" />
+                <MUXC:NavigationViewItem Icon="Switch">
+                    <ToggleButton Content="Theme" Style="{StaticResource ToggleButtonRevealStyle}" Click="Button_Click_1" />
                 </MUXC:NavigationViewItem>
             </StackPanel>
         </MUXC:NavigationView.PaneFooter>
         <Grid>
 
-            <Frame x:Name="frame" Margin="10,70,9,0" Navigating="OnNavigatingToPage" >
+            <Frame x:Name="frame" Margin="10,70,9,0" Navigating="OnNavigatingToPage">
                 <Frame.ContentTransitions>
                     <TransitionCollection>
                         <NavigationThemeTransition>
@@ -81,11 +75,7 @@
 
             <StackPanel  Background="AntiqueWhite" Height="59" VerticalAlignment="Top" Canvas.ZIndex="1" Grid.ColumnSpan="2">
                 <Image Source="Assets/logoliv.png" Width="215" Height="60" Canvas.ZIndex="2" HorizontalAlignment="Left" Margin="100,0,0,0" />
-                
             </StackPanel>
-
         </Grid>
     </MUXC:NavigationView>
-
-
 </Page>

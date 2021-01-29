@@ -48,13 +48,13 @@
 
                 <views1:OrderListPage Margin="12"
                                         Width="400"
-                                        Height="250"                                        
+                                        Height="250"
                                         Tag="Books" />
 
                 <views2:DisplayCategoriesPage Margin="12"
                                       Width="400"
                                       Height="250"
-                                      
+
                                       Tag="Categories" />
             </GridView>
         </Grid>

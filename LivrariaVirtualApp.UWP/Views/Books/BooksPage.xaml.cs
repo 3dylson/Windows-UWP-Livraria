@@ -18,10 +18,7 @@ namespace LivrariaVirtualApp.UWP.Views.Books
         {
             InitializeComponent();
             BookViewModel = new BookViewModel();
-            
         }
-
-        
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -35,7 +32,6 @@ namespace LivrariaVirtualApp.UWP.Views.Books
 
         private void ContentGridView_ItemClick(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void Buy_Click(object sender, RoutedEventArgs e)
@@ -50,14 +46,12 @@ namespace LivrariaVirtualApp.UWP.Views.Books
         {
             if (sender is Controls.CollapsibleSearchBox searchBox)
             {
-                
                 searchBox.AutoSuggestBox.PlaceholderText = "Search books...";
-                
             }
         }
 
         /// <summary>
-        /// Workaround to support earlier versions of Windows. 
+        /// Workaround to support earlier versions of Windows.
         /// </summary>
         private void CommandBar_Loaded(object sender, RoutedEventArgs e)
         {

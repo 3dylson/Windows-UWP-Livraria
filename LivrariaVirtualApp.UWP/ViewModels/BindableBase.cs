@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 /// <summary>
 /// Esta classe não tem que ser usada. Mas é uma boa prática de generalização de funcionalidades.
@@ -18,7 +14,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
     /// </summary>
     public abstract class BindableBase : INotifyPropertyChanged
     {
-        /// <summary> 
+        /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;

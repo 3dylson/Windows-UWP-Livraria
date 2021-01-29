@@ -6,7 +6,6 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using static LivrariaVirtualApp.Domain.Models.Order;
 
@@ -42,12 +41,12 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             new OrderViewModel(await GetOrder(orderId));
 
         /// <summary>
-        /// Gets the underlying Order object. 
+        /// Gets the underlying Order object.
         /// </summary>
         public Order Model { get; }
 
         /// <summary>
-        /// Loads the customer with the specified ID. 
+        /// Loads the customer with the specified ID.
         /// </summary>
         private async void LoadUser(int userId)
         {
@@ -70,16 +69,14 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         public bool CanRefresh => Model != null && !IsModified && IsExistingOrder;
 
         /// <summary>
-        /// Gets a value that specifies whether the user can revert changes. 
+        /// Gets a value that specifies whether the user can revert changes.
         /// </summary>
         public bool CanRevert => Model != null && IsModified && IsExistingOrder;
 
-        
-
-        bool _IsModified = false;
+        private bool _IsModified = false;
 
         /// <summary>
-        /// Gets or sets a value that indicates whether the underlying model has been modified. 
+        /// Gets or sets a value that indicates whether the underlying model has been modified.
         /// </summary>
         public bool IsModified
         {
@@ -88,7 +85,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             {
                 if (value != _IsModified)
                 {
-                    // Only record changes after the order has loaded. 
+                    // Only record changes after the order has loaded.
                     if (IsLoaded)
                     {
                         _IsModified = value;
@@ -119,7 +116,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         public bool IsNewOrder => Model.Id == 0;
 
         /// <summary>
-        /// Gets or sets the invoice number for this order. 
+        /// Gets or sets the invoice number for this order.
         /// </summary>
         public int Id
         {
@@ -142,8 +139,8 @@ namespace LivrariaVirtualApp.UWP.ViewModels
 
         /// <summary>
         /// Gets or sets the customer for this order. This value is null
-        /// unless you manually retrieve the customer (using CustomerId) and 
-        /// set it. 
+        /// unless you manually retrieve the customer (using CustomerId) and
+        /// set it.
         /// </summary>
         public User User
         {
@@ -172,7 +169,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         private ObservableCollection<Cart> _carts;
 
         /// <summary>
-        /// Gets the line items in this invoice. 
+        /// Gets the line items in this invoice.
         /// </summary>
         public ObservableCollection<Cart> Carts
         {
@@ -198,7 +195,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         }
 
         /// <summary>
-        /// Notifies anyone listening to this object that a line item changed. 
+        /// Notifies anyone listening to this object that a line item changed.
         /// </summary>
         private void Carts_Changed(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -207,7 +204,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
                 Model.Cart = Carts.ToList();
             }
 
-            OnPropertyChanged(nameof(Carts));            
+            OnPropertyChanged(nameof(Carts));
             OnPropertyChanged(nameof(Total));
             IsModified = true;
         }
@@ -260,7 +257,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         public string NewCartBookListPriceFormatted => (NewCart?.Book?.Price ?? 0).ToString("c");
 
         /// <summary>
-        /// Gets or sets the date this order was placed. 
+        /// Gets or sets the date this order was placed.
         /// </summary>
         public DateTime Date_created
         {
@@ -276,17 +273,14 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             }
         }
 
-                
-
-        
         /// <summary>
-        /// Gets the total. This value is calculated automatically. 
+        /// Gets the total. This value is calculated automatically.
         /// </summary>
         public decimal Total => Model.Total;
 
         /// <summary>
         /// Gets or sets the shipping address, which may be different
-        /// from the customer's primary address. 
+        /// from the customer's primary address.
         /// </summary>
         public string Shipping_address
         {
@@ -302,11 +296,8 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             }
         }
 
-
-
-
         /// <summary>
-        /// Gets the set of order status values so we can populate the order status combo box. 
+        /// Gets the set of order status values so we can populate the order status combo box.
         /// </summary>
         public List<string> OrderStatusValues => Enum.GetNames(typeof(OrderStatus)).ToList();
 
@@ -327,14 +318,14 @@ namespace LivrariaVirtualApp.UWP.ViewModels
                 if (Model.Status != value)
                 {
                     Model.Status = value;
-                    OnPropertyChanged();                   
+                    OnPropertyChanged();
                     IsModified = true;
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the name of the order's customer. 
+        /// Gets or sets the name of the order's customer.
         /// </summary>
         public string UserOrdering
         {
@@ -350,7 +341,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         }
 
         /// <summary>
-        /// Saves the current order to the database. 
+        /// Saves the current order to the database.
         /// </summary>
         public async Task SaveOrderAsync()
         {
@@ -378,12 +369,12 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         }
 
         /// <summary>
-        /// Stores the product suggestions. 
+        /// Stores the product suggestions.
         /// </summary>
         public ObservableCollection<Book> ProductSuggestions { get; } = new ObservableCollection<Book>();
 
         /// <summary>
-        /// Queries the database and updates the list of new product suggestions. 
+        /// Queries the database and updates the list of new product suggestions.
         /// </summary>
         public async void UpdateProductSuggestions(string queryText)
         {

@@ -2,19 +2,10 @@
 using LivrariaVirtualApp.UWP.ViewModels;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Email;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
@@ -28,7 +19,7 @@ namespace LivrariaVirtualApp.UWP.Views.Orders
     public sealed partial class OrderListPage : Page
     {
         /// <summary>
-        /// We use this object to bind the UI to our data. 
+        /// We use this object to bind the UI to our data.
         /// </summary>
         public OrderListPageViewModel ViewModel { get; } = new OrderListPageViewModel();
 
@@ -41,7 +32,7 @@ namespace LivrariaVirtualApp.UWP.Views.Orders
         }
 
         /// <summary>
-        /// Retrieve the list of orders when the user navigates to the page. 
+        /// Retrieve the list of orders when the user navigates to the page.
         /// </summary>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -52,7 +43,7 @@ namespace LivrariaVirtualApp.UWP.Views.Orders
         }
 
         /// <summary>
-        /// Opens the order in the order details page for editing. 
+        /// Opens the order in the order details page for editing.
         /// </summary>
         private void EditButton_Click(object sender, RoutedEventArgs e) =>
             Frame.Navigate(typeof(OrderDetailPage), ViewModel.SelectedOrder.Id);
@@ -81,7 +72,7 @@ namespace LivrariaVirtualApp.UWP.Views.Orders
         }
 
         /// <summary>
-        /// Workaround to support earlier versions of Windows. 
+        /// Workaround to support earlier versions of Windows.
         /// </summary>
         private void CommandBar_Loaded(object sender, RoutedEventArgs e)
         {
@@ -111,11 +102,10 @@ namespace LivrariaVirtualApp.UWP.Views.Orders
         }
 
         /// <summary>
-        /// Creates an email about the currently selected invoice. 
+        /// Creates an email about the currently selected invoice.
         /// </summary>
         private async void EmailButton_Click(object sender, RoutedEventArgs e)
         {
-
             var emailMessage = new EmailMessage
             {
                 Body = $"Dear {ViewModel.SelectedOrder.UserOrdering},",
@@ -130,7 +120,6 @@ namespace LivrariaVirtualApp.UWP.Views.Orders
                 emailMessage.To.Add(emailRecipient);
             }
             await EmailManager.ShowComposeNewEmailAsync(emailMessage);
-
         }
 
         /// <summary>
@@ -141,13 +130,13 @@ namespace LivrariaVirtualApp.UWP.Views.Orders
                 ViewModel.QueryOrders(args.QueryText);
 
         /// <summary>
-        /// Updates the suggestions for the AutoSuggestBox as the user types. 
+        /// Updates the suggestions for the AutoSuggestBox as the user types.
         /// </summary>
         private void OrderSearch_TextChanged(AutoSuggestBox sender,
             AutoSuggestBoxTextChangedEventArgs args)
         {
-            // We only want to get results when it was a user typing, 
-            // otherwise we assume the value got filled in by TextMemberPath 
+            // We only want to get results when it was a user typing,
+            // otherwise we assume the value got filled in by TextMemberPath
             // or the handler for SuggestionChosen
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
@@ -157,7 +146,7 @@ namespace LivrariaVirtualApp.UWP.Views.Orders
 
         /// <summary>
         /// Navigates to the order detail page when the user
-        /// double-clicks an order. 
+        /// double-clicks an order.
         /// </summary>
         private void DataGrid_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e) =>
             Frame.Navigate(typeof(OrderDetailPage), ViewModel.SelectedOrder.Id);
@@ -172,7 +161,7 @@ namespace LivrariaVirtualApp.UWP.Views.Orders
         }
 
         /// <summary>
-        /// Selects the tapped order. 
+        /// Selects the tapped order.
         /// </summary>
         private void DataGrid_RightTapped(object sender, RightTappedRoutedEventArgs e) =>
             ViewModel.SelectedOrder = (e.OriginalSource as FrameworkElement).DataContext as Order;

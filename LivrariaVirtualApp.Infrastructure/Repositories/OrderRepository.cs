@@ -1,7 +1,6 @@
 ﻿using LivrariaVirtualApp.Domain.Models;
 using LivrariaVirtualApp.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -55,7 +54,7 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
                 .Where(order => parameters
                     .Any(parameter =>
                         order.Shipping_address.StartsWith(parameter) ||
-                        order.User.Name.StartsWith(parameter) ||                        
+                        order.User.Name.StartsWith(parameter) ||
                         order.Id.ToString().StartsWith(parameter)))
                 .OrderByDescending(order => parameters
                     .Count(parameter =>

@@ -1,21 +1,12 @@
 ﻿using LivrariaVirtualApp.Domain.Models;
 using LivrariaVirtualApp.UWP.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Email;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -33,7 +24,7 @@ namespace LivrariaVirtualApp.UWP.Views.Orders
         public OrderDetailPage() => InitializeComponent();
 
         /// <summary>
-        /// Stores the view model. 
+        /// Stores the view model.
         /// </summary>
         private OrderViewModel _viewModel;
 
@@ -99,8 +90,10 @@ namespace LivrariaVirtualApp.UWP.Views.Orders
                     case SaveChangesDialogResult.Save:
                         await ViewModel.SaveOrderAsync();
                         break;
+
                     case SaveChangesDialogResult.DontSave:
                         break;
+
                     case SaveChangesDialogResult.Cancel:
                         if (e.NavigationMode == NavigationMode.Back)
                         {
@@ -112,7 +105,7 @@ namespace LivrariaVirtualApp.UWP.Views.Orders
                         }
                         e.Cancel = true;
 
-                        // This flag gets cleared on navigation, so restore it. 
+                        // This flag gets cleared on navigation, so restore it.
                         ViewModel.IsModified = true;
                         break;
                 }
@@ -183,9 +176,11 @@ namespace LivrariaVirtualApp.UWP.Views.Orders
                     await ViewModel.SaveOrderAsync();
                     ViewModel = await OrderViewModel.CreateFromid(ViewModel.Id);
                     break;
+
                 case SaveChangesDialogResult.DontSave:
                     ViewModel = await OrderViewModel.CreateFromid(ViewModel.Id);
                     break;
+
                 case SaveChangesDialogResult.Cancel:
                     break;
             }
@@ -267,21 +262,20 @@ namespace LivrariaVirtualApp.UWP.Views.Orders
         /// <summary>
         /// Removes a line item from the order.
         /// </summary>
-               
+
         private void RemoveProduct_Click(object sender, RoutedEventArgs e)
         {
             //private void RemoveProduct_Click(object sender, RoutedEventArgs e) =>
             //    ViewModel.Carts.Remove((sender as FrameworkElement).DataContext as Cart);
-
         }
 
         /// <summary>
-        /// Fired when a property value changes. 
+        /// Fired when a property value changes.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Notifies listeners that a property value changed. 
+        /// Notifies listeners that a property value changed.
         /// </summary>
         private void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

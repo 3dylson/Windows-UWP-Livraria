@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LivrariaVirtualApp.UWP.ViewModels
@@ -21,7 +20,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         public OrderListPageViewModel() => IsLoading = false;
 
         /// <summary>
-        /// Gets the unfiltered collection of all orders. 
+        /// Gets the unfiltered collection of all orders.
         /// </summary>
         private List<Order> MasterOrdersList { get; } = new List<Order>();
 

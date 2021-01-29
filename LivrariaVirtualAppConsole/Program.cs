@@ -47,7 +47,6 @@ namespace LivrariaVirtualAppConsole
             bk.Image = null;
             bk.Category_id = 1;
             await UOW.BookRepository.CreateAsync(bk);
-
         }
     }
 }

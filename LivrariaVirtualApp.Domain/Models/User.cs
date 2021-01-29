@@ -53,7 +53,6 @@ namespace LivrariaVirtualApp.Domain.Models
             Id = user_id;
         }
 
-
         public Wishlist AddBook(Book book)
         {
             var existingBook = Wishlists
@@ -64,9 +63,8 @@ namespace LivrariaVirtualApp.Domain.Models
                 existingBook = new Wishlist(Name, book.Id);
                 Wishlists.Add(existingBook);
             }
-               return existingBook;
+            return existingBook;
         }
-
 
         /// <summary>
         /// Returns the User's infos.

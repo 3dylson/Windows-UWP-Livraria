@@ -32,7 +32,7 @@ namespace LivrariaVirtualApp.Domain.Models
             //this.Parental_guide = pg;
             //this.Language = language;
             //this.Price = price;
-            
+
             //this.Publisher = publisher;
             //this.Pages = pages;
             //this.Overview = overview;

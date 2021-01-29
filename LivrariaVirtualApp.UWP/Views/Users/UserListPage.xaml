@@ -1,16 +1,15 @@
 ﻿<Page
     x:Class="LivrariaVirtualApp.UWP.Views.Users.UserListPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:LivrariaVirtualApp.UWP.Views.Users"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    xmlns:vm="using:LivrariaVirtualApp.UWP.ViewModels"
-    xmlns:stateTriggers="using:LivrariaVirtualApp.UWP.StateTriggers"
-    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:c="using:LivrariaVirtualApp.UWP.Controls"
+    xmlns:stateTriggers="using:LivrariaVirtualApp.UWP.StateTriggers"
+    xmlns:vm="using:LivrariaVirtualApp.UWP.ViewModels"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:MUXC="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
     NavigationCacheMode="Required">
 
     <Page.Resources>
@@ -94,22 +93,22 @@
                     SelectedItem="{x:Bind ViewModel.SelectedUser, Mode=TwoWay}"
                     KeyDown="DataGrid_KeyDown"
                     RightTapped="DataGrid_RightTapped"
-                    ContextFlyout="{StaticResource DataGridContextMenu}" >
+                    ContextFlyout="{StaticResource DataGridContextMenu}">
                     <toolkit:DataGrid.Columns>
                         <toolkit:DataGridTextColumn
                             Header="Name"
-                            Tag="Name"                            
-                            Binding="{Binding Name}"/>
+                            Tag="Name"
+                            Binding="{Binding Name}" />
                         <toolkit:DataGridTextColumn
                             Header="Email"
                             Tag="Email"
-                            Binding="{Binding Email}"/>
+                            Binding="{Binding Email}" />
                         <toolkit:DataGridTextColumn
                             Header="Phone"
-                            Binding="{Binding Phone}"/>
+                            Binding="{Binding Phone}" />
                         <toolkit:DataGridTextColumn
-                            Header="Address"                                                       
-                            Binding="{Binding Address}"/>
+                            Header="Address"
+                            Binding="{Binding Address}" />
                     </toolkit:DataGrid.Columns>
                 </toolkit:DataGrid>
                 <MUXC:ProgressBar
