@@ -144,6 +144,7 @@
     <Compile Include="ViewModels\OrderListPageViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\WishlistViewModel.cs" />
     <Compile Include="Views\Books\BookFormPage.xaml.cs">
       <DependentUpon>BookFormPage.xaml</DependentUpon>
     </Compile>
