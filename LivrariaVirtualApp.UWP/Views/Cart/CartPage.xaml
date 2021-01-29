@@ -9,16 +9,15 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Carrinho" Style="{StaticResource HeaderTextBlockStyle}"/>
-              
+                <TextBlock Text="Carrinho" Style="{StaticResource HeaderTextBlockStyle}" />
             </Grid>
 
             <ListView Grid.Row="1" ItemsSource="{x:Bind CartViewModel.Books}">
@@ -32,21 +31,21 @@
                     <DataTemplate x:DataType="models:Cart">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Margin="10" x:Name="thumb" Source="{x:Bind Book.Image, 
-                            Converter={StaticResource bytesToImageConverter}}"/>
+                            <Image Grid.Column="0" Margin="10" x:Name="thumb" Source="{x:Bind Book.Image,
+                            Converter={StaticResource bytesToImageConverter}}" />
                             <StackPanel Grid.Column="1">
-                                <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="{x:Bind Book.Name}"/>
-                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" 
-                                       Text="{x:Bind Quantity}"/>
+                                <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="{x:Bind Book.Name}" />
+                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}"
+                                       Text="{x:Bind Quantity}" />
                             </StackPanel>
                             <Button Grid.Column="2" Click="Button_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <SymbolIcon Symbol="Delete"/>
-                                    <TextBlock Text="Delete"/>
+                                    <SymbolIcon Symbol="Delete" />
+                                    <TextBlock Text="Delete" />
                                 </StackPanel>
                             </Button>
                         </Grid>
@@ -54,5 +53,4 @@
                 </ListView.ItemTemplate>
             </ListView>
      </Grid>
-
 </Page>

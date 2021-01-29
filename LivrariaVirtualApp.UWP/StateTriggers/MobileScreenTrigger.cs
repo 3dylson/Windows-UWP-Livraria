@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.System.Profile;
+﻿using Windows.System.Profile;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 
@@ -20,7 +15,6 @@ namespace LivrariaVirtualApp.UWP.StateTriggers
     public class MobileScreenTrigger : StateTriggerBase
     {
         private UserInteractionMode _interactionMode;
-
 
         public MobileScreenTrigger()
         {

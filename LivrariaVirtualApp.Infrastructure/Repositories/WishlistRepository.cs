@@ -14,6 +14,12 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         {
         }
 
+        public Task<List<Wishlist>> FindAllByUserIdAsync(int userId)
+        {
+            return _dbContext.Wishlists
+                  .Where(e => e.User_id == userId).ToListAsync();
+        }
+
         public Task<List<Wishlist>> FindAllByNameStartWithAsync(string name_wishlist)
         {
             return _dbContext.Wishlists.Where(c => c.Name.StartsWith(name_wishlist))
@@ -38,6 +44,16 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
         }
 
         public override Task<IEnumerable<Wishlist>> GetAsync(string search)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<Wishlist> GetAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<IEnumerable<Wishlist>> GetAsync()
         {
             throw new NotImplementedException();
         }

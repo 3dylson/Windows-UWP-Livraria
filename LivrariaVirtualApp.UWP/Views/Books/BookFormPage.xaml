@@ -12,17 +12,17 @@
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Adicionar/editar Livro" Style="{StaticResource HeaderTextBlockStyle}"/>
-                <CommandBar Grid.Column="1"  VerticalAlignment="Center"                         
-                        x:Name="mainCommandBar" Background="Transparent"      
+                <TextBlock Text="Adicionar/editar Livro" Style="{StaticResource HeaderTextBlockStyle}" />
+                <CommandBar Grid.Column="1"  VerticalAlignment="Center"
+                        x:Name="mainCommandBar" Background="Transparent"
                         OverflowButtonVisibility="Collapsed"
                         DefaultLabelPosition="Right">
 
@@ -36,7 +36,7 @@
                         <FlyoutBase.AttachedFlyout>
                             <Flyout>
                                 <Border Background="#dc3545" Padding="10">
-                                    <TextBlock Text="Livro já existe." Foreground="White"/>
+                                    <TextBlock Text="Livro já existe." Foreground="White" />
                                 </Border>
                             </Flyout>
                         </FlyoutBase.AttachedFlyout>
@@ -47,9 +47,7 @@
                     Icon="Cancel"
                     Label="Cancelar"
                     ToolTipService.ToolTip="Cancelar" />
-
                 </CommandBar>
-
             </Grid>
             <ScrollViewer Grid.Row="1">
                 <StackPanel>
@@ -58,49 +56,47 @@
                     DO NOT use both -->
                     <!--<ComboBox x:Name="categories" Header="Categegory" ItemsSource="{x:Bind CategoryViewModel.Categories}"
                           SelectedValue="{x:Bind ProductViewModel.CategoryName, Mode=TwoWay}"
-                          SelectedValuePath="Name"/>-->
+                          SelectedValuePath="Name" />-->
                     <AutoSuggestBox x:Name="AutoSuggestBox"
                     Header="Category" QueryIcon="Find" DisplayMemberPath="Name"
                     Text="{x:Bind BookViewModel.CategoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     TextChanged="AutoSuggestBox_TextChanged"
                     QuerySubmitted="AutoSuggestBox_QuerySubmitted"
-                    SuggestionChosen="AutoSuggestBox_SuggestionChosen"/>
-                    <TextBox Header="Nome" x:Name="name" 
+                    SuggestionChosen="AutoSuggestBox_SuggestionChosen" />
+                    <TextBox Header="Nome" x:Name="name"
                     Text="{x:Bind BookViewModel.BookName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox Header="ISBN" x:Name="isbn" 
+                    <TextBox Header="ISBN" x:Name="isbn"
                     Text="{x:Bind BookViewModel.BookISBN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox Header="Parental guide" x:Name="pg" 
+                    <TextBox Header="Parental guide" x:Name="pg"
                     Text="{x:Bind BookViewModel.BookParental_guide, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox Header="Language" x:Name="language" 
+                    <TextBox Header="Language" x:Name="language"
                     Text="{x:Bind BookViewModel.BookLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox Header="Price" x:Name="price" 
+                    <TextBox Header="Price" x:Name="price"
                     Text="{x:Bind BookViewModel.BookPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <!--<DatePicker Header="Realease date" x:Name="realease_date" 
+                    <!--<DatePicker Header="Realease date" x:Name="realease_date"
                     SelectedDate="{x:Bind BookViewModel.BookRealease_date, Converter={StaticResource DateTimeOffsetConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
 
-                    <TextBox Header="Publisher" x:Name="publisher" 
+                    <TextBox Header="Publisher" x:Name="publisher"
                     Text="{x:Bind BookViewModel.BookPublisher, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox Header="Pages" x:Name="pages" 
+                    <TextBox Header="Pages" x:Name="pages"
                     Text="{x:Bind BookViewModel.BookPages, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                    <TextBox Header="Overview" x:Name="overview" 
-                    Text="{x:Bind BookViewModel.BookOverview, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />                   
-                       
-                    <Button x:Name="btnThumb"  Margin="0,10" Content="Escolher Imagem..." Tapped="btnThumb_Tapped"/>
+                    <TextBox Header="Overview" x:Name="overview"
+                    Text="{x:Bind BookViewModel.BookOverview, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <Button x:Name="btnThumb"  Margin="0,10" Content="Escolher Imagem..." Tapped="btnThumb_Tapped" />
                     <Border Background="Red" BorderBrush="Black" BorderThickness="2" Margin="5"
                     Visibility="{x:Bind BookViewModel.Invalid, Mode=OneWay}">
-                        <TextBlock Text="Livro inválido"/>
+                        <TextBlock Text="Livro inválido" />
                     </Border>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-
-
     </Grid>
 </Page>

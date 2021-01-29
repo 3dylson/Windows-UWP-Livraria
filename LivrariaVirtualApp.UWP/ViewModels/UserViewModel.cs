@@ -1,19 +1,14 @@
 ﻿using LivrariaVirtualApp.Domain.Models;
 using Microsoft.Toolkit.Uwp.Helpers;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LivrariaVirtualApp.UWP.ViewModels
 {
-   public class UserViewModel : BindableBase, IEditableObject
+    public class UserViewModel : BindableBase, IEditableObject
     {
-
         public UserViewModel(User user = null) => User = user ?? new User();
 
         private User _user;
@@ -94,7 +89,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets a value that indicates whether the underlying model has been modified. 
+        /// Gets or sets a value that indicates whether the underlying model has been modified.
         /// </summary>
         /// <remarks>
         /// Used when sync'ing with the server to reduce load and only upload the models that have changed.
@@ -120,7 +115,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         private bool _isLoading;
 
         /// <summary>
-        /// Gets or sets a value that indicates whether to show a progress bar. 
+        /// Gets or sets a value that indicates whether to show a progress bar.
         /// </summary>
         public bool IsLoading
         {
@@ -163,7 +158,6 @@ namespace LivrariaVirtualApp.UWP.ViewModels
                 OnPropertyChanged(nameof(IsLogged));
                 OnPropertyChanged(nameof(IsNotLogged));
                 OnPropertyChanged(nameof(IsAdmin));
-   
             }
         }
 
@@ -178,7 +172,6 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         }
 
         public bool IsAdmin => LoggedUser != null && LoggedUser.Admin == 1;
-
 
         /// <summary>
         /// Saves user data that has been edited.
@@ -276,6 +269,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         {
             throw new NotImplementedException(); //Not used
         }
+
         /// <summary>
         /// Called when a bound DataGrid control cancels the edits that have been made to a customer.
         /// </summary>
@@ -285,7 +279,6 @@ namespace LivrariaVirtualApp.UWP.ViewModels
         /// Called when a bound DataGrid control commits the edits that have been made to a customer.
         /// </summary>
         public async void EndEdit() => await SaveAsync();
-
 
         internal async Task<bool> DoLoginAsync()
         {
@@ -303,7 +296,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
 
         internal async Task<bool> RegisterAsync()
         {
-            bool err = true;    
+            bool err = true;
 
             var user = await App.UnitOfWork.UserRepository.FindByEmail(User.Email);
             if (user == null)
@@ -318,8 +311,6 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             return !ShowError;
         }
 
-        
-
         private bool _showError;
 
         public bool ShowError
@@ -331,6 +322,5 @@ namespace LivrariaVirtualApp.UWP.ViewModels
                 OnPropertyChanged();
             }
         }
-
     }
 }

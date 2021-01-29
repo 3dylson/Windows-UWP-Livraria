@@ -3,7 +3,7 @@ using System;
 
 namespace LivrariaVirtualApp.Infrastructure.Migrations
 {
-    public partial class UpdatedMigration : Migration
+    public partial class LastMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,9 +50,9 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                     Language = table.Column<string>(maxLength: 45, nullable: false),
                     Price = table.Column<decimal>(nullable: false),
                     Publisher = table.Column<string>(maxLength: 100, nullable: false),
-                    Pages = table.Column<string>(maxLength: 20, nullable: false),
+                    Pages = table.Column<string>(maxLength: 20, nullable: true),
                     Overview = table.Column<string>(maxLength: 256, nullable: false),
-                    Image = table.Column<byte[]>(nullable: false),
+                    Image = table.Column<byte[]>(nullable: true),
                     Category_id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -97,6 +97,7 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 45, nullable: false),
+                    Color = table.Column<string>(nullable: true),
                     User_id = table.Column<int>(nullable: false),
                     BookId = table.Column<int>(nullable: false)
                 },
@@ -123,29 +124,41 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                 {
                     BookId = table.Column<int>(nullable: false),
                     OrderId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
                     Quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Carts", x => new { x.BookId, x.OrderId });
+                    table.PrimaryKey("PK_Carts", x => new { x.BookId, x.OrderId, x.UserId });
                     table.ForeignKey(
                         name: "FK_Carts_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Carts_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Carts_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Address", "Admin", "Email", "Name", "Password", "Phone" },
                 values: new object[] { 1, null, 1, "admin@admin.com", "admin", "D033E22AE348AEB5660FC2140AEC35850C4DA997", null });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Address", "Email", "Name", "Password", "Phone" },
+                values: new object[] { 2, null, "test@test.com", "test", "A94A8FE5CCB19BA61C4C0873D391E987982FBBD3", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_Category_id",
@@ -162,6 +175,11 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                 name: "IX_Carts_OrderId",
                 table: "Carts",
                 column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Carts_UserId",
+                table: "Carts",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_Name",

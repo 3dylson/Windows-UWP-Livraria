@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Microsoft.Graphics.Canvas.Effects;
+using System;
 using System.Numerics;
-
+using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Hosting;
-using Windows.UI.Composition;
-using Microsoft.Graphics.Canvas.Effects;
 
 namespace LivrariaVirtualApp.UWP.Animations
 {
@@ -40,6 +39,7 @@ namespace LivrariaVirtualApp.UWP.Animations
             var brush = CreateBlurEffectBrush(amount);
             element.SetBrush(brush);
         }
+
         static public void Blur(this UIElement element, double milliseconds, double start, double end, CompositionEasingFunction easingFunction = null)
         {
             var brush = CreateBlurEffectBrush();
@@ -69,6 +69,7 @@ namespace LivrariaVirtualApp.UWP.Animations
         {
             return CreateSpriteVisual(ElementCompositionPreview.GetElementVisual(element));
         }
+
         static public SpriteVisual CreateSpriteVisual(Visual elementVisual)
         {
             var compositor = elementVisual.Compositor;

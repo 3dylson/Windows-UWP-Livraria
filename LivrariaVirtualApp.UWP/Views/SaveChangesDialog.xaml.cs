@@ -1,25 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace LivrariaVirtualApp.UWP.Views
 {
     /// <summary>
-    /// Creates a dialog that gives the users a chance to save changes, discard them, 
-    /// or cancel the operation that trigggered the event. 
+    /// Creates a dialog that gives the users a chance to save changes, discard them,
+    /// or cancel the operation that trigggered the event.
     /// </summary>
     public sealed partial class SaveChangesDialog : ContentDialog
     {
@@ -29,7 +17,7 @@ namespace LivrariaVirtualApp.UWP.Views
         }
 
         /// <summary>
-        /// Gets or sets the user's choice. 
+        /// Gets or sets the user's choice.
         /// </summary>
         public SaveChangesDialogResult Result { get; set; } = SaveChangesDialogResult.Cancel;
 
@@ -40,7 +28,7 @@ namespace LivrariaVirtualApp.UWP.Views
             "Would you like to save your changes?";
 
         /// <summary>
-        /// Fired when the user chooses to save. 
+        /// Fired when the user chooses to save.
         /// </summary>
         private void yesButton_Click(object sender, RoutedEventArgs e)
         {
@@ -68,7 +56,7 @@ namespace LivrariaVirtualApp.UWP.Views
     }
 
     /// <summary>
-    /// Defines the choices available to the user. 
+    /// Defines the choices available to the user.
     /// </summary>
     public enum SaveChangesDialogResult
     {
@@ -77,4 +65,3 @@ namespace LivrariaVirtualApp.UWP.Views
         Cancel
     }
 }
-

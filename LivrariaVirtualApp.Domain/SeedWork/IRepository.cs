@@ -25,6 +25,10 @@ namespace LivrariaVirtualApp.Domain.SeedWork
 
         Task<List<T>> FindAllAsync();
 
+        Task<T> GetAsync(int id);
+
+        Task<IEnumerable<T>> GetAsync();
+
         /// <summary>
         /// Returns all "T" with a data field matching the start of the given string.
         /// </summary>

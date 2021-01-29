@@ -5,6 +5,7 @@ namespace LivrariaVirtualApp.Domain.Models
     public class Wishlist : Entity
     {
         public string Name { get; set; }
+        public string Color { get; set; }
 
         public int User_id { get; set; }
 
@@ -17,12 +18,12 @@ namespace LivrariaVirtualApp.Domain.Models
         {
         }
 
-        public Wishlist(string name_wishlist, int wishlist_id)
+        public Wishlist(string name_wishlist, int wishlist_id) /*string colorCode*/
         {
             Name = name_wishlist;
             Id = wishlist_id;
+            //Color = colorCode;
         }
-
 
         public override string ToString()
         {

@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:LivrariaVirtualApp.UWP.Views.Users"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:controls1="using:LivrariaVirtualApp.UWP.local_Controls"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:controls1="using:LivrariaVirtualApp.UWP.local_Controls" xmlns:views1="using:LivrariaVirtualApp.UWP.Views.Orders" xmlns:views2="using:LivrariaVirtualApp.UWP.Views.Categories"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -31,13 +31,13 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="1" Margin="12,0" Text="Dashboard" FontSize="22" Foreground="Gray" />
+            <TextBlock Grid.Row="1" Margin="12,0" Text="Dashboard Admin" FontSize="22" Foreground="Gray" />
 
             <GridView Grid.Row="2"
                       Margin="6"
                       ItemContainerStyle="{StaticResource GridItemStyle}"
                       SelectionMode="None"
-                      IsItemClickEnabled="True">
+                      IsItemClickEnabled="False">
                 <!--ItemClick="OnItemClick"-->
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -46,17 +46,16 @@
                 </GridView.ItemsPanel>
                 <views:UserListPage  Margin="12" Width="600" Height="250"  Tag="Users" />
 
-                <!--<views:BooksPane Margin="12"
+                <views1:OrderListPage Margin="12"
                                         Width="400"
                                         Height="250"
-                                        ItemsSource="{x:Bind ViewModel.Books, Mode=OneWay}"
                                         Tag="Books" />
 
-                <views:OrdersPane Margin="12"
+                <views2:DisplayCategoriesPage Margin="12"
                                       Width="400"
                                       Height="250"
-                                      ItemsSource="{x:Bind ViewModel.Orders, Mode=OneWay}"
-                                      Tag="Orders" />-->
+
+                                      Tag="Categories" />
             </GridView>
         </Grid>
     </Grid>

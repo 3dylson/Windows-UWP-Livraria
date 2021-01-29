@@ -92,12 +92,12 @@ namespace LivrariaVirtualApp.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<User>> GetAsync()
+        public override async Task<IEnumerable<User>> GetAsync()
         {
             return await _dbContext.Users.AsNoTracking().ToListAsync();
         }
 
-        public async Task<User> GetAsync(int admin)
+        public override async Task<User> GetAsync(int admin)
         {
             return await _dbContext.Users
                 .AsNoTracking()

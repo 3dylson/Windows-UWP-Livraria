@@ -1,26 +1,27 @@
 ﻿<Page
     x:Class="LivrariaVirtualApp.UWP.Views.Users.UserListPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:LivrariaVirtualApp.UWP.Views.Users"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    xmlns:vm="using:LivrariaVirtualApp.UWP.ViewModels"
-    xmlns:stateTriggers="using:LivrariaVirtualApp.UWP.StateTriggers"
-    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:c="using:LivrariaVirtualApp.UWP.Controls"
+    xmlns:stateTriggers="using:LivrariaVirtualApp.UWP.StateTriggers"
+    xmlns:vm="using:LivrariaVirtualApp.UWP.ViewModels"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:MUXC="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
     NavigationCacheMode="Required">
 
     <Page.Resources>
         <MenuFlyout x:Key="DataGridContextMenu">
             <MenuFlyoutItem
                 Click="ViewDetails_Click"
+                Style="{StaticResource MenuFlyoutItemRevealStyle}"
                 Tag="&#xE1A5;"
                 Text="View details" />
             <MenuFlyoutItem
                 Click="AddOrder_Click"
+                Style="{StaticResource MenuFlyoutItemRevealStyle}"
                 Tag="&#xE14D;"
                 Text="Add order" />
         </MenuFlyout>
@@ -33,6 +34,7 @@
 
             <TextBlock
                 x:Name="PageTitle"
+                Style="{StaticResource TitleTextBlockStyle}"
                 Text="Customers" />
 
             <CommandBar IsOpen="False"
@@ -91,7 +93,7 @@
                     SelectedItem="{x:Bind ViewModel.SelectedUser, Mode=TwoWay}"
                     KeyDown="DataGrid_KeyDown"
                     RightTapped="DataGrid_RightTapped"
-                    ContextFlyout="{StaticResource DataGridContextMenu}" Margin="0,27,0,0">
+                    ContextFlyout="{StaticResource DataGridContextMenu}">
                     <toolkit:DataGrid.Columns>
                         <toolkit:DataGridTextColumn
                             Header="Name"
@@ -103,8 +105,7 @@
                             Binding="{Binding Email}" />
                         <toolkit:DataGridTextColumn
                             Header="Phone"
-                            Binding="{Binding Phone}"
-                            CanUserSort="True" />
+                            Binding="{Binding Phone}" />
                         <toolkit:DataGridTextColumn
                             Header="Address"
                             Binding="{Binding Address}" />
