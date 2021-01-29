@@ -49,19 +49,38 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Margin="10" x:Name="thumb" Source="{x:Bind Image, Converter={StaticResource bytesToImageConverter}}"/>
-                        <StackPanel Grid.Column="1">
-                            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="{x:Bind Name}"/>
-                            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind Category.Name}"/>
+
+                        <StackPanel Grid.Column="1" Margin="8,0,0,8">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Name-"/>
+                                <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="{x:Bind Name}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Categoria-"/>
+                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind Category.Name}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="ISBN-"/>
+                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ISBN}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="PG-"/>
+                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind Parental_guide}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Lang-"/>
+                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind Language}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Publisher-"/>                            
+                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind Publisher}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Price-"/>
+                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind Price}"/>
+                            </StackPanel>
                         </StackPanel>
-                        <Button Grid.Column="2" Click="BtnDelete_Click" Margin="5,0">
-                            <!--<FlyoutBase.AttachedFlyout>
-                                <Flyout>
-                                    <Border Background="#dc3545" Padding="10">
-                                        <TextBlock Text="Não é possivel eliminar o produto" Foreground="White"/>
-                                    </Border>
-                                </Flyout>
-                            </FlyoutBase.AttachedFlyout>-->
+                        <Button Grid.Column="2" Click="BtnDelete_Click" Margin="5,0">                            
                             <StackPanel Orientation="Horizontal">
                                 <SymbolIcon Symbol="Delete"/>
                                 <TextBlock Text="Eliminar"/>

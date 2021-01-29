@@ -96,18 +96,18 @@ namespace LivrariaVirtualApp.UWP.Views.Books
             BookViewModel.LoadFile(file);
 
             // 'file' is null if user cancels the file picker.
-            if (file != null)
-            {
-                // Open a stream for the selected file.
-                // The 'using' block ensures the stream is disposed
-                // after the image is loaded.
-                using (Stream stream = await file.OpenStreamForReadAsync())
-                {
-                    byte[] bytes = new byte[stream.Length];
-                    await stream.ReadAsync(bytes, 0, bytes.Length);
-                    BookViewModel.Image = bytes;
-                }
-            }
+            //if (file != null)
+            //{
+            //    // Open a stream for the selected file.
+            //    // The 'using' block ensures the stream is disposed
+            //    // after the image is loaded.
+            //    using (Stream stream = await file.OpenStreamForReadAsync())
+            //    {
+            //        byte[] bytes = new byte[stream.Length];
+            //        await stream.ReadAsync(bytes, 0, bytes.Length);
+            //        BookViewModel.Image = bytes;
+            //    }
+            //}
         }
     }
 }

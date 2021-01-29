@@ -18,7 +18,12 @@ namespace LivrariaVirtualApp.UWP.ViewModels
 
         public BookViewModel BookViewModel { get; set; }
 
+        public UserViewModel UserViewModel { get; set; }
+
         public ObservableCollection<Book> Books { get; set; }
+
+
+
 
         /// <summary>
         /// Gets the underlying Cart object.

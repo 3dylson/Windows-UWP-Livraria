@@ -29,7 +29,7 @@ namespace LivrariaVirtualApp.UWP.Views.Books
         {
             InitializeComponent();
             BookViewModel = new BookViewModel();
-
+            
         }
 
         
@@ -39,7 +39,7 @@ namespace LivrariaVirtualApp.UWP.Views.Books
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
 
-            BookViewModel.LoadAllAsync();
+            BookViewModel.LoadAllAsync();            
             base.OnNavigatedTo(e);
 
         }

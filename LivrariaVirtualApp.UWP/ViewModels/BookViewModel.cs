@@ -10,6 +10,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.Storage.Streams;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace LivrariaVirtualApp.UWP.ViewModels
 {
@@ -142,6 +144,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             set
             {
                 Set(ref _image, value);
+                
             }
         }
 
@@ -247,6 +250,29 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             }
         }
 
+        public static async Task<BitmapImage> GetBitmapAsync(byte[] data)
+        {
+            var bitmapImage = new BitmapImage();
+
+            using (var stream = new InMemoryRandomAccessStream())
+            {
+                using (var writer = new DataWriter(stream))
+                {
+                    writer.WriteBytes(data);
+                    await writer.StoreAsync();
+                    await writer.FlushAsync();
+                    writer.DetachStream();
+                }
+
+                stream.Seek(0);
+                await bitmapImage.SetSourceAsync(stream);
+            }
+
+            return bitmapImage;
+        }
+
+
+
         internal async Task<Book> AddBookAsync()
         {
             // Get existing Category or Create a new one
@@ -260,7 +286,7 @@ namespace LivrariaVirtualApp.UWP.ViewModels
             Book.ISBN = BookISBN;
             Book.Parental_guide = BookParental_guide;
             Book.Language = BookLanguage;
-            Book.Price = BookPrice;
+            Book.Price = (decimal)BookPrice;
             //Book.Realease_date = BookRealease_date;
             Book.Publisher = BookPublisher;
             Book.Pages = BookPages;

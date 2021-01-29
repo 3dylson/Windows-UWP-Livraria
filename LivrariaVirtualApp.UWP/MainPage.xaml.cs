@@ -25,48 +25,50 @@ namespace LivrariaVirtualApp.UWP
 
             UserViewModel = App.UserViewModel;
             ViewModel = new MainViewModel();
-            
+
+            Loaded += (sender, args) =>
+            {
+                navBar.SelectedItem = categories;
+                navBar.SelectedItem = books;
+                navBar.SelectedItem = admin;
+                navBar.SelectedItem = displaybooks;
+                navBar.SelectedItem = displaycategories;
+                navBar.SelectedItem = userlist;
+                navBar.SelectedItem = orderlist;
+                navBar.SelectedItem = orders;
+            };
+
         }
             
 
         public Frame AppFrame => frame;
 
+        public readonly string Categories = "Manage Categorie";
+        public readonly string Books = "Manage Book";
+        public readonly string Admin = "Dashboard";
+        public readonly string Displaybooks = "Livros";
+        public readonly string Displaycategories = "Categorias";
+        public readonly string Userlist = "User List";
+        public readonly string Orderlist = "Order List";
+        public readonly string Orders = "Pedidos";
+
         private void NavigationView_ItemInvoked(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
         {
-            var selectedItem = args.InvokedItem as NavigationViewItem;
-            if (selectedItem != null)
+            var selectedItem = args.InvokedItem as string;
+            var pageType =
+                selectedItem == Categories ? typeof(CategoriesPage) :
+                selectedItem == Books ? typeof(ManageBooksPage) :
+                selectedItem == Admin ? typeof(AdminDashBoard) :
+                selectedItem == Displaybooks ? typeof(BooksPage) :
+                selectedItem == Displaycategories ? typeof(DisplayCategoriesPage) :
+                selectedItem == Userlist ? typeof(UserListPage) :
+                selectedItem == Orderlist ? typeof(OrderListPage) :
+                selectedItem == Orders ? typeof(OrdersPage) : null;
+            if (pageType != null && pageType != AppFrame.CurrentSourcePageType)
             {
-                switch (selectedItem.Tag)
-                {
-                    case "categories":
-                        AppFrame.Navigate(typeof(CategoriesPage));
-                        break;
-                    case "books":
-                        AppFrame.Navigate(typeof(ManageBooksPage));
-                        break;
-                    case "admin":
-                        AppFrame.Navigate(typeof(AdminDashBoard));
-                        break;
-                    case "displaybooks":
-                        AppFrame.Navigate(typeof(BooksPage));
-                        break;
-                    case "displaycategories":
-                        AppFrame.Navigate(typeof(DisplayCategoriesPage));
-                        break;
-                    case "userlist":
-                        AppFrame.Navigate(typeof(UserListPage));
-                        break;
-                    case "orderlist":
-                        AppFrame.Navigate(typeof(OrderListPage));
-                        break;
-                    case "orders":
-                        AppFrame.Navigate(typeof(OrdersPage));
-                        break;
-
-
-
-                }
+                AppFrame.Navigate(pageType);
             }
+                       
         }
 
         /// <summary>

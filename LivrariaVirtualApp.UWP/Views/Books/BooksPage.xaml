@@ -43,11 +43,11 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                    <Image x:Name="thumb" Source="{Binding Image, Converter={StaticResource bytesToImageConverter}}" Height="100" Stretch="Fill" VerticalAlignment="Top"/>
+                    <Image x:Name="thumb" Source="{Binding Image, Converter={StaticResource BytesToImageConverter}}" Height="100" Stretch="Fill" VerticalAlignment="Top"/>
                 <StackPanel Grid.Column="1" Margin="8,0,0,8">
                     <TextBlock Text="{x:Bind Name}"  Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,8"/>
                     <StackPanel Orientation="Horizontal">                        
-                        <TextBlock Text="Idioma " Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        <TextBlock Text="Idioma- " Style="{ThemeResource CaptionTextBlockStyle}"/>
                         <TextBlock Text="{x:Bind Language}" Style="{ThemeResource CaptionTextBlockStyle}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">

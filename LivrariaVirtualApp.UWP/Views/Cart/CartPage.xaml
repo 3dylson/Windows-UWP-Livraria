@@ -24,7 +24,7 @@
             <ListView Grid.Row="1" ItemsSource="{x:Bind CartViewModel.Books}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="VerticalContentAlignment" Value="Center" />
                     </Style>
                 </ListView.ItemContainerStyle>
