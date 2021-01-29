@@ -35,7 +35,6 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                         .HasMaxLength(20);
 
                     b.Property<byte[]>("Image")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Language")
@@ -54,7 +53,6 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                         .HasMaxLength(256);
 
                     b.Property<string>("Pages")
-                        .IsRequired()
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
@@ -88,12 +86,17 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("BookId", "OrderId");
+                    b.HasKey("BookId", "OrderId", "UserId");
 
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Carts");
                 });
@@ -195,6 +198,14 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                             Email = "admin@admin.com",
                             Name = "admin",
                             Password = "D033E22AE348AEB5660FC2140AEC35850C4DA997"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Admin = 0,
+                            Email = "test@test.com",
+                            Name = "test",
+                            Password = "A94A8FE5CCB19BA61C4C0873D391E987982FBBD3"
                         });
                 });
 
@@ -207,6 +218,9 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
 
                     b.Property<int>("BookId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -242,13 +256,19 @@ namespace LivrariaVirtualApp.Infrastructure.Migrations
                     b.HasOne("LivrariaVirtualApp.Domain.Models.Book", "Book")
                         .WithMany()
                         .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("LivrariaVirtualApp.Domain.Models.Order", "Order")
                         .WithMany("Cart")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("LivrariaVirtualApp.Domain.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
