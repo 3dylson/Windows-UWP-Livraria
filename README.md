@@ -17,4 +17,4 @@ User2:
 **Login: test@test.com
 Password: test**
 
-![dbLivraria](/uploads/9700895c7bce505b90b243c2ab3dfe21/dbLivraria.png)
+![dbLivraria](https://user-images.githubusercontent.com/59789179/107451776-e429fa00-6b3f-11eb-919a-0db5feca4f83.png)
